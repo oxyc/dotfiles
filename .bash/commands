@@ -52,7 +52,7 @@ mkcdir () {
 }
 
 # Base on http://dotfiles.org/~rprice/.bashrc
-function record_desktop() {
+record_desktop() {
   local current_dir=$(pwd)
   local output_dir='/tmp/screenrec'
   local ip=$(dig +short myip.opendns.com @resolver1.opendns.com)
