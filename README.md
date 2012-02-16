@@ -4,6 +4,14 @@
 curl https://raw.github.com/oxyc/dotfiles/master/install.sh -o - | bash
 ``
 
+# Features
+
+...
+
+## Bash prompt
+
+![Bash prompt](http://i.imgur.com/2asnT.png)
+
 # Inspired/Stolen by
 
 - [Gianni Chiappetta](https://github.com/gf3/dotfiles)
