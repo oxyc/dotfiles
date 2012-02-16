@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# New commands
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ll='ls -lah"'
+alias lsd='ls -la | grep "^d"'
+alias clean='rm -f *~'
+
+# Rewrites
+alias df='df -h'
+alias du='du -hc'
+alias ping='ping -c 5'
+alias vi='vim'
+
+# Shortcuts
+alias g='git'
+alias v='vim'
+
+# Enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# IP addresses
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
+
+# Start a HTTP server from a directory
+alias server="python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();'"
+
+# Proper calculator
+# http://dotfiles.org/~inky/.bashrc
+alias calc='python -ic "from math import *; from random import *"'
+
+# List 10 biggest files in pwd.
+alias bf='du -x | sort -nr | head -10'
+
+# http://dotfiles.org/~ghost1227/.bashrc
+alias meminfo="echo -e '/proc/meminfo:\n';grep --color=auto '^[Mem|Swap]*[Free|Total]*:' /proc/meminfo && echo -e '\nfree -m:'; free -m"
+
+# Make HTTP requests
+for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
+    alias "$method"="lwp-request -m '$method'"
+done

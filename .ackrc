@@ -1,0 +1,21 @@
+
+--type-set=drupal=.module,.inc,.install,.php,.info
+--type-add=php=.inc,.module,.install
+--type-set=haml=.haml
+--type-set=sass=.sass
+--type-set=scss=.scss
+--type-set=stylus=.styl,.stylus
+--type-set=less=.less
+--type-set=coffee=.coffee
+
+# Like in Vim, ignore the case unless the pattern contains mixed case.
+--smart-case
+
+--sort-files
+-a
+
+--ignore-dir=log
+--ignore-dir=tmp
+--ignore-dir=vendor
+--ignore-dir=nbproject
+
