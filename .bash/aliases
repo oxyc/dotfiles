@@ -3,7 +3,7 @@
 # New commands
 alias ..='cd ..'
 alias ...='cd ../..'
-alias ll='ls -lah"'
+alias ll='ls -lah'
 alias lsd='ls -la | grep "^d"'
 alias clean='rm -f *~'
 
