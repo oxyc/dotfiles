@@ -1,0 +1,7 @@
+#!/bin/bash
+# Find Drupal files implementing said hook.
+
+if [ -n "$1" ]; then
+  local string="function\s((?!hook).*)_${1}\("
+  ack "$string" -l
+fi
