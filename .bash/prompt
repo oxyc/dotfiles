@@ -1,5 +1,5 @@
 #!/bin/bash
-# Screenshot: @todo
+# Screenshot: http://i.imgur.com/2asnT.png
 # git magic inspired by https://github.com/gf3/dotfiles/blob/master/.bash_prompt
 
 parse_git_dirty() {
