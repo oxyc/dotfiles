@@ -1,10 +1,9 @@
 #!/bin/bash
 
-
 # Whether or not we have a command
 # http://dotfiles.org/~steve/.bashrc
 have() {
-    type "$1" &> /dev/null
+  type "$1" &> /dev/null
 }
 
 # Filter through running processes
@@ -36,12 +35,12 @@ extract () {
 
 # http://dotfiles.org/~krib/.bashrc
 bu () {
-  if [ "`dirname $1`" == "." ]; then
-    mkdir -p ~/.backup/`pwd`;
-    cp $1 ~/.backup/`pwd`/$1-`date +%Y%m%d%H%M`.backup;
+  if [ "$(dirname $1)" == "." ]; then
+    mkdir -p ~/.backup/$(pwd)
+    cp $1 ~/.backup/$(pwd)/$1-$(date +%Y%m%d%H%M).backup
   else
-    mkdir -p ~/.backup/`dirname $1`;
-    cp $1 ~/.backup/$1-`date +%Y%m%d%H%M`.backup;
+    mkdir -p ~/.backup/$(dirname $1)
+    cp $1 ~/.backup/$1-$(date +%Y%m%d%H%M).backup
   fi
 }
 
@@ -57,7 +56,11 @@ record_desktop() {
   local output_dir='/tmp/screenrec'
   local ip=$(dig +short myip.opendns.com @resolver1.opendns.com)
   mkdir -p $output_dir && cd $output_dir && python -m SimpleHTTPServer 8000 &
-  cd $current_dir
-  echo "Preview with 'vlc http://${ip}:8000/out.mpg'"
-  echo "Begin recording in:" ; sleep 1 ; echo 3 ; sleep 1 ; echo 2 ; sleep 1 ; echo 1 ; ffmpeg -f x11grab -s wxga -r 25 -i :0.0  -sameq /tmp/screenrec/out.mpg
+  if [ ! $? ]; then
+    cd $current_dir
+    echo "Preview with 'vlc http://${ip}:8000/out.mpg'"
+    echo "Begin recording in 5 sec"
+    sleep 5
+    ffmpeg -f x11grab -s wxga -r 25 -i :0.0  -sameq ${output_dir}/out.mpg
+  fi
 }
