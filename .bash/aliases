@@ -30,9 +30,6 @@ fi
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 
-# Start a HTTP server from a directory
-alias server="python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();'"
-
 # Proper calculator
 # http://dotfiles.org/~inky/.bashrc
 alias calc='python -ic "from math import *; from random import *"'
