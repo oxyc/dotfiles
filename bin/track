@@ -1,0 +1,125 @@
+#!/bin/bash
+# A dead simple time tracking/logging script.
+#
+# Configuration:
+# Local computer: export TRACK_SSH="REMOTE_ALIAS"
+# Remote computer: export TRACK_LOG_FILE="PATH_TO_A_LOG_FILE"
+
+# Log file path defined to be evaluated either locally or remotely
+[[ "$TRACK_SSH" ]] && log_file="\$TRACK_LOG_FILE" || log_file="$TRACK_LOG_FILE"
+
+# Current time information
+todays_date=$(date '+%Y-%m-%d')
+timestamp=$(date '+%H:%M')
+
+# Helper functions
+run_remotely() { ssh -q $TRACK_SSH "$1"; }
+run() { [[ "$TRACK_SSH" ]] && run_remotely "$1" || $1; }
+output() {
+ sort | awk 'BEGIN { FS = "\t" }; {\
+    output="\033[1m" $1 " " $2 " \033[0;33m→\033[0m";\
+    for (i=3; i<=NF;i++) { output=output " "$i }\
+    print output\
+  }'
+}
+
+usage() {
+  cat << HELP
+Usage: track [action]
+
+Dead simple time tracking / logging script.
+
+Options:
+  --show | Show the latest log entries, takes either NULL, a limiting number,
+          'today' or 'time', e.g., 'track --show 10'
+  --find | Filters through log entries with grep,
+           e.g., 'track --find Added\ function'
+  --help | Show this output
+  *      | Everything else passed will be logged. If you begin something in the
+           format HH:MM it will be used as a timestamp. If you only enter 'END'
+           it will be used to track time from the previous message.
+HELP
+}
+
+calculate_time() {
+  local prev_line=""
+  local not_calculated=( )
+  local calculated=( )
+
+  while read line; do
+    local message=${line:17}
+    local prev_message=${prev_line:17}
+
+    # Onlt filter messaged beginning with END
+    if [[ "${message}" == "END" ]]; then
+
+      local start_time=${prev_line:11:5}
+      local end_time=${line:11:5}
+      local duration=$(($(date --date "$end_time" +%s)-$(date --date "$start_time" +%s)))
+      local output_msg="${start_time}-${end_time}\t$(($duration/60))min\t${prev_message}"
+
+      calculated[${#calculated[*]}]="$output_msg"
+      unset not_calculated[${#not_calculated[@]}-1] # Pop it off a
+    else
+      not_calculated[${#not_calculated[*]}]="$line"
+    fi
+    prev_line="$line"
+  done
+
+  echo -e "\033[1;33mTime tracked today\033[0m"
+  for i in "${calculated[@]}"; do echo -e "$i" | output; done
+  echo -e "\n\033[1;33mCould not calculate duration\033[0m"
+  for i in "${not_calculated[@]}"; do echo -e "$i" | output; done
+}
+
+show() {
+  if [[ "$1" == "today" ]]; then
+    run "cat $log_file" | grep "^${todays_date}" | output
+  else 
+    if [[ "$1" == "time" ]]; then
+      run "cat $log_file" | grep "^${todays_date}" | calculate_time
+    else
+      [[ "$1" =~ ^[[:digit:]]+ ]] && count=$1
+      run "cat $log_file" | tail -${count:-10} | output
+    fi
+  fi
+}
+
+log() {
+  # A timestamp was passed, use it
+  if [[ "$1" =~ ^[[:digit:]]{2}:[[:digit:]]{2} ]]; then
+    timestamp=$1
+    shift
+  fi
+
+  local entry="${todays_date}\t${timestamp}\t$*"
+  run "echo -e \"$entry\" >> $TRACK_LOG_FILE"
+
+  if test $? != 0; then
+    echo -e "\033[0;31mSomething went horribly wrong!\033[0m"
+    exit 1
+  fi
+
+  echo -e "$entry" | output
+}
+
+# Filter through log content with grep
+find_grep() {
+  run "cat $log_file" | grep "$1" | output
+}
+
+# Undo last write
+undo() {
+  run "sed '\$d' < $log_file > /tmp/track; mv /tmp/track $log_file"
+}
+
+case "$1" in
+  --help|-h) usage ;;
+  --show|-s) shift && show "$1" ;;
+  --find|-f) shift && find_grep "$@" ;;
+  --undo|-u) undo ;;
+  *) log $* ;;
+esac
+
+unset todays_date timestamp
+exit $?
