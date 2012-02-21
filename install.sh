@@ -7,11 +7,14 @@ syncit() {
 
 case "$1" in
   --update|-u)
-    git pull && git submodule foreach git pull
-    [[ $? == 0 ]] && syncit || echo "Something went wrong"
+    git pull && git submodule foreach git pull \
+      && syncit \
+      || echo "Something went wrong"
     ;;
   *)
-    git clone --recursive git://github.com/oxyc/dotfiles.git
-    [[ $? == 0 ]] && cd dotfiles && syncit || echo "Something went wrong"
+    git clone --recursive git://github.com/oxyc/dotfiles.git \
+      && cd dotfiles \
+      && syncit \
+      || echo "Something went wrong"
     ;;
 esac
