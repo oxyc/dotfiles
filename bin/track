@@ -45,14 +45,23 @@ Usage: track [action]
 Dead simple time tracking / logging script.
 
 Options:
-  --show | Show the latest log entries, takes either NULL, a limiting number,
-          'today' or 'time', e.g., 'track --show 10'
-  --find | Filters through log entries with grep,
-           e.g., 'track --find Added\ function'
-  --help | Show this output
-  *      | Everything else passed will be logged. If you begin something in the
-           format HH:MM it will be used as a timestamp. If you only enter 'END'
-           it will be used to track time from the previous message.
+  -s, --show    Show log entries, takes a couple of different arguments.
+                  -s: show the default[20] amount of entries
+                  -s 10: show the 10 latest entries
+                  -s today: show all entries made today
+                  -s time: try to calculate time tracked today
+
+  -f, --find    Filters through log entries with grep.
+                  -f Added\ function
+
+  -u, --undo    Undo the last entry addition. Note, you cant undo undoes.
+
+  -h, --help    Displays this output
+
+  *             Everything else passed will be logged, some keywords exist:
+                  - if you timestamp a message with HH:MM it will be respected.
+                  - if your message is END, it will be used to track time
+                    beginning at the previous message.
 HELP
 }
 

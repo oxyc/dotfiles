@@ -21,8 +21,39 @@ Edit your own name and website into ~/bin/license.
 
 ### Bundled scripts
 
-- [ack](http://betterthangrep.com/) - Ack, better than grep
-- [markdown](http://daringfireball.net/projects/markdown/) - Markdown to HTML
+#### [ack](http://betterthangrep.com/)
+
+Ack, better than grep
+
+#### [markdown](http://daringfireball.net/projects/markdown/)
+
+Markdown to HTML script
+
+#### Track
+```
+Usage: track [action]
+
+Dead simple time tracking / logging script.
+
+Options:
+  -s, --show    Show log entries, takes a couple of different arguments.
+                  -s: show the default[20] amount of entries
+                  -s 10: show the 10 latest entries
+                  -s today: show all entries made today
+                  -s time: try to calculate time tracked today
+
+  -f, --find    Filters through log entries with grep.
+                  -f Added\ function
+
+  -u, --undo    Undo the last entry addition. Note, you cant undo undoes.
+
+  -h, --help    Displays this output
+
+  *             Everything else passed will be logged, some keywords exist:
+                  - if you timestamp a message with HH:MM it will be respected.
+                  - if your message is END, it will be used to track time
+                    beginning at the previous message.
+```
 
 ### Useful aliases/functions
 - `ip` Output your external IP.
