@@ -19,7 +19,7 @@ prompt_desc() {
     OUTPUT="${OUTPUT}$(parse_git_branch)/"
   fi
 
-  [[ -n "$OUTPUT" ]] && echo " ${OUTPUT:0:-1}"
+  [[ -n "$OUTPUT" ]] && echo " ${OUTPUT%?}"
 }
 
 CYAN="\033[36m"
