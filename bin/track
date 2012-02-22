@@ -13,10 +13,17 @@ todays_date=$(date '+%Y-%m-%d')
 timestamp=$(date '+%H:%M')
 
 # Helper functions
-run_remotely() { ssh -q $TRACK_SSH "$1"; }
+run_remotely() { eval ssh -q $TRACK_SSH "$1"; }
 run() { [[ "$TRACK_SSH" ]] && run_remotely "$1" || eval "$1"; }
+print_h() { echo -e "\033[1;33m$1\033[0m"; } # Heading
+print_e() { echo -e "\033[0;31m$1\033[0m"; } # Error
+sec_to_hour() {
+  local hours=$(($1/3600))
+  local mins=$(($1/60-$hours*60))
+  printf "%d:%02d" $hours $mins
+}
 output() {
- sort | awk 'BEGIN { FS = "\t" }; {\
+  perl -pe 's/\d+(")$/$i++.$1/e;' | awk -F "\t" '{\
     output="\033[1m" $1 " " $2 " \033[0;33m→\033[0m";\
     for (i=3; i<=NF;i++) { output=output " "$i }\
     print output\
@@ -45,6 +52,7 @@ calculate_time() {
   local prev_line=""
   local not_calculated=( )
   local calculated=( )
+  local total_time=0
 
   while read line; do
     local message=${line:17}
@@ -56,20 +64,30 @@ calculate_time() {
       local start_time=${prev_line:11:5}
       local end_time=${line:11:5}
       local duration=$(($(date --date "$end_time" +%s)-$(date --date "$start_time" +%s)))
-      local output_msg="${start_time}-${end_time}\t$(($duration/60))min\t${prev_message}"
+      local output_msg="${start_time}-${end_time}\t$(sec_to_hour $duration)h\t${prev_message}"
 
       calculated[${#calculated[*]}]="$output_msg"
-      unset not_calculated[${#not_calculated[@]}-1] # Pop it off a
+      unset not_calculated[${#not_calculated[@]}-1] # Pop
+      total_time=$(($total_time+$duration))
     else
       not_calculated[${#not_calculated[*]}]="$line"
     fi
     prev_line="$line"
   done
 
-  echo -e "\033[1;33mTime tracked today\033[0m"
-  for i in "${calculated[@]}"; do echo -e "$i" | output; done
-  echo -e "\n\033[1;33mCould not calculate duration\033[0m"
-  for i in "${not_calculated[@]}"; do echo -e "$i" | output; done
+  if [[ ${#calculated[@]} -ne 0 ]]; then
+    print_h "Time tracked today"
+    for i in "${calculated[@]}"; do echo -e "$i" | output; done
+  else
+    print_h "Nothing tracked today"
+  fi
+  if [[ ${#not_calculated[@]} -ne 0 ]]; then
+    print_h "\nCould not calculate duration"
+    for i in "${not_calculated[@]}"; do echo -e "$i" | output; done
+  fi
+  if [[ $total_time -ne 0 ]]; then
+    print_h "\nTotal time today:\033[0m $(sec_to_hour $total_time)h"
+  fi
 }
 
 show() {
@@ -80,7 +98,7 @@ show() {
       run "cat $log_file" | grep "^${todays_date}" | calculate_time
     else
       [[ "$1" =~ ^[[:digit:]]+ ]] && count=$1
-      run "cat $log_file" | tail -${count:-10} | output
+      run "cat $log_file" | tail -${count:-20} | output
     fi
   fi
 }
@@ -96,7 +114,7 @@ log() {
   run "echo -e \"$entry\" >> $log_file"
 
   if test $? != 0; then
-    echo -e "\033[0;31mSomething went horribly wrong!\033[0m"
+    print_e "Something went horribly wrong!"
     exit 1
   fi
 
