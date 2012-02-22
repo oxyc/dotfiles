@@ -13,10 +13,18 @@ todays_date=$(date '+%Y-%m-%d')
 timestamp=$(date '+%H:%M')
 
 # Helper functions
-run_remotely() { eval ssh -q $TRACK_SSH "$1"; }
-run() { [[ "$TRACK_SSH" ]] && run_remotely "$1" || eval "$1"; }
 print_h() { echo -e "\033[1;33m$1\033[0m"; } # Heading
 print_e() { echo -e "\033[0;31m$1\033[0m"; } # Error
+print_n() { echo -e "$1" | output; } # Normal
+
+run_remotely() { ssh -q $TRACK_SSH "$1"; return $?; }
+run() {
+  if [[ -n "$TRACK_SSH" ]]; then
+    run_remotely "$1"
+  else
+    eval "$1"
+  fi
+}
 sec_to_hour() {
   local hours=$(($1/3600))
   local mins=$(($1/60-$hours*60))
@@ -112,13 +120,12 @@ log() {
 
   local entry="${todays_date}\t${timestamp}\t$*"
   run "echo -e \"$entry\" >> $log_file"
-
-  if test $? != 0; then
+  if [ $? != 0 ]; then
     print_e "Something went horribly wrong!"
     exit 1
+  else
+    print_n "$entry"
   fi
-
-  echo -e "$entry" | output
 }
 
 # Filter through log content with grep
