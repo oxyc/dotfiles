@@ -1,9 +1,5 @@
 # This might seem backwards.
 # https://github.com/janmoesen/tilde/blob/master/.bashrc
 
-for file in ~/.bash/{exports}; do
-    [ -r "$file" ] && source "$file"
-done
-unset file
-
+[ -r "$HOME/.bash/exports" ] && source "$HOME/.bash/exports"
 [ -n "$PS1" ] && source ~/.bash_profile;
