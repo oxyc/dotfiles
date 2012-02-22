@@ -6,7 +6,7 @@
 # Remote computer: export TRACK_LOG_FILE="PATH_TO_A_LOG_FILE"
 
 # Log file path defined to be evaluated either locally or remotely
-[[ "$TRACK_SSH" ]] && log_file="\$TRACK_LOG_FILE" || log_file="$TRACK_LOG_FILE"
+[[ -n "$TRACK_SSH" ]] && log_file="\$TRACK_LOG_FILE" || log_file="$TRACK_LOG_FILE"
 
 # Current time information
 todays_date=$(date '+%Y-%m-%d')
