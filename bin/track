@@ -14,7 +14,7 @@ timestamp=$(date '+%H:%M')
 
 # Helper functions
 run_remotely() { ssh -q $TRACK_SSH "$1"; }
-run() { [[ "$TRACK_SSH" ]] && run_remotely "$1" || $1; }
+run() { [[ "$TRACK_SSH" ]] && run_remotely "$1" || eval "$1"; }
 output() {
  sort | awk 'BEGIN { FS = "\t" }; {\
     output="\033[1m" $1 " " $2 " \033[0;33m→\033[0m";\
@@ -93,7 +93,7 @@ log() {
   fi
 
   local entry="${todays_date}\t${timestamp}\t$*"
-  run "echo -e \"$entry\" >> $TRACK_LOG_FILE"
+  run "echo -e \"$entry\" >> $log_file"
 
   if test $? != 0; then
     echo -e "\033[0;31mSomething went horribly wrong!\033[0m"
