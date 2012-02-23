@@ -29,6 +29,16 @@ Ack, better than grep
 
 Markdown to HTML script
 
+#### SSH Expect
+
+Make ssh connection with password and identity file scriptable. Without
+identity file one can use sshpass, but for both password and file, this is
+needed.
+
+```
+sshexp user password path_to_identity_file hostname command
+```
+
 #### Track
 ```
 Usage: track [action]
