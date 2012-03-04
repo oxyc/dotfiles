@@ -1,0 +1,1 @@
+set prompt "\[\e[37m\]\w \[\e[36m\]\u\@\h \[\e[37m\]ftp \[\e[0m\]"
