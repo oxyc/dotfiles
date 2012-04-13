@@ -93,4 +93,4 @@ drcd() {
 }
 
 # Add tab completion for drush aliases
-complete -o "default" -o "nospace" -W "$(ls -1 /etc/drush/aliases | grep .aliases | sed 's/\.[^ ]*/ /g')" drcd
+[[ -e /etc/drush/aliases ]] && complete -o "default" -o "nospace" -W "$(ls -1 /etc/drush/aliases | grep .aliases | sed 's/\.[^ ]*/ /g')" drcd
