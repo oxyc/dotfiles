@@ -7,7 +7,7 @@ syncit() {
 
 case "$1" in
   --update|-u)
-    git pull && git submodule foreach git pull \
+    git pull && git submodule foreach git pull origin master \
       && syncit \
       || echo "Something went wrong"
     ;;
