@@ -1,0 +1,35 @@
+{
+    "passfail" : false,
+    "jquery" : true,
+    "predef": [
+        "google",
+        "Drupal"
+    ],
+
+    "node" : true,
+    "es5" : true,
+    "browser" : true,
+
+    "asi" : false,
+    "boss" : false,
+    "curly": false,
+    "debug": true,
+    "devel": true,
+    "eqeqeq": true,
+    "evil": true,
+    "forin": false,
+    "immed": true,
+    "laxbreak": false,
+    "newcap": true,
+    "noarg": true,
+    "noempty": false,
+    "nonew": false,
+    "nomen": false,
+    "onevar": true,
+    "plusplus": false,
+    "regexp": false,
+    "undef": true,
+    "sub": true,
+    "strict": false,
+    "white": false
+}
