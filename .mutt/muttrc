@@ -1,0 +1,112 @@
+# Directories and commands
+set alias_file       = ~/.mutt/alias                         # alias file
+set header_cache     = ~/.mutt/cache/headers                 # where to store headers
+set message_cachedir = ~/.mutt/cache/bodies                  # where to store bodies
+set certificate_file = ~/.mutt/certificates                  # where to store certs
+set signature        = ~/.mutt/sig                           # my signature file
+set tmpdir           = ~/.mutt/temp                          # where to keep temp files
+set editor           = "vim +/^$ +:s/^$/\\\\r\\\\r/ +:noh -c 'normal! k' -c 'set nolist' -c 'redraw'" # use vim
+
+# Main Options
+set mbox_type        = Maildir
+set folder           = ~/.Mail
+set spoolfile        = "+oxy/INBOX"                                # Default mailbox
+set timeout          = 3                                           # Idle time before scanning
+set mail_check       = 0                                           # Minimum time between scans
+set sort_alias       = alias
+set reverse_alias
+unset move                                                         # Gmail does that
+set delete                                                         # Don't ask
+set quit                                                           # Don't ask
+unset mark_old                                                     # read/new is enough
+set pipe_decode                                                    # strip headers and eval mimes when piping
+set thorough_search                                                # strip headers and eval mimes before searching
+
+set mbox             = "+archive"
+set postponed        = "+drafts"
+unset record                                                       # required to prevent duplicates in sent
+
+set sendmail = /usr/bin/msmtp
+
+# Index options
+set sort = threads
+set sort_aux = reverse-last-date-received
+set sort_re                                                        # Thread based on regex
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+
+# Pager
+set pager_index_lines = 10                                         # show 10 messages when in pager
+set pager_context     = 5                                          # show five lines when skipping in pager
+set pager_stop                                                     # don't go to next message automatically
+set menu_scroll                                                    # scroll in menus
+set smart_wrap                                                     # don't split words
+set tilde                                                          # show tildes like in vim
+unset markers                                                      # no ugly plus signs
+auto_view text/html                                                # view html automatically
+alternative_order text/plain text/enriched text/html               # save html for last
+set quote_regexp      = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+
+# Formats
+set date_format         = "%m/%d"
+set index_format        = "[%Z]  %D  %-20.20F  %s"
+set status_format       = "-%r- %v ---[ Folder: %f, Msgs: %m%?n? New: %n?%?d? Del: %d?%?t? Tag: %t?%?l? %l? ]%?p?---- .: %p waiting to send :. ?--%>- (%P) ---"
+set alias_format        = "%4n %t %-20a  %r"
+
+# Composing mail
+set realname = "Oskar Schöldström"
+set from = mail@oxy.fi
+alternates public@oxy.fi|oskar.scholdstrom@arcada.fi|oskar.scholdstrom@gmail.com
+set envelope_from = yes
+set sig_dashes
+set fast_reply # Skip to compose when replying
+set fcc_attach                                                     # save attachments with the body
+unset mime_forward                                                 # forward attachments as part of body
+set forward_format = "Fwd: %s"                                     # format for subject when forwarding
+set include                                                        # include message in replies
+set attribution = "On %d, %n wrote:"                               # set the attribution
+set reply_to
+set reverse_name = yes
+set include
+set forward_quote                                                  # include message in forwards
+
+# Header
+ignore *                                                           # ignore all headers
+unignore from: to: cc: date: subject:                              # show only these
+hdr_order from: to: cc: date: subject:                             # and in this order
+
+# Mailboxes
+mailboxes "+oxy/INBOX +arcada/INBOX +gmail/inbox"
+
+# Hooks
+folder-hook oxy/* set from=mail@oxy.fi
+folder-hook arcada/* set from=oskar.scholdstrom@arcada.fi
+folder-hook gmail/* set from=oskar.scholdstrom@gmail.com
+
+# Bindings
+bind index <tab>    sync-mailbox
+bind index k        previous-entry
+bind index j        next-entry
+bind pager i        exit
+bind pager /        search
+bind pager k        previous-line
+bind pager j        next-line
+bind pager gg       top
+bind pager G        bottom
+bind index gg       first-entry
+bind index G        last-entry
+bind index,pager R  group-reply
+bind index \Cp      recall-message
+bind index <space>  collapse-thread
+
+# Macros
+macro index D "<save-message>+trash<enter>"  "move message to trash"
+macro index S "<save-message>+spam<enter>"   "move message to spam"
+macro index I "<change-folder>!<enter>"      "go to Inbox"
+macro index gmail "<change-folder>+gmail/inbox<enter>"
+macro index arcada "<change-folder>+arcada/inbox<enter>"
+macro generic "1" ":set from=mail@oxy.fi"
+macro generic "2" ":set from=oskar.scholdstrom@arcada.fi"
+macro generic "3" ":set from=oskar.scholdstrom@gmail.com"
+
+# Source
+source ~/.mutt/colors.muttrc
