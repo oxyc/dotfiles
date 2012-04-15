@@ -16,13 +16,23 @@ function setupTmux() {
 
 function createSession () {
   case $1 in
-    dev|cindy )
+    dev )
       tmux new-session -d -s $1 'ssh -t tlk screen -rd'
       tmux rename-window 'irssi'
 
       tmux new-window -t $1:2 -n 'mutt' 'mutt'
-      tmux new-window -t $1:3 -n 'vim' '/bin/bash -c "[[ -e ~/.vim_session ]] && vim -S ~/.vim_session"' \; split-window -v -l 2
+      tmux new-window -t $1:3 -n 'vim' '/bin/bash -c "[[ -e ~/.vim_session ]] && vim -S ~/.vim_session"' \; split-window -v -l 5 'sudo tail -f /var/log/apache2/error.log'
       tmux new-window -t $1:4 -n 'bash' '/bin/bash'
+
+      tmux select-window -t $1:3
+      tmux -2 attach-session -t $1
+      ;;
+    cindy )
+      tmux new-session -d -s $1 'ssh -t tlk screen -rd'
+      tmux rename-window 'irssi'
+
+      tmux new-window -t $1:2 -n 'mutt' 'mutt'
+      tmux new-window -t $1:3 -n 'bash' '/bin/bash'
 
       tmux select-window -t $1:2
       tmux -2 attach-session -t $1
