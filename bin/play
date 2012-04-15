@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 function setupTmux() {
   if [[ $(tmux list-sessions 2>/dev/null | awk "/^$1:/ { print 1 }") == 1 ]]; then
