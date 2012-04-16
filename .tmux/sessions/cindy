@@ -9,7 +9,7 @@ tmux new-session -d -s $session -n 'irssi' $tmux_append 'ssh -t tlk screen -rd'
 tmux new-window -t $session:2 -n 'mutt' $tmux_append 'mutt; bash'
 
 # 3. Empty shell
-tmux new-window -t $session3 -n 'bash' $tmux_append 'bash'
+tmux new-window -t $session:3 -n 'bash' $tmux_append 'bash'
 
 tmux select-window -t $session:1 $tmux_append
 tmux -2 attach-session -t $session $tmux_append
