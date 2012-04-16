@@ -74,3 +74,20 @@ record_desktop() {
     ffmpeg -f x11grab -s wxga -r 25 -i :0.0  -sameq ${output_dir}/out.mpg
   fi
 }
+
+# Attach tmux sessions
+play() {
+  local session="${1:-$(hostname)}"
+  [[ -n $TMUX_SOCKET_DIR ]] && socket="-S ${TMUX_SOCKET_DIR}/${session}"
+
+  if tmux has-session -t $session; then
+    tmux -2 attach-session -t $session $socket
+  else
+    if [[ -e ~/.tmux/sessions/$session ]]; then
+      echo "No session to attach, trying to create one"; wait 1
+      . ~/.tmux/sessions/$session $socket
+    else
+      echo "No session exist for $session, looked in ~/.tmux/sessions/$session"
+    fi
+  fi
+}
