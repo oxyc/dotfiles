@@ -1,0 +1,68 @@
+# Sample minimal config file.  Copy this to ~/.offlineimaprc and edit to
+# suit to get started fast.
+
+[general]
+accounts = Oxy,Arcada,Gmail
+maxsyncaccounts = 3
+ui = ttyui
+
+[mbnames]
+enabled = yes
+filename = ~/.mutt/mailboxes
+header = "mailboxes "
+peritem = "+%(accountname)s/%(foldername)s"
+sep = " "
+footer = "\n"
+
+[Account Oxy]
+localrepository = OxyLocal
+remoterepository = OxyRemote
+autorefresh = 5
+
+[Account Arcada]
+localrepository = ArcadaLocal
+remoterepository = ArcadaRemote
+autorefresh = 5
+
+[Account Gmail]
+localrepository = GmailLocal
+remoterepository = GmailRemote
+autorefresh = 5
+
+[Repository OxyLocal]
+type = Maildir
+localfolders = ~/.Mail/oxy
+
+[Repository ArcadaLocal]
+type = Maildir
+localfolders = ~/.Mail/arcada
+
+[Repository GmailLocal]
+type = Maildir
+localfolders = ~/.Mail/gmail
+
+[Repository OxyRemote]
+type = IMAP
+keepalive = 60
+remotehost = mail.oxy.fi
+remoteuser = mail+oxy.fi
+ssl = yes
+
+[Repository ArcadaRemote]
+type = IMAP
+keepalive = 60
+remotehost = imap.arcada.fi
+remoteuser = scholdso
+folderfilter = lambda foldername: foldername in ['INBOX', 'Drafts', 'Sent', 'archive']
+ssl = yes
+
+[Repository GmailRemote]
+type = IMAP
+keepalive = 60
+remotehost = imap.gmail.com
+remoteuser = oskar.scholdstrom@gmail.com
+nametrans = lambda foldername: re.sub ('sent_mail', 'sent',
+                               re.sub ('starred', 'flagged',
+                               re.sub (' ', '_', foldername.lower())))
+folderfilter = lambda foldername: foldername not in '[Gmail]/All Mail'
+ssl = yes
