@@ -105,3 +105,28 @@ function duh {
     done
   done
 }
+# Edit the files found with the previous "ack" command using Vim
+# https://github.com/janmoesen/tilde/blob/master/.bash/commands
+function vack {
+  local cmd=''
+  if [ $# -eq 0 ]; then
+    cmd="$(fc -nl -1)"
+    cmd="${cmd:2}"
+  else
+    cmd='ack'
+    for x; do
+      cmd="$cmd $(printf '%q' "$x")"
+    done
+    echo "$cmd"
+  fi
+  if [ "${cmd:0:4}" != 'ack ' ]; then
+    $cmd
+    return $?
+  fi
+  declare -a files
+  while read -r file; do
+    echo "$file"
+    files+=("$file")
+  done < <(bash -c "${cmd/ack/ack -l}")
+  "${EDITOR:-vim}" "${files[@]}"
+}
