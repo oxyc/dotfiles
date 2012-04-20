@@ -3,7 +3,7 @@
 One-line installation script
 
 ```bash
-wget https://raw.github.com/oxyc/dotfiles/master/install.sh -O - | bash
+wget https://raw.github.com/oxyc/dotfiles/master/install.sh -O - | pipe=1 bash
 ```
 
 Add a .bash/extras file with your additional settings, such as:
