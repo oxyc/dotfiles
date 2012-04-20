@@ -57,7 +57,7 @@ syncit() {
     if ((prompt)); then
       ! confirm "Copy $src to $target" && continue
     fi
-    rsync --backup-dir="$backup" -ar "$src" "$HOME"
+    rsync --exclude=".git/" --backup-dir="$backup" -ar "$src" "$HOME"
 
     # Backup in case something goes wrong
     if [[ $? -ne 0 ]]; then
