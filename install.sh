@@ -3,16 +3,13 @@
 if [[ ${BASH_SOURCE[0]} ]]; then
   filepath="$(readlink -f "${BASH_SOURCE[0]}")"
   filedir="$(dirname $filepath)"
-# Support pipe-install
-else
-  filedir="$PWD"
 fi
 backup="$HOME/.backup-dotfiles"
 
 die() {
   echo -e "$1\n"
   exit 1
-} >&2
+}
 
 usage() {
   cat <<'EOF'
@@ -21,10 +18,8 @@ install.sh [COMMAND]
 Install oxys dotfiles repository.
 
 Options:
-  -f, --force   Prompt for each first level file before copying
-  -h, --help    Display this help and exit
-  install       Install dotfiles, only required the first time
-  update        Update files
+  -f, --force  Force installation not to prompt on files. Enabled while piping.
+  -h, --help   Display this help and exit
 EOF
 }
 
@@ -59,7 +54,7 @@ syncit() {
     local target="$HOME/$basename"
 
     # Verify unless force flagged
-    if [[ $force -ne 1 ]]; then
+    if ((prompt)); then
       ! confirm "Copy $src to $target" && continue
     fi
     rsync --backup-dir="$backup" -ar "$src" "$HOME"
@@ -68,6 +63,8 @@ syncit() {
     if [[ $? -ne 0 ]]; then
       mv $backup/* $HOME/
       die "rsync failed for whatever reason, trying to restore backups."
+    else
+      echo -n "$target"
     fi
     echo
   done
@@ -79,17 +76,19 @@ syncit() {
 # Parse the options
 while [[ $1 = ?* ]]; do
   case $1 in
-    -f|--force) force=1;;
+    -p|--prompt) prompt=1;;
     -h|--help) usage >&2; exit 0;;
-    install) setup=1;;
-    update) update=1;;
-    *) die "Invalid option: $1";;
   esac
 
   shift
 done
 
-if ((update)); then
+if ((pipe)); then
+  filedir="$PWD"
+  git clone --recursive git://github.com/oxyc/dotfiles.git \
+    && verifyDirectory \
+    && syncit
+else
   verifyDirectory
 
   cd $filedir \
@@ -97,17 +96,6 @@ if ((update)); then
     && git submodule foreach git pull origin master \
     && syncit \
     && cd $OLDPWD
-
-elif ((setup));then
-  git clone --recursive git://github.com/oxyc/dotfiles.git \
-    && verifyDirectory \
-    && syncit
-else
-  die "$0: missing command operand\nTry \`$0 --help\` for more information."
-fi
-
-if [[ $? -ne 0 ]]; then
-  die "Something went wrong... sorry about that"
 fi
 
 source $HOME/.bash_profile
