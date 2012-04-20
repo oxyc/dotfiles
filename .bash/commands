@@ -105,6 +105,7 @@ function duh {
     done
   done
 }
+
 # Edit the files found with the previous "ack" command using Vim
 # https://github.com/janmoesen/tilde/blob/master/.bash/commands
 function vack {
