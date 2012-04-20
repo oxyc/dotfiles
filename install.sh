@@ -4,10 +4,6 @@ filepath="$(readlink -f "${BASH_SOURCE[0]}")"
 filedir="$(dirname $filepath)"
 backup="$HOME/.backup-dotfiles"
 
-force=0
-setup=0
-update=0
-
 die() {
   echo -e "$1\n"
   exit 1
