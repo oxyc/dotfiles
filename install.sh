@@ -9,7 +9,7 @@ setup=0
 update=0
 
 die() {
-  echo -e "$1"
+  echo -e "$1\n"
   exit 1
 } >&2
 
@@ -68,6 +68,7 @@ syncit() {
       mv $backup/* $HOME/
       die "rsync failed for whatever reason, trying to restore backups."
     fi
+    echo
   done
 
   # delete backups
