@@ -1,7 +1,12 @@
 #!/bin/bash
 
-filepath="$(readlink -f "${BASH_SOURCE[0]}")"
-filedir="$(dirname $filepath)"
+if [[ ${BASH_SOURCE[0]} ]]; then
+  filepath="$(readlink -f "${BASH_SOURCE[0]}")"
+  filedir="$(dirname $filepath)"
+# Support pipe-install
+else
+  filedir="$PWD"
+fi
 backup="$HOME/.backup-dotfiles"
 
 die() {
