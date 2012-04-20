@@ -24,26 +24,6 @@ set -o vi
 # Make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# Sudo completion
-complete -cf sudo
-
-# Enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-  . /etc/bash_completion
-fi
-
-# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2)" scp sftp ssh
-
-# Add tab completion for play using active tmux sessions and session files available
-_play_complete() {
-  cat <(tmux list-sessions 2>/dev/null | awk -F ':' '{ print $1 }') \
-      <(ls 2>/dev/null ~/.tmux/sessions/)
-}
-complete -o "default" -o "nospace" -C _play_complete play
-
 # @TODO should LC_ALL also be set?
 export LANG='en_US.UTF-8'
 
