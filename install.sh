@@ -35,14 +35,12 @@ confirm() {
 
 # Try to find the correct repo directory
 verifyDirectory() {
-  local dir=$1
-  if [[ ${dir##*/} != "dotfiles" ]]; then
-    if [[ -d "$dir/dotfiles" ]]; then
-      dir="$dir/dotfiles"
-      filedir="$dir"
+  if [[ ${filredir##*/} != "dotfiles" ]]; then
+    if [[ -d "$filedir/dotfiles" ]]; then
+      filedir="$filedir/dotfiles"
     fi
   fi
-  [[ -d "$dir/.git" ]] || die "Couldn't find the repository directory."
+  [[ -d "$filedir/.git" ]] || die "Couldn't find the repository directory."
 }
 
 syncit() {
@@ -61,19 +59,19 @@ syncit() {
 
     # Verify unless force flagged
     if [[ $force -ne 1 ]]; then
-      ! confirm "Copy $basename" && continue
+      ! confirm "Copy $src to $target" && continue
     fi
-    rsync --backup-dir="$backup" -av "$src" "$target"
+    rsync --backup-dir="$backup" -ar "$src" "$HOME"
 
     # Backup in case something goes wrong
     if [[ $? -ne 0 ]]; then
-      #mv $backup/* $HOME/
+      mv $backup/* $HOME/
       die "rsync failed for whatever reason, trying to restore backups."
     fi
   done
 
   # delete backups
-  #rm -rf $backup
+  rm -rf $backup
 }
 
 # Parse the options
@@ -90,7 +88,7 @@ while [[ $1 = ?* ]]; do
 done
 
 if ((update)); then
-  verifyDirectory $filedir
+  verifyDirectory
 
   cd $filedir \
     && git pull origin master \
@@ -100,8 +98,8 @@ if ((update)); then
 
 elif ((setup));then
   git clone --recursive git://github.com/oxyc/dotfiles.git \
-    && verifyDirectory $filedir \
-    && setup
+    && verifyDirectory \
+    && syncit
 else
   die "$0: missing command operand\nTry \`$0 --help\` for more information."
 fi
