@@ -59,6 +59,10 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
   done
 fi
 
+if [ hash fasd 2>/dev/null ]; then
+  eval "$(fasd --init auto)"
+fi
+
 
 # When connecting to SSH, start or reattach screen session
 # http://dotfiles.org/~thayer/.bashrc

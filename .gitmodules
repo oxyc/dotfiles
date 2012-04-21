@@ -4,3 +4,6 @@
 [submodule "lib/ls--"]
 	path = lib/ls--
 	url = git://github.com/trapd00r/ls--.git
+[submodule "lib/fasd"]
+	path = lib/fasd
+	url = git://github.com/clvv/fasd.git
