@@ -10,6 +10,8 @@ Xft.lcdfilter: lcddefault
 
 URxvt.termName:           rxvt-256color
 *customization:           -color
+URxvt.title:              urxvt, named to annoy touch typers?
+Urxvt.loginShell:         true
 
 URxvt*geometry:           150x40
 XTerm*visualBell:         true
@@ -26,9 +28,21 @@ URxvt*foreground:         #aaaaaa
 URxvt*font:               xft:InconsolataForPowerline:medium:pixelsize=14
 URxvt*boldFont:           xft:InconsolataForPowerline:medium:pixelsize=14
 URxvt*colorBD:            #ffffff
+URxvt.xftAntialias:       true
+
+! urxvt will force a screen refresh on each new line it received
+URxvt*jumpScroll:         false
+
+! Remove ! if lines are disappear
+! URxvt*skipScroll:         false
+
+URxvt*saveLines:          10000
 
 ! Dont select special chars
 URxvt.cutchars:           "\\ `\"\'()*;<>[]{|}&,=?@^\:"
+
+! alt, meta, hyper, super, mod1, mod2, mod3, mod4, mod5
+URxvt.modifier: super
 
 ! Match URLs
 URxvt*perl-ext-common:    default,matcher
@@ -43,21 +57,8 @@ URxvt.iso14755_52: false
 URxvt.iso14755: false
 
 ! Questionable stuff @todo
-! *dynamicColors:      true
-xterm*utf8:               1
-xterm*saveLines:          10000
-
-xterm*scrollKey:          true
-xterm*scrollTtyOutput:    false
-
-!urxvt.xftAntialias:      true
-!urxvt*keysym.S-Prior:   ^[[5;2~
-!urxvt*keysym.S-Next:    ^[[6;2~
-
-!xterm*jumpScroll:         true
-!xterm*multiScroll:        true
-!xterm*toolBar:            false
-!xterm*antialias:          false
+URxvt*keysym.S-Prior:   ^[[5;2~
+URxvt*keysym.S-Next:    ^[[6;2~
 
 URxvt.keysym.Control-Up: \033[1;5A
 URxvt.keysym.Control-Down: \033[1;5B
