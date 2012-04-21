@@ -1,5 +1,6 @@
 
 URxvt*geometry:           150x40
+URxvt.termName:           rxvt-256color
 
 
 
@@ -10,12 +11,10 @@ URxvt*colorBD:            #ffffff
 URxvt*foreground:         #aaaaaa
 URxvt*scrollBar:          false
 URxvt*internalBorder:     0
-!*termName:               xterm-256color
 
 ! Transparent background
 URxvt*depth:              32
 URxvt*background:         rgba:0000/0000/0000/dddd
-
 
 *dynamicColors:      true
 xterm*utf8:               2
@@ -48,9 +47,12 @@ URxvt.cutchars: "\\ `\"\'()*;<>[]{|}&,=?@^\:"
 
 ! Match URLs
 URxvt*perl-ext-common:  default,matcher
-URxvt*urlLauncher:      /usr/bin/google-chrome
+URxvt.urlLauncher:      /usr/bin/google-chrome
+URxvt.underlinedURLs: true
 URxvt*matcher.button:   1
 URxvt*matcher.pattern.1: \\bwww\\.[\\w-]+\\.[\\w./?&@#-]*[\\w/-]
+
+URxvt.iconFile: /usr/share/icons/hicolor/scalable/apps/terminator.svg
 
 ! this does what?
 XTerm*cutNewline: true
@@ -67,13 +69,14 @@ xterm*highlightSelection: true
 XTerm*eightBitInput:   false
 XTerm*metaSendsEscape: true
 
-Xft.antialias: true
-Xft.autohint: 0
-Xft.dpi: 96
-Xft.hinting: true
-Xft.hintstyle: hintfull
-Xft.lcdfilter: lcddefault
-Xft.rgba: rgb
+! Cant see much difference?
+! Xft.antialias: true
+! Xft.autohint: 0
+! Xft.dpi: 96
+! Xft.hinting: true
+! Xft.hintstyle: hintfull
+! Xft.lcdfilter: lcddefault
+!! Xft.rgba: rgb <- evil
 
 ! Fix up xterms keybindings
 ! http://tldp.org/HOWTO/XWindow-User-HOWTO/moreconfig.html
@@ -87,6 +90,12 @@ Xft.rgba: rgb
 !    <Key>Page_Down:    string(0x1b) string("[6~")\n\
 !    <KeyPress>Prior : scroll-back(1,page)\n\
 !    <KeyPress>Next : scroll-forw(1,page)
+
+! Disable Keycap Picture Insert and ISO-14755 Mode. Trigger by Ctrl-Shift
+! https://bitbucket.org/sme/dotfiles/src/0b4387472283/.Xdefaults
+URxvt.iso14755_52: false
+URxvt.iso14755: false
+
 
 ! http://blog.ssokolow.com/archives/2011/05/01/modernizing-xterms-paste/
 ! Meta is <Alt>
@@ -106,4 +115,3 @@ Xft.rgba: rgb
     Meta <Key>V: insert-selection(PRIMARY, CUT_BUFFER_0) \n\
     Meta <Key>M: iconify() \n\
     Meta <Key>P: print()
-
