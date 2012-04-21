@@ -19,3 +19,8 @@ _play_complete() {
       <(ls 2>/dev/null ~/.tmux/sessions/)
 }
 complete -o "default" -o "nospace" -C _play_complete play
+
+if [ -e "$HOME/lib/todo.txt-cli/todo_completion" ]; then
+  source "$HOME/lib/todo.txt-cli/todo_copmletion"
+  complete -F _todo t
+fi
