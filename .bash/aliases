@@ -16,6 +16,7 @@ alias vi='vim'
 # Shortcuts
 alias g='git'
 alias v='vim'
+alias t='todo.sh -d ~/.todo.cfg'
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
