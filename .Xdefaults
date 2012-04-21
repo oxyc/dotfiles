@@ -1,32 +1,58 @@
 
-URxvt*geometry:           150x40
+! Cant see much difference? @todo
+Xft.antialias: true
+Xft.autohint: 0
+Xft.dpi: 96
+Xft.hinting: true
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcddefault
+!! Xft.rgba: rgb <- evil
+
 URxvt.termName:           rxvt-256color
+*customization:           -color
 
-
-
-! Looks, also dont use bold font.
-URxvt*font:               xft:InconsolataForPowerline:medium:pixelsize=14
-URxvt*boldFont:           xft:InconsolataForPowerline:medium:pixelsize=14
-URxvt*colorBD:            #ffffff
-URxvt*foreground:         #aaaaaa
+URxvt*geometry:           150x40
+XTerm*visualBell:         true
 URxvt*scrollBar:          false
 URxvt*internalBorder:     0
+URxvt.iconFile:           /usr/share/icons/Humanity/apps/128/terminal.svg
 
 ! Transparent background
 URxvt*depth:              32
 URxvt*background:         rgba:0000/0000/0000/dddd
 
-*dynamicColors:      true
-xterm*utf8:               2
+! Fonts
+URxvt*foreground:         #aaaaaa
+URxvt*font:               xft:InconsolataForPowerline:medium:pixelsize=14
+URxvt*boldFont:           xft:InconsolataForPowerline:medium:pixelsize=14
+URxvt*colorBD:            #ffffff
+
+! Dont select special chars
+URxvt.cutchars:           "\\ `\"\'()*;<>[]{|}&,=?@^\:"
+
+! Match URLs
+URxvt*perl-ext-common:    default,matcher
+URxvt*urlLauncher:        /usr/bin/google-chrome
+URxvt*underlinedURLs:     true
+URxvt*matcher.button:     1
+URxvt*matcher.pattern.1:  \\bwww\\.[\\w-]+\\.[\\w./?&@#-]*[\\w/-]
+
+! Disable Keycap Picture Insert and ISO-14755 Mode. Trigger by Ctrl-Shift
+! https://bitbucket.org/sme/dotfiles/src/0b4387472283/.Xdefaults
+URxvt.iso14755_52: false
+URxvt.iso14755: false
+
+! Questionable stuff @todo
+! *dynamicColors:      true
+xterm*utf8:               1
 xterm*saveLines:          10000
-
-! Visual bell
-XTerm*visualBell:         true
-
-URxvt*cursorColor: red
 
 xterm*scrollKey:          true
 xterm*scrollTtyOutput:    false
+
+!urxvt.xftAntialias:      true
+!urxvt*keysym.S-Prior:   ^[[5;2~
+!urxvt*keysym.S-Next:    ^[[6;2~
 
 !xterm*jumpScroll:         true
 !xterm*multiScroll:        true
@@ -38,69 +64,27 @@ URxvt.keysym.Control-Down: \033[1;5B
 URxvt.keysym.Control-Left: \033[1;5D
 URxvt.keysym.Control-Right: \033[1;5C
 
+! ! Xterm 
+
 ! Clicking to select stuff
-!XTerm*on2Clicks:  regex [^ \n]+
-!XTerm*on3Clicks:  line
+XTerm*on2Clicks:  regex [^ \n]+
+XTerm*on3Clicks:  line
 
-! Dont select special chars
-URxvt.cutchars: "\\ `\"\'()*;<>[]{|}&,=?@^\:"
-
-! Match URLs
-URxvt*perl-ext-common:  default,matcher
-URxvt.urlLauncher:      /usr/bin/google-chrome
-URxvt.underlinedURLs: true
-URxvt*matcher.button:   1
-URxvt*matcher.pattern.1: \\bwww\\.[\\w-]+\\.[\\w./?&@#-]*[\\w/-]
-
-URxvt.iconFile: /usr/share/icons/hicolor/scalable/apps/terminator.svg
-
-! this does what?
 XTerm*cutNewline: true
-
-xterm*selectToClipboard: true
-
-*customization: -color
+XTerm*selectToClipboard: true
 
 ! http://j.rigelseven.com/read/55816/
-xterm*highlightSelection: true
+XTerm*highlightSelection: true
 
 ! Support alt-keys in irssi
 ! http://irssi.org/beginner/
 XTerm*eightBitInput:   false
 XTerm*metaSendsEscape: true
 
-! Cant see much difference?
-! Xft.antialias: true
-! Xft.autohint: 0
-! Xft.dpi: 96
-! Xft.hinting: true
-! Xft.hintstyle: hintfull
-! Xft.lcdfilter: lcddefault
-!! Xft.rgba: rgb <- evil
-
-! Fix up xterms keybindings
-! http://tldp.org/HOWTO/XWindow-User-HOWTO/moreconfig.html
-! xterm*VT100.translations:	#override \
-!    <Key>BackSpace:    string(0x7F) \n\
-!    <Key>Insert:       string(0x1b) string("[2~")\n\
-!    <Key>Delete:       string(0x1b) string("[3~")\n\
-!    <Key>Home:         string(0x1b) string("[1~")\n\
-!    <Key>End:	     string(0x1b) string("[4~")\n\
-!    <Key>Page_Up:      string(0x1b) string("[5~")\n\
-!    <Key>Page_Down:    string(0x1b) string("[6~")\n\
-!    <KeyPress>Prior : scroll-back(1,page)\n\
-!    <KeyPress>Next : scroll-forw(1,page)
-
-! Disable Keycap Picture Insert and ISO-14755 Mode. Trigger by Ctrl-Shift
-! https://bitbucket.org/sme/dotfiles/src/0b4387472283/.Xdefaults
-URxvt.iso14755_52: false
-URxvt.iso14755: false
-
-
 ! http://blog.ssokolow.com/archives/2011/05/01/modernizing-xterms-paste/
 ! Meta is <Alt>
-! iconify() minimize
-! @todo print() does what?
+! iconify() minimize @todo print() does what?
+! Only work in xterm
 *VT100.Translations: #override \
     Shift <Key>Up:                scroll-back(1) \n\
     Shift <Key>Down:              scroll-forw(1) \n\
