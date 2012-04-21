@@ -1,0 +1,57 @@
+xterm*geometry:           80x25
+xterm*faceName:           InconsolataForPowerline:regular:pixelsize=14
+
+xterm*background:         black
+xterm*foreground:         gray
+xterm*dynamicColors:      true
+xterm*utf8:               2
+xterm*eightBitInput:      true
+xterm*saveLines:          2048
+xterm*scrollKey:          true
+xterm*scrollTtyOutput:    false
+xterm*scrollBar:          false
+xterm*jumpScroll:         true
+xterm*multiScroll:        true
+xterm*toolBar:            false
+xterm*antialias:          false
+
+xterm*selectToClipboard: true
+
+*customization: -color
+xterm*termName:  xterm-256color
+
+! http://j.rigelseven.com/read/55816/
+xterm*highlightSelection: true
+
+Xft.antialias: true
+Xft.autohint: 0
+Xft.dpi: 96
+Xft.hinting: true
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcddefault
+Xft.rgba: rgb
+
+! Fix up xterms keybindings
+! http://tldp.org/HOWTO/XWindow-User-HOWTO/moreconfig.html
+! xterm*VT100.translations:	#override \
+!    <Key>BackSpace:    string(0x7F) \n\
+!    <Key>Insert:       string(0x1b) string("[2~")\n\
+!    <Key>Delete:       string(0x1b) string("[3~")\n\
+!    <Key>Home:         string(0x1b) string("[1~")\n\
+!    <Key>End:	     string(0x1b) string("[4~")\n\
+!    <Key>Page_Up:      string(0x1b) string("[5~")\n\
+!    <Key>Page_Down:    string(0x1b) string("[6~")\n\
+!    <KeyPress>Prior : scroll-back(1,page)\n\
+!    <KeyPress>Next : scroll-forw(1,page)
+
+! http://blog.ssokolow.com/archives/2011/05/01/modernizing-xterms-paste/
+*VT100.Translations: #override \
+    Shift <Key>Up:                scroll-back(1) \n\
+    Shift <Key>Down:              scroll-forw(1) \n\
+    ~Meta Shift Ctrl <Key>V:      insert-selection(CLIPBOARD) \n\
+    Meta Shift Ctrl <Key>V:       insert-selection(PRIMARY) \n\
+    ~Shift <Btn1Up>:              select-end(PRIMARY, CUT_BUFFER0) \n\
+    Shift <Btn1Up>:               select-end(CLIPBOARD, CUT_BUFFER1) \n\
+    ~Shift ~Ctrl ~Meta <Btn2Up>:  insert-selection(PRIMARY, CUT_BUFFER0) \n\
+    Shift ~Ctrl ~Meta <Btn2Up>:   insert-selection(CLIPBOARD, CUT_BUFFER1)
+
