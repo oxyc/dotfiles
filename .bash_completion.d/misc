@@ -1,0 +1,22 @@
+#!/bin/bash
+
+complete -cf sudo
+complete -o nospace -A command killall
+
+# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2)" scp sftp ssh
+
+if [ hash play 2>/dev/null ]; then
+  # Add tab completion for play using active tmux sessions and session files available
+  _play_complete() {
+    cat <(tmux list-sessions 2>/dev/null | awk -F ':' '{ print $1 }') \
+        <(ls 2>/dev/null ~/.tmux/sessions/)
+  }
+  complete -o "default" -o "nospace" -C _play_complete play
+fi
+
+if [ -e "$HOME/lib/todo.txt-cli/todo_completion" ]; then
+  source "$HOME/lib/todo.txt-cli/todo_completion"
+  complete -F _todo t
+fi
+
