@@ -51,6 +51,15 @@ export PAGER='less'
 [[ -d "$HOME/node_modules" ]] && export PATH="$PATH:$HOME/node_modules"
 [[ -d "$HOME/drush" ]] && export PATH="$PATH:$HOME/drush"
 
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+  . /etc/bash_completion
+
+  for file in ~/.bash_completion.d/*; do
+    [ -r "$file" ] && source "$file"
+  done
+fi
+
+
 # When connecting to SSH, start or reattach screen session
 # http://dotfiles.org/~thayer/.bashrc
 #if [ -n "$SSH_CONNECTION" ] && [ -z "$SCREEN_EXIST" ]; then
