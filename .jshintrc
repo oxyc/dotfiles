@@ -12,6 +12,7 @@
 
     "asi" : false,
     "boss" : false,
+    "expr" : true,
     "curly": false,
     "debug": true,
     "devel": true,
