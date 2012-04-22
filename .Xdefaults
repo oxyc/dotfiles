@@ -1,11 +1,11 @@
 
 ! Cant see much difference? @todo
-Xft.antialias: true
-Xft.autohint: 0
-Xft.dpi: 96
-Xft.hinting: true
-Xft.hintstyle: hintfull
-Xft.lcdfilter: lcddefault
+Xft.antialias:            true
+Xft.autohint:             0
+Xft.dpi:                  96
+Xft.hinting:              true
+Xft.hintstyle:            hintfull
+Xft.lcdfilter:            lcddefault
 !! Xft.rgba: rgb <- evil
 
 URxvt.termName:           rxvt-256color
@@ -50,17 +50,17 @@ URxvt*matcher.pattern.1:  \\bwww\\.[\\w-]+\\.[\\w./?&@#-]*[\\w/-]
 
 ! Disable Keycap Picture Insert and ISO-14755 Mode. Trigger by Ctrl-Shift
 ! https://bitbucket.org/sme/dotfiles/src/0b4387472283/.Xdefaults
-URxvt.iso14755_52: false
-URxvt.iso14755: false
+URxvt.iso14755_52:        false
+URxvt.iso14755:           false
 
-! Questionable stuff @todo
-URxvt*keysym.S-Prior:   ^[[5;2~
-URxvt*keysym.S-Next:    ^[[6;2~
-
-URxvt.keysym.Control-Up: \033[1;5A
-URxvt.keysym.Control-Down: \033[1;5B
-URxvt.keysym.Control-Left: \033[1;5D
-URxvt.keysym.Control-Right: \033[1;5C
+! @todo
+! URxvt*keysym.S-Prior:     ^[[5;2~
+! URxvt*keysym.S-Next:      ^[[6;2~
+! 
+! URxvt.keysym.Control-Up:    \033[1;5A
+! URxvt.keysym.Control-Down:  \033[1;5B
+! URxvt.keysym.Control-Left:  \033[1;5D
+! URxvt.keysym.Control-Right: \033[1;5C
 
 ! ! Xterm 
 
@@ -74,19 +74,19 @@ xterm*antialias:          false
 xterm*scrollTtyOutput:    false
 
 ! Clicking to select stuff
-XTerm*on2Clicks:  regex [^ \n]+
-XTerm*on3Clicks:  line
+XTerm*on2Clicks:          regex [^ \n]+
+XTerm*on3Clicks:          line
 
-XTerm*cutNewline: true
-XTerm*selectToClipboard: true
+XTerm*cutNewline:         true
+XTerm*selectToClipboard:  true
 
 ! http://j.rigelseven.com/read/55816/
-XTerm*highlightSelection: true
+XTerm*highlightSelection:  true
 
 ! Support alt-keys in irssi
 ! http://irssi.org/beginner/
-XTerm*eightBitInput:   false
-XTerm*metaSendsEscape: true
+XTerm*eightBitInput:       false
+XTerm*metaSendsEscape:     true
 
 ! http://blog.ssokolow.com/archives/2011/05/01/modernizing-xterms-paste/
 ! Meta is <Alt>
