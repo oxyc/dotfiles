@@ -1,10 +1,9 @@
-# Sample minimal config file.  Copy this to ~/.offlineimaprc and edit to
-# suit to get started fast.
+# http://www.docunext.com/wiki/Example_OfflineIMAP_configuration_file
 
 [general]
 accounts = Oxy,Arcada,Gmail
 maxsyncaccounts = 3
-ui = ttyui
+ui = Noninteractive.Quiet
 
 [mbnames]
 enabled = yes
@@ -17,17 +16,14 @@ footer = "\n"
 [Account Oxy]
 localrepository = OxyLocal
 remoterepository = OxyRemote
-autorefresh = 5
 
 [Account Arcada]
 localrepository = ArcadaLocal
 remoterepository = ArcadaRemote
-autorefresh = 5
 
 [Account Gmail]
 localrepository = GmailLocal
 remoterepository = GmailRemote
-autorefresh = 5
 
 [Repository OxyLocal]
 type = Maildir
