@@ -6,15 +6,15 @@ Xft.dpi:                  96
 Xft.hinting:              true
 Xft.hintstyle:            hintfull
 Xft.lcdfilter:            lcddefault
-!! Xft.rgba: rgb <- evil
+Xft.rgba:                 rgb
 
 URxvt.termName:           rxvt-256color
 *customization:           -color
-URxvt.title:              urxvt, named to annoy touch typers?
+URxvt.title:              Terminal
 Urxvt.loginShell:         true
 
 URxvt*geometry:           150x40
-XTerm*visualBell:         true
+URxvt*visualBell:         false
 URxvt*scrollBar:          false
 URxvt*internalBorder:     0
 URxvt.iconFile:           /usr/share/icons/Humanity/apps/128/terminal.svg
@@ -67,11 +67,12 @@ URxvt.iso14755:           false
 xterm*utf8:               1
 xterm*saveLines:          10000
 xterm*scrollKey:          true
-xxterm*jumpScroll:        true
+xterm*jumpScroll:        true
 xterm*multiScroll:        true
 xterm*toolBar:            false
 xterm*antialias:          false
 xterm*scrollTtyOutput:    false
+xterm*visualBell:         false
 
 ! Clicking to select stuff
 XTerm*on2Clicks:          regex [^ \n]+
