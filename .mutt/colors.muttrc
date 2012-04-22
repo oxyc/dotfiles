@@ -1,4 +1,5 @@
 # vim: filetype=muttrc
+# https://github.com/altercation/mutt-colors-solarized
 
 # make sure that you are using mutt linked against slang, not ncurses, or
 # suffer the consequences of weird color issues. use "mutt -v" to check this.
