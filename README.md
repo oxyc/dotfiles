@@ -82,6 +82,10 @@ Options:
 All screenshots are taken on a black background, actually there is a 10% alpha
 transparency on them, configured for urxvt
 
+#### Full screen
+
+![Full screen](http://i.imgur.com/6kP2O.png)
+
 #### Mutt
 
 ![Mutt](http://i.imgur.com/EkUx6.png)
