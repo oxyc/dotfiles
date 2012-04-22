@@ -101,8 +101,8 @@ XTerm*metaSendsEscape: true
     Shift <Btn1Up>:               select-end(CLIPBOARD, CUT_BUFFER1) \n\
     ~Shift ~Ctrl ~Meta <Btn2Up>:  insert-selection(PRIMARY, CUT_BUFFER0) \n\
     Shift ~Ctrl ~Meta <Btn2Up>:   insert-selection(CLIPBOARD, CUT_BUFFER1) \n\
-    Meta <Key>C: select-cursor-start() \
-      select-cursor-end(PRIMARY, CUT_BUFFER0) \n\
-    Meta <Key>V: insert-selection(PRIMARY, CUT_BUFFER_0) \n\
-    Meta <Key>M: iconify() \n\
-    Meta <Key>P: print()
+    Meta <Key>C:                  select-cursor-start() \
+                                  select-cursor-end(PRIMARY, CUT_BUFFER0) \n\
+    Meta <Key>V:                  insert-selection(PRIMARY, CUT_BUFFER_0) \n\
+    Meta <Key>M:                  iconify() \n\
+    Meta <Key>P:                  print()
