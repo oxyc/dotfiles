@@ -64,6 +64,15 @@ URxvt.keysym.Control-Right: \033[1;5C
 
 ! ! Xterm 
 
+xterm*utf8:               1
+xterm*saveLines:          10000
+xterm*scrollKey:          true
+xxterm*jumpScroll:        true
+xterm*multiScroll:        true
+xterm*toolBar:            false
+xterm*antialias:          false
+xterm*scrollTtyOutput:    false
+
 ! Clicking to select stuff
 XTerm*on2Clicks:  regex [^ \n]+
 XTerm*on3Clicks:  line
