@@ -77,9 +77,22 @@ Options:
 - `calc` A proper calculator
 - `bf` List the 10 biggest files in the current path.
 
-### Bash prompt
+## Screenshots
 
-![Bash prompt](http://i.imgur.com/2asnT.png)
+All screenshots are taken on a black background, actually there is a 10% alpha
+transparency on them, configured for urxvt
+
+#### Mutt
+
+![Mutt](http://i.imgur.com/EkUx6.png)
+
+#### Irssi
+
+![Irssi](http://i.imgur.com/PRrEH.png)
+
+#### ls++ & vim
+
+![ls++ & vim](http://i.imgur.com/XWNXB.png)
 
 ## Additional suggestions
 
