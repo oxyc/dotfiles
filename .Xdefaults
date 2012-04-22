@@ -41,9 +41,6 @@ URxvt*saveLines:          10000
 ! Dont select special chars
 URxvt.cutchars:           "\\ `\"\'()*;<>[]{|}&,=?@^\:"
 
-! alt, meta, hyper, super, mod1, mod2, mod3, mod4, mod5
-URxvt.modifier: super
-
 ! Match URLs
 URxvt*perl-ext-common:    default,matcher
 URxvt*urlLauncher:        /usr/bin/google-chrome
