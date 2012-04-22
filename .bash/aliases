@@ -19,16 +19,25 @@ alias v='vim'
 hash todo.sh 2>/dev/null && alias t='todo.sh -d ~/.todo.cfg'
 hash ls++ 2>/dev/null && alias l='ls++'
 
+# Fasd shortcuts
+if [ hash fasd 2>/dev/null ]; then
+  alias a='fasd -a' # any
+  alias s='fasd -s' # show / search / select
+  alias d='fasd -d' # directory
+  alias f='fasd -f' # file
+  alias z='fasd_cd -d' # cd, same functionality as j in autojump
+fi
+
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 
 # Enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
 fi
 
 # IP addresses
@@ -47,6 +56,6 @@ alias meminfo="echo -e '/proc/meminfo:\n';grep --color=auto '^[Mem|Swap]*[Free|T
 
 # Make HTTP requests
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-    alias "$method"="lwp-request -m '$method'"
+  alias "$method"="lwp-request -m '$method'"
 done
 unset method

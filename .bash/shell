@@ -35,7 +35,7 @@ export HISTFILESIZE=16384
 export HISTCONTROL='ignoredups:ignorespace'
 
 # Make some commands not show up in history
-export HISTIGNORE='ls:ls *:ll:lsd:cd:cd -:pwd:* --help'
+export HISTIGNORE='ls:l:ll:lsd:cd:cd -:pwd:* --help'
 
 # Some distros won't check home path for inputrc.
 export INPUTRC="$HOME/.inputrc"
@@ -57,6 +57,10 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
   for file in ~/.bash_completion.d/*; do
     [ -r "$file" ] && source "$file"
   done
+fi
+
+if [ hash fasd 2>/dev/null ]; then
+  eval "$(fasd --init auto)"
 fi
 
 
