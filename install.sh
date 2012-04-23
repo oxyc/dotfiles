@@ -4,6 +4,12 @@ if [[ ${BASH_SOURCE[0]} ]]; then
   filepath="$(readlink -f "${BASH_SOURCE[0]}")"
   filedir="$(dirname $filepath)"
 fi
+
+# pipe
+if [ ! -t 1 ]; then
+  filedir="$PWD"
+fi
+
 backup="$HOME/.backup-dotfiles"
 
 die() {
@@ -83,19 +89,25 @@ while [[ $1 = ?* ]]; do
   shift
 done
 
-if ((pipe)); then
-  filedir="$PWD"
-  git clone --recursive git://github.com/oxyc/dotfiles.git \
-    && verifyDirectory \
-    && syncit
-else
-  verifyDirectory
 
-  cd $filedir \
-    && git pull origin master \
-    && git submodule foreach git pull origin master \
-    && syncit \
-    && cd $OLDPWD
+# Updates filedir to correct path or exits
+verifyDirectory
+
+if ! hash perl; then
+  echo "Some libraries require perl which you don't have."
+else
+  if ! perl -MTerm::ExtendedColor -e 1 2>/dev/null; then
+    if confirm "You must install Term::ExtendedColor for ls++ to work, install it now?"; then
+      echo
+      sudo cpan Term::ExtendedColor
+    fi
+  fi
 fi
+
+cd $filedir \
+  && git pull origin master \
+  && git submodule foreach git pull origin master \
+  && syncit \
+  && cd $OLDPWD
 
 source $HOME/.bash_profile
