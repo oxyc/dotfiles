@@ -37,12 +37,13 @@ function gc() { git checkout "${@:-master}"; } # Checkout master by default
 alias gcb='gc -b'
 
 # Fasd shortcuts
-hash fasd 2>/dev/null && {
-  alias a='fasd -a' # any
-  alias s='fasd -s' # show / search / select
-  alias d='fasd -d' # directory
-  alias f='fasd -f' # file
-  alias z='fasd_cd -d' # cd, same functionality as j in autojump
+have && {
+  alias o='fasd -f -e xdg-open'
+  alias oo='fasd -fi -e xdg-open'
+  alias z='fasd_cd -d'
+  alias zz='fasd_cd -d -i'
+  alias v='fasd -f -e vim'
+  alias vv='fasd -fi -e vim'
 }
 
 # Enable aliases to be sudo’ed
