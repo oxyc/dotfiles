@@ -16,8 +16,8 @@ alias vi='vim'
 # Shortcuts
 alias g='git'
 alias v='vim'
-hash todo.sh 2>/dev/null && alias t='todo.sh -d ~/.todo.cfg'
-hash ls++ 2>/dev/null && alias l='ls++'
+have todo.sh && alias t='todo.sh -d ~/.todo.cfg'
+have ls++ && alias l='ls++'
 
 # Git shortcuts
 alias ga='git add'
