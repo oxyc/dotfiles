@@ -19,6 +19,23 @@ alias v='vim'
 hash todo.sh 2>/dev/null && alias t='todo.sh -d ~/.todo.cfg'
 hash ls++ 2>/dev/null && alias l='ls++'
 
+# Git shortcuts
+alias ga='git add'
+alias gp='git push'
+alias gpa='gp --all'
+alias gu='git pull'
+alias gl='git log'
+alias gg='gl --decorate --oneline --graph --date-order --all'
+alias gs='git status'
+alias gd='git diff'
+alias gdc='gd --cached'
+alias gm='git commit -m'
+alias gma='git commit -am'
+alias gb='git branch'
+alias gba='git branch -a'
+function gc() { git checkout "${@:-master}"; } # Checkout master by default
+alias gcb='gc -b'
+
 # Fasd shortcuts
 hash fasd 2>/dev/null && {
   alias a='fasd -a' # any

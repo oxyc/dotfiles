@@ -131,3 +131,17 @@ function vack {
   done < <(bash -c "${cmd/ack/ack -l}")
   "${EDITOR:-vim}" "${files[@]}"
 }
+
+# Git log with per-commit clickable GitHub URLs.
+# https://github.com/cowboy/dotfiles/commit/78fde838a429250e923f5611e233c6e4e942b377
+function gf() {
+  local remote="$(git remote -v | awk '/^origin.*\(push\)$/ {print $2}')"
+  [[ "$remote" ]] || return
+  local user_repo="$(echo "$remote" | perl -pe 's/.*://;s/\.git$//')"
+  git log $* --name-status --color | awk "$(cat <<AWK
+    /^.*commit [0-9a-f]+/ {sha=substr(\$2,1,7); printf "%s\thttps://github.com/$user_repo/commit/%s\033[0m\n", \$1, sha; next}
+    /^[MA]\t/ {printf "%s\thttps://github.com/$user_repo/blob/%s/%s\n", \$1, sha, \$2; next}
+    /.*/ {print \$0}
+AWK
+  )" | less -R
+}
