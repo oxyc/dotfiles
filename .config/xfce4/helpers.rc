@@ -1,0 +1,5 @@
+FileManager=Thunar
+MailReader=mutt
+WebBrowser=custom-WebBrowser
+TerminalEmulator=urxvt
+
