@@ -168,3 +168,8 @@ function rasterize() {
     exit 1
   fi
 }
+
+dimscreen() {
+  local amount="${1:-0}"
+  sudo bash -c "for i in /sys/class/backlight/acpi_video*/brightness; do echo $amount > \$i; done"
+}
