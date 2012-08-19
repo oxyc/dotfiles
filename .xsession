@@ -5,4 +5,4 @@ if [ -f $HOME/.Xdefaults ]; then
 fi
 
 # Map caps lock to esc
-xmodmap -e 'clear Lock' -e 'keycode 0x42
+xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
