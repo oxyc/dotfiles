@@ -86,8 +86,7 @@ play() {
     if [[ -e ~/.tmux/sessions/$session ]]; then
       echo "No session to attach, trying to create one"; wait 1
       . ~/.tmux/sessions/$session $socket
-    else
-      echo "No session exist for $session, looked in ~/.tmux/sessions/$session"
+    else echo "No session exist for $session, looked in ~/.tmux/sessions/$session"
     fi
   fi
 }
@@ -172,4 +171,14 @@ function rasterize() {
 dimscreen() {
   local amount="${1:-0}"
   sudo bash -c "for i in /sys/class/backlight/acpi_video*/brightness; do echo $amount > \$i; done"
+}
+
+toggletouch() {
+  local touchpad=$(xinput list | grep 'TouchPad' | sed -e 's/.*id=\([0-9]\+\).*/\1/')
+  local trackpad=$(xinput list | grep 'TrackPoint' | sed -e 's/.*id=\([0-9]\+\).*/\1/')
+  local enabled=$(xinput list-props $touchpad | grep 'Device Enabled' | sed 's/.*:.\+\([01]\).*/\1/')
+  ((enabled)) && local status=0 || local status=1
+  xinput --set-prop $touchpad "Device Enabled" $status
+  xinput --set-prop $trackpad "Device Enabled" $status
+
 }
