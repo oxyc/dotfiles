@@ -61,6 +61,8 @@ fi
 
 hash fasd 2>/dev/null && eval "$(fasd --init auto)"
 
+# Source nvm
+[[ -f "$HOME/.nvm/nvm.sh" ]] && . $HOME/.nvm/nvm.sh
 
 # When connecting to SSH, start or reattach screen session
 # http://dotfiles.org/~thayer/.bashrc
