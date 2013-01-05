@@ -16,9 +16,11 @@ set mail_check       = 0                                           # Minimum tim
 set sort_alias       = alias
 set reverse_alias
 unset move                                                         # Gmail does that
+unset confirmappend                                                # Don't ask
 set delete                                                         # Don't ask
 set quit                                                           # Don't ask
 unset mark_old                                                     # read/new is enough
+set beep_new                                                       # bell on new emails
 set pipe_decode                                                    # strip headers and eval mimes when piping
 set thorough_search                                                # strip headers and eval mimes before searching
 
@@ -102,6 +104,7 @@ bind index <space>  collapse-thread
 macro index D "<save-message>+trash<enter>"  "move message to trash"
 macro index S "<save-message>+spam<enter>"   "move message to spam"
 macro index I "<change-folder>!<enter>"      "go to Inbox"
+macro index O "<shell-escape>offlineimap<enter>"  "run offlineiamp to sync all mail"
 macro index gmail "<change-folder>+gmail/inbox<enter>"
 macro index arcada "<change-folder>+arcada/INBOX<enter>"
 macro generic "1" ":set from=mail@oxy.fi"
