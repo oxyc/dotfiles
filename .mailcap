@@ -1,0 +1,2 @@
+application/pdf; pdftotext -layout %s - | less
+text/html;       google-chrome %s
