@@ -198,3 +198,9 @@ screenshot() {
   import -window "$id" -frame $filename
   imageshadow $filename $filename
 }
+
+windowsize() {
+  local width=${1:-640}
+  local height=${2:-400}
+  wmctrl -r :ACTIVE: -e 0,-1,-1,$width,$height
+}
