@@ -1,5 +1,4 @@
 #!/bin/bash
-# Screenshot: http://i.imgur.com/2asnT.png
 # git magic inspired by https://github.com/gf3/dotfiles/blob/master/.bash_prompt
 
 parse_git_dirty() {
@@ -19,12 +18,11 @@ prompt_desc() {
     OUTPUT="${OUTPUT}$(parse_git_branch)/"
   fi
 
-  [[ -n "$OUTPUT" ]] && echo " ${OUTPUT%?}"
+  [[ -n "$OUTPUT" ]] && echo " (${OUTPUT%?})"
 }
 
-CYAN="\033[36m"
-WHITE="\033[37m"
-ORANGE="\033[33m"
+WHITE="\033[97m"
+YELLOW="\033[93m"
 RESET="\033[0m"
 
-PS1="\[${WHITE}\]\w \[${CYAN}\]${USER}@${HOSTNAME}\[${WHITE}\]\$(prompt_desc) \[${RESET}\]"
+PS1="\[$WHITE\]\W\[$YELLOW\]\$(prompt_desc)\[$WHITE\]:\[$RESET\] "
