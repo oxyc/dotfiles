@@ -182,3 +182,11 @@ toggletouch() {
   xinput --set-prop $touchpad "Device Enabled" $status
   xinput --set-prop $trackpad "Device Enabled" $status
 }
+
+imageshadow () {
+  local input="$@"
+  # Sanitize filename and prepend it with `shadow`
+  local output=$(echo "${input%.*}-shadow.${input#*.}" | sed -e "y/ /-/; s/\(.*\)/\L\1/")
+  convert "$input" \( +clone -background black -shadow 100x10+0+10 \) \
+    +swap -background transparent -layers merge +repage $output
+}
