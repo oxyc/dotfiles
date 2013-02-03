@@ -183,10 +183,18 @@ toggletouch() {
   xinput --set-prop $trackpad "Device Enabled" $status
 }
 
-imageshadow () {
-  local input="$@"
-  # Sanitize filename and prepend it with `shadow`
-  local output=$(echo "${input%.*}-shadow.${input#*.}" | sed -e "y/ /-/; s/\(.*\)/\L\1/")
+imageshadow() {
+  local input="$1"
+  local output="${2:-${input%.*}-shadow.${input#*.}}"
   convert "$input" \( +clone -background black -shadow 100x10+0+10 \) \
-    +swap -background transparent -layers merge +repage $output
+    +swap -background transparent -layers merge +repage "$output"
+}
+
+screenshot() {
+  [[ $1 ]] && echo "Grabbing screenshot in $1 sec" && sleep $1
+  local activeWindow=$(xprop -root | grep "_NET_ACTIVE_WINDOW(WINDOW)")
+  local id=${activeWindow:40}
+  local filename="$(date +%F_%H%M%S).png"
+  import -window "$id" -frame $filename
+  imageshadow $filename $filename
 }
