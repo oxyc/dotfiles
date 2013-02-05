@@ -1,12 +1,11 @@
 ## Installation
 
-One-line installation script
 
 ```bash
-wget https://raw.github.com/oxyc/dotfiles/master/install.sh -O - | pipe=1 bash
+make install
 ```
 
-Add a .bash/extras file with your additional settings, such as:
+Add a .bash/extras.sh file with your additional settings, such as:
 
 ```bash
 git config --global user.name FULLNAME
@@ -14,8 +13,6 @@ git config --global user.email EMAIL
 git config --global github.user USERNAME
 git config --global github.token TOKEN
 ```
-
-Edit your own name and website into ~/bin/license.
 
 ## Features
 
@@ -104,7 +101,7 @@ As this is often used with shell-only accessed computers I'm not including a
 font but my personal preference is [Inconsolata](http://levien.com/type/myfonts/inconsolata.html) by Raph Levien.
 
 ```bash
-mkdir -p ~/.fonts && cd ~/.fonts && wget http://levien.com/type/myfonts/Inconsolata.otf && sudo fc-cache -f -v
+mkdir -p ~/.fonts && cd ~/.fonts && wget http://levien.com/type/myfonts/Inconsolata.otf && fc-cache -f -v
 ```
 
 ## Inspired/Stolen by
