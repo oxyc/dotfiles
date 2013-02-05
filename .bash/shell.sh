@@ -48,6 +48,7 @@ export PAGER='less'
 
 # PATH additions
 [[ -d "$HOME/bin" ]] && export PATH="$PATH:$HOME/bin"
+[[ -d "$HOME/.local/bin" ]] && export PATH="$PATH:$HOME/.local/bin"
 [[ -d "$HOME/node_modules" ]] && export PATH="$PATH:$HOME/node_modules"
 [[ -d "$HOME/drush" ]] && export PATH="$PATH:$HOME/drush"
 

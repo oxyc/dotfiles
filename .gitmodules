@@ -1,0 +1,9 @@
+[submodule ".local/lib/ls--"]
+	path = .local/lib/ls--
+	url = git://github.com/trapd00r/ls--.git
+[submodule ".local/lib/todo.txt-cli"]
+	path = .local/lib/todo.txt-cli
+	url = git://github.com/ginatrapani/todo.txt-cli.git
+[submodule ".local/lib/fasd"]
+	path = .local/lib/fasd
+	url = git://github.com/clvv/fasd.git
