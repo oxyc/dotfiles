@@ -1,0 +1,65 @@
+#!/bin/sh
+
+start() {
+  # Disable the NMI Watchdog
+  echo 0 > /proc/sys/kernel/watchdog
+
+  # Reduce the VM write-back timeout (lose 10 sec on crash)
+  echo 1500 > /proc/sys/vm/dirty_writeback_centisecs
+
+  # Runtime power-management for PCI devices
+  for i in /sys/bus/pci/devices/*/power/control ; do
+    echo auto > ${i}
+  done
+  # Reduce power for SATA link power management
+  for i in 0 1 2 3 4 5 ; do
+    echo min_power>/sys/class/scsi_host/host${i}/link_power_management_policy
+  done
+
+  # Runtime power-management for USB devices
+  for i in /sys/bus/usb/devices/*/power/control ; do
+    echo auto > ${i}
+  done
+
+  # Enable audio codec power management
+  echo 1 > /sys/module/snd_hda_intel/parameters/power_save
+
+  # Disable Wake-on-LAN
+  # @todo can this be detected somehow? most have wwan0...
+  ethtool -s enp0s25 wol d
+
+  # Dim screen
+  for i in /sys/class/backlight/acpi_video*/brightness; do
+    echo 10 > $i;
+  done
+}
+
+stop() {
+  echo 1 > /proc/sys/kernel/watchdog
+  echo 60000 > /proc/sys/vm/dirty_writeback_centisecs
+
+  # Change power-saving for SATA devices
+  for i in 0 1 2 3 4 5 ; do
+    echo min_power>/sys/class/scsi_host/host${i}/link_power_management_policy
+  done
+
+  # Enable full power for PCI devices
+  for i in /sys/bus/pci/devices/*/power/control ; do
+    echo on > ${i}
+  done
+
+  # Enable Wake-on-LAN
+  ethtool -s enp0s25 wol g
+
+  # Disable audio codec power management
+  echo 10 > /sys/module/snd_hda_intel/parameters/power_save
+
+  # Dim screen
+  for i in /sys/class/backlight/acpi_video*/brightness; do
+    echo 15 > $i;
+  done
+}
+
+case $1 in
+  start|stop) "$1" ;;
+esac
