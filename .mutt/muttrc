@@ -9,8 +9,7 @@ set editor           = "vim +/^$ +:s/^$/\\\\r\\\\r/ +:noh -c 'normal! k' -c 'set
 
 # Main Options
 set mbox_type        = Maildir
-set folder           = ~/.Mail
-set spoolfile        = "+oxy/INBOX"                                # Default mailbox
+set folder           = ~/.mail
 set timeout          = 3                                           # Idle time before scanning
 set mail_check       = 0                                           # Minimum time between scans
 set sort_alias       = alias
@@ -71,13 +70,22 @@ set reverse_name = yes
 set include
 set forward_quote                                                  # include message in forwards
 
+# Mailboxes
+set spoolfile = "+gmail/INBOX"                                    # Default mailbox
+mailboxes +gmail/INBOX \
+          +gmail/archive \
+          +gmail/sent \
+          +gmail/drafts \
+
+set mbox             = "+gmail/archive"
+set postponed        = "+gmail/drafts"
+
+
 # Header
 ignore *                                                           # ignore all headers
 unignore from: to: cc: date: subject:                              # show only these
+unhdr_order *
 hdr_order from: to: cc: date: subject:                             # and in this order
-
-# Mailboxes
-mailboxes "+oxy/INBOX +arcada/INBOX +gmail/inbox"
 
 # Hooks
 folder-hook oxy/* set from=mail@oxy.fi

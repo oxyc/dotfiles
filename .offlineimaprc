@@ -1,9 +1,9 @@
 # http://www.docunext.com/wiki/Example_OfflineIMAP_configuration_file
 
 [general]
-accounts = Oxy,Arcada,Gmail
-maxsyncaccounts = 3
-ui = Noninteractive.Quiet
+accounts = Gmail
+ui = quiet
+fsync = False
 
 [mbnames]
 enabled = yes
@@ -13,52 +13,37 @@ peritem = "+%(accountname)s/%(foldername)s"
 sep = " "
 footer = "\n"
 
-[Account Oxy]
-localrepository = OxyLocal
-remoterepository = OxyRemote
-
-[Account Arcada]
-localrepository = ArcadaLocal
-remoterepository = ArcadaRemote
-
 [Account Gmail]
-localrepository = GmailLocal
-remoterepository = GmailRemote
+localrepository = Gmail-Local
+remoterepository = Gmail-Remote
+status_backend = sqlite
 
-[Repository OxyLocal]
+[Repository Gmail-Local]
 type = Maildir
-localfolders = ~/.Mail/oxy
+localfolders = ~/.mail/gmail
+nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
+                            'sent':    '[Gmail]/Sent Mail',
+                            'flagged': '[Gmail]/Starred',
+                            'trash':   '[Gmail]/Trash',
+                            'archive': '[Gmail]/All Mail',
+                            }.get(folder, folder)
 
-[Repository ArcadaLocal]
-type = Maildir
-localfolders = ~/.Mail/arcada
-
-[Repository GmailLocal]
-type = Maildir
-localfolders = ~/.Mail/gmail
-
-[Repository OxyRemote]
-type = IMAP
+[Repository Gmail-Remote]
+maxconnections = 1
+type = Gmail
 keepalive = 60
-remotehost = mail.oxy.fi
-remoteuser = mail+oxy.fi
-ssl = yes
-
-[Repository ArcadaRemote]
-type = IMAP
-keepalive = 60
-remotehost = imap.arcada.fi
-remoteuser = scholdso
-folderfilter = lambda foldername: foldername in ['INBOX', 'Drafts', 'Sent', 'archive']
-ssl = yes
-
-[Repository GmailRemote]
-type = IMAP
-keepalive = 60
-remotehost = imap.gmail.com
+# remotehost = imap.gmail.com
 remoteuser = oskar.scholdstrom@gmail.com
-nametrans = lambda foldername: re.sub ('sent_mail', 'sent',
-                               re.sub ('starred', 'flagged',
-                               re.sub (' ', '_', foldername.lower())))
-folderfilter = lambda foldername: foldername not in '[Gmail]/All Mail'
+realdelete = no
+nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
+                            '[Gmail]/Sent Mail': 'sent',
+                            '[Gmail]/Starred':   'flagged',
+                            '[Gmail]/Trash':     'trash',
+                            '[Gmail]/All Mail':  'archive',
+                            }.get(folder, folder)
+folderfilter = lambda folder: folder not in ['[Gmail]/Trash',
+                                             '[Gmail]/Important',
+                                             '[Gmail]/Spam',
+                                             ]
 ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
