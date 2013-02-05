@@ -1,0 +1,35 @@
+"amixer set Master playback 1+"
+  m:0x0 + c:123
+  XF86AudioRaiseVolume
+
+"amixer set Master playback 1-"
+  m:0x0 + c:122
+  XF86AudioLowerVolume
+
+"amixer set Master toggle"
+  m:0x0 + c:121
+  XF86AudioMute
+
+"synclient TouchpadOff=`toggletouch`"
+  m:0x0 + c:199
+  XF86ScreenSaver
+
+#"(Scheme function)"
+#    m:0x0 + c:160
+#    XF86ScreenSaver
+
+#"(Scheme function)"
+#    m:0x0 + c:235
+#    XF86Display
+#
+#"(Scheme function)"
+#    m:0x0 + c:173
+#    XF86AudioPrev
+#
+#"(Scheme function)"
+#    m:0x0 + c:172
+#    XF86AudioPlay
+
+#"(Scheme function)"
+#    m:0x0 + c:171
+#    XF86AudioNext
