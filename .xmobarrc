@@ -1,0 +1,17 @@
+Config { font = "xft:Inconsolata-8:normal"
+, bgColor = "black"
+, fgColor = "grey"
+, position = TopW L 95
+, lowerOnStart = True
+, commands = [ Run Memory ["-t","Mem: %"] 10
+  , Run Battery ["-t","Batt: <acstatus> <left>%"] 10
+  , Run Memory ["-t","Mem: <usedratio>%"] 10
+  , Run MultiCpu ["-t", "CPU: <total>%"] 100
+  -- Run Mail
+  , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+  , Run StdinReader
+]
+, sepChar = "%"
+, alignSep = "}{"
+, template = "%StdinReader%} {%battery% << %multicpu% << %memory% << %date%"
+}
