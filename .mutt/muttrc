@@ -23,11 +23,22 @@ set beep_new                                                       # bell on new
 set pipe_decode                                                    # strip headers and eval mimes when piping
 set thorough_search                                                # strip headers and eval mimes before searching
 
-set mbox             = "+archive"
-set postponed        = "+drafts"
 unset record                                                       # required to prevent duplicates in sent
 
 set sendmail = /usr/bin/msmtp
+
+# Sidebar
+set sidebar_delim   = '|'
+set sidebar_visible = yes
+set sidebar_width   = 24
+color sidebar_new color221 color233
+bind index,pager <down>   sidebar-next
+bind index,pager <up>     sidebar-prev
+bind index,pager <right>  sidebar-open
+
+# Status bar
+set status_chars = " *%A"
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
 
 # Index options
 set sort = threads
@@ -113,6 +124,9 @@ macro index D "<save-message>+trash<enter>"  "move message to trash"
 macro index S "<save-message>+spam<enter>"   "move message to spam"
 macro index I "<change-folder>!<enter>"      "go to Inbox"
 macro index O "<shell-escape>offlineimap<enter>"  "run offlineiamp to sync all mail"
+macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
+macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
+
 macro index gmail "<change-folder>+gmail/inbox<enter>"
 macro index arcada "<change-folder>+arcada/INBOX<enter>"
 macro generic "1" ":set from=mail@oxy.fi"
