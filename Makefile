@@ -2,14 +2,16 @@ SHELL_FILES ?= .ackrc .bash_profile .bashrc .dircolors .gitconfig .inputrc .jshi
 	.bash/aliases.sh .bash/exports.sh .bash/functions.sh .bash/prompt.sh .bash/shell.sh \
 	.bash_completion.d/misc $(wildcard .local/bin/*)
 
-XORG_FILES ?= .xsession .Xdefaults
+XORG_FILES ?= .xsession .Xdefaults .xbindkeysrc
+XMONAD_FILES ?= .xmonad/xmonad.hs .xmobarrc
 DRUPAL_FILES ?= .bash/drush.sh .ctags
-MUTT_FILES ?= .mutt/colors.muttrc .mutt/muttrc .mutt/sig .msmtprc .offlineimaprc .mailcap
+MUTT_FILES ?= .mutt/colors.muttrc .mutt/muttrc .mutt/sig .msmtprc .offlineimaprc .mailcap \
+							.mutt/certificates/Equifax_Secure_CA.cert
 TMUX_FILES ?= .tmux.conf .bash_completion.d/tmux
 TODO_FILES ?= .todo.cfg
 IRSSI_FILES ?= .irssi/dark.theme
 
-TARGETS_CLEAN ?= XORG DRUPAL MUTT TMUX TODO IRSSI SHELL
+TARGETS_CLEAN ?= XORG XMONAD DRUPAL MUTT TMUX TODO IRSSI SHELL
 
 MUTT_DIRS ?= .mutt/cache/bodies .mutt/cache/headers .mutt/temp
 SHELL_DIRS ?= .backup
@@ -38,21 +40,23 @@ install: clean xorg drupal mutt tmux todo irssi shell
 
 xorg: $(addprefix $(DEST)/,$(XORG_FILES))
 
+xmonad: $(addprefix $(DEST)/, $(XMONAD_FILES))
+
 drupal: $(addprefix $(DEST)/,$(DRUPAL_FILES))
 
 mutt: $(addprefix $(DEST)/,$(MUTT_FILES))
-	@mkdir -p $(MUTT_DIRS)
+	@mkdir -p $(addprefix $(DEST)/,$(MUTT_DIRS))
 
 tmux: $(addprefix $(DEST)/,$(TMUX_FILES))
-	@mkdir -p $(TMUX_DIRS)
+	@mkdir -p $(addprefix $(DEST)/,$(TMUX_DIRS))
 
 todo: $(addprefix $(DEST)/,$(TODO_FILES))
-	@mkdir -p $(TODO_DIRS)
+	@mkdir -p $(addprefix $(DEST)/$(TODO_DIRS))
 
 irssi: $(addprefix $(DEST)/,$(IRSSI_FILES))
 
 shell: $(addprefix $(DEST)/,$(SHELL_FILES))
-	@mkdir -p $(SHELL_DIRS)
+	@mkdir -p $(addprefix $(DEST)/,$(SHELL_DIRS))
 
 # Helpers ---------------------------------------------------------------------
 
@@ -80,4 +84,4 @@ clean-target: $(addprefix $(BACKUP)/,$($(CLEAN)_FILES))
 clean:
 	@$(foreach target,$(TARGETS_CLEAN), make -s CLEAN=$(target) clean-target;)
 
-.PHONY: xorg drupal mutt tmux todo irssi shell clean-target clean install
+.PHONY: xorg xmonad drupal mutt tmux todo irssi shell clean-target clean install
