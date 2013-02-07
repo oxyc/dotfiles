@@ -131,6 +131,8 @@ macro index I "<change-folder>!<enter>"      "go to Inbox"
 macro index O "<shell-escape>offlineimap<enter>"  "run offlineiamp to sync all mail"
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
+macro index,pager \cb "<pipe-message> urlscan<enter>" "call urlscan to extract URLS out of a message"
+macro attach,compose \cb "<pipe-entry> urlscan<enter>" "call urlscan to extract URLS out of a message"
 
 macro index gmail "<change-folder>+gmail/inbox<enter>"
 macro index arcada "<change-folder>+arcada/INBOX<enter>"
