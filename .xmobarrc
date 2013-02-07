@@ -1,17 +1,19 @@
-Config { font = "xft:Inconsolata-8:normal"
-, bgColor = "black"
-, fgColor = "grey"
-, position = TopW L 95
+Config { font = "xft:InconsolataForPowerline-10:normal"
+, bgColor = "#111111"
+, fgColor = "#aaaaaa"
+, position = TopW L 100
 , lowerOnStart = True
 , commands = [ Run Memory ["-t","Mem: %"] 10
-  , Run Battery ["-t","Batt: <acstatus> <left>%"] 10
-  , Run Memory ["-t","Mem: <usedratio>%"] 10
-  , Run MultiCpu ["-t", "CPU: <total>%"] 100
-  -- Run Mail
+  , Run Battery ["-t","AC: <acstatus> <left>%  <watts>W <timeleft>"] 10
+  , Run Mail [("I", "~/.mail/gmail/INBOX")
+    , ("A", "~/.mail/gmail/Arcada")
+    , ("O", "~/.mail/gmail/oxy.fi")
+    , ("G", "~/.mail/gmail/Genero")
+  ] "mail"
   , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
   , Run StdinReader
 ]
 , sepChar = "%"
 , alignSep = "}{"
-, template = "%StdinReader%} {%battery% << %multicpu% << %memory% << %date%"
+, template = "%StdinReader%} {%mail%  %battery%  %date%  "
 }
