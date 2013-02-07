@@ -28,7 +28,7 @@ unset record                                                       # required to
 set sendmail = /usr/bin/msmtp
 
 # Sidebar
-set sidebar_delim   = '|'
+set sidebar_delim   = ' |'
 set sidebar_visible = yes
 set sidebar_width   = 24
 color sidebar_new color221 color233
@@ -92,6 +92,9 @@ mailboxes +gmail/INBOX \
           +gmail/archive \
           +gmail/sent \
           +gmail/drafts \
+          +gmail/Genero \
+          +gmail/Arcada \
+          +gmail/oxy.fi \
 
 set mbox             = "+gmail/archive"
 set postponed        = "+gmail/drafts"
