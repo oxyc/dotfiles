@@ -64,6 +64,11 @@ set index_format        = "[%Z]  %D  %-20.20F  %s"
 set status_format       = "-%r- %v ---[ Folder: %f, Msgs: %m%?n? New: %n?%?d? Del: %d?%?t? Tag: %t?%?l? %l? ]%?p?---- .: %p waiting to send :. ?--%>- (%P) ---"
 set alias_format        = "%4n %t %-20a  %r"
 
+# Goobook for autocompleting contacts
+set query_command="goobook query '%s'"
+bind editor <Tab> complete-query
+macro index,pager a "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
+
 # Composing mail
 set realname = "Oskar Schöldström"
 set from = mail@oxy.fi
