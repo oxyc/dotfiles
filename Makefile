@@ -10,6 +10,7 @@ MUTT_FILES ?= .mutt/colors.muttrc .mutt/muttrc .mutt/sig .msmtprc .offlineimaprc
 TMUX_FILES ?= .tmux.conf .bash_completion.d/tmux
 TODO_FILES ?= .todo.cfg
 IRSSI_FILES ?= .irssi/dark.theme
+GTK_FILES ?= .gtkrc-2.0
 
 TARGETS_CLEAN ?= XORG XMONAD DRUPAL MUTT TMUX TODO IRSSI SHELL
 
@@ -30,7 +31,7 @@ fetch-github:
 	@git pull origin master
 	@git submodule foreach git pull origin master
 
-install: clean xorg drupal mutt tmux todo irssi shell
+install: clean xorg drupal mutt tmux todo irssi shell gtk
 	@if ! perl -MTerm::ExtendedColor -e 1 2>/dev/null; then \
 		cpan Term::ExtendedColor; \
 	fi
@@ -39,6 +40,8 @@ install: clean xorg drupal mutt tmux todo irssi shell
 # Main targets ----------------------------------------------------------------
 
 xorg: $(addprefix $(DEST)/,$(XORG_FILES))
+
+gtk: $(addprefix $(DEST)/,$(GTK_FILES))
 
 xmonad: $(addprefix $(DEST)/, $(XMONAD_FILES))
 
@@ -84,4 +87,4 @@ clean-target: $(addprefix $(BACKUP)/,$($(CLEAN)_FILES))
 clean:
 	@$(foreach target,$(TARGETS_CLEAN), make -s CLEAN=$(target) clean-target;)
 
-.PHONY: xorg xmonad drupal mutt tmux todo irssi shell clean-target clean install
+.PHONY: xorg xmonad drupal mutt tmux todo irssi shell clean-target clean install gtk

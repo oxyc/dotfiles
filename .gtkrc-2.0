@@ -1,0 +1,8 @@
+# Auto-written by gtk2_prefs. Do not edit.
+
+gtk-theme-name = "Dust"
+gtk-icon-theme-name = "Faenza"
+style "user-font" {
+  font_name="DejaVu Sans Semi-Condensed 10"
+}
+widget_class "*" style "user-font"
