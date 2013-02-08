@@ -25,4 +25,4 @@ WHITE="\033[97m"
 YELLOW="\033[93m"
 RESET="\033[0m"
 
-PS1="\[$WHITE\]\W\[$YELLOW\]\$(prompt_desc)\[$WHITE\]:\[$RESET\] "
+PS1="\n\[$WHITE\]\W\[$YELLOW\]\$(prompt_desc)\[$WHITE\]:\[$RESET\] "
