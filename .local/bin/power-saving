@@ -1,65 +1,102 @@
 #!/bin/sh
 
+eth_interfaces="$(\ip link show | awk -F ': ' '{print $2}' | grep '^e')"
+dim=7 # 1-15
+
 start() {
+  echo "Enabling power saving mode"
+  # Bus
+  for i in /sys/bus/*/devices/*/power/control; do echo auto > $i; done
+
+  # USB autosuspend
+  for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 1 > $i; done
+
   # Disable the NMI Watchdog
   echo 0 > /proc/sys/kernel/watchdog
+  echo 0 > /proc/sys/kernel/nmi_watchdog
 
-  # Reduce the VM write-back timeout (lose 10 sec on crash)
-  echo 1500 > /proc/sys/vm/dirty_writeback_centisecs
+  # CPU
+  for i in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo powersave > $i; done
+
+  # @TODO
+  echo 5 > /proc/sys/vm/laptop_mode
+  echo 90 > /proc/sys/vm/dirty_ratio
+  echo 1 > /proc/sys/vm/dirty_background_ratio
+
+  echo 60000 > /proc/sys/vm/dirty_expire_centisecs
+  echo 60000 > /proc/sys/vm/dirty_writeback_centisecs
+
+  # Reduce power for SATA link power management
+  for i in /sys/class/scsi_host/host*/link_power_management_policy; do echo min_power > $i; done
 
   # Runtime power-management for PCI devices
-  for i in /sys/bus/pci/devices/*/power/control ; do
-    echo auto > ${i}
-  done
-  # Reduce power for SATA link power management
-  for i in 0 1 2 3 4 5 ; do
-    echo min_power>/sys/class/scsi_host/host${i}/link_power_management_policy
-  done
-
-  # Runtime power-management for USB devices
-  for i in /sys/bus/usb/devices/*/power/control ; do
-    echo auto > ${i}
-  done
+  for i in /sys/bus/pci/devices/*/power/control; do echo auto > $i; done
 
   # Enable audio codec power management
   echo 1 > /sys/module/snd_hda_intel/parameters/power_save
+  echo Y > /sys/module/snd_hda_intel/parameters/power_save_controller
 
   # Disable Wake-on-LAN
-  # @todo can this be detected somehow? most have wwan0...
-  ethtool -s enp0s25 wol d
+  while read i; do ethtool -s "$i" wol d; done <<< "$eth_interfaces"
+
+  # Energy Star feature
+  xset +dpms
+  xset dpms 0 0 120
 
   # Dim screen
-  for i in /sys/class/backlight/acpi_video*/brightness; do
-    echo 10 > $i;
-  done
+  for i in /sys/class/backlight/acpi_video*/brightness; do echo $dim > $i; done
 }
 
 stop() {
+  echo "Disabling power saving mode"
+
+  # Bus
+  for i in /sys/bus/*/devices/*/power/control; do echo on > $i; done
+
+  # USB autosuspend
+  for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 600 > $i; done
+  for i in /sys/bus/usb/devices/*/power/control; do echo auto > $i; done
+
+  # Enable the NMI watchdog
   echo 1 > /proc/sys/kernel/watchdog
-  echo 60000 > /proc/sys/vm/dirty_writeback_centisecs
+  echo 1 > /proc/sys/kernel/nmi_watchdog
+
+  # CPU
+  for i in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo ondemand > $i; done
+
+  # @TODO
+  echo 0 > /proc/sys/vm/laptop_mode
+  echo 30 > /proc/sys/vm/dirty_ratio
+  echo 30 > /proc/sys/vm/dirty_background_ratio
+
+  echo 600 > /proc/sys/vm/dirty_expire_centisecs
+  echo 600 > /proc/sys/vm/dirty_writeback_centisecs
 
   # Change power-saving for SATA devices
-  for i in 0 1 2 3 4 5 ; do
-    echo min_power>/sys/class/scsi_host/host${i}/link_power_management_policy
-  done
+  for i in /sys/class/scsi_host/host*/link_power_management_policy; do echo max_performance > $i; done
 
   # Enable full power for PCI devices
-  for i in /sys/bus/pci/devices/*/power/control ; do
-    echo on > ${i}
-  done
-
-  # Enable Wake-on-LAN
-  ethtool -s enp0s25 wol g
+  for i in /sys/bus/pci/devices/*/power/control ; do echo on > ${i}; done
 
   # Disable audio codec power management
-  echo 10 > /sys/module/snd_hda_intel/parameters/power_save
+  echo 0 > /sys/module/snd_hda_intel/parameters/power_save
+  echo Y > /sys/module/snd_hda_intel/parameters/power_save_controller
+
+  # Enable Wake-on-LAN
+  # while read i; do ethtool -s "$i" wol g; done <<< "$eth_interfaces"
+
+  # Energy Star feature
+  # xset -dpms
 
   # Dim screen
-  for i in /sys/class/backlight/acpi_video*/brightness; do
-    echo 15 > $i;
-  done
+  for i in /sys/class/backlight/acpi_video*/brightness; do echo 15 > $i; done
+}
+
+detectMode() {
+  [ "$(cat /sys/class/power_supply/AC/online)" -eq "0" ] && start || stop
 }
 
 case $1 in
   start|stop) "$1" ;;
+  *) detectMode ;;
 esac
