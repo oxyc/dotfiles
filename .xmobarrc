@@ -5,10 +5,10 @@ Config { font = "xft:InconsolataForPowerline-10:normal"
 , lowerOnStart = True
 , commands = [ Run Memory ["-t","Mem: %"] 10
   , Run Battery ["-t","AC: <acstatus> <left>%  <watts>W <timeleft>"] 10
-  , Run Mail [("I", "~/.mail/gmail/INBOX")
-    , ("A", "~/.mail/gmail/Arcada")
-    , ("O", "~/.mail/gmail/oxy.fi")
-    , ("G", "~/.mail/gmail/Genero")
+  , Run Mail [("inbox", "~/.mail/gmail/INBOX")
+    , ("oxy.fi", "~/.mail/gmail/oxy.fi")
+    , ("genero", "~/.mail/gmail/Genero")
+    , ("arcada", "~/.mail/gmail/Arcada")
   ] "mail"
   , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
   , Run StdinReader

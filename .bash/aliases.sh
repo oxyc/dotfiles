@@ -19,6 +19,9 @@ alias v='vim'
 have todo.sh && alias t='todo.sh -d ~/.todo.cfg'
 have ls++ && alias l='ls++'
 
+# Download mutt attachments into downloads folder
+have mutt && alias mutt='cd ~/downloads/mutt && mutt && cd -'
+
 # Git shortcuts
 alias ga='git add'
 alias gp='git push'

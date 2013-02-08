@@ -1,12 +1,12 @@
 SHELL_FILES ?= .ackrc .bash_profile .bashrc .dircolors .gitconfig .inputrc .jshintrc .lftprc .ls++.conf \
 	.bash/aliases.sh .bash/exports.sh .bash/functions.sh .bash/prompt.sh .bash/shell.sh \
-	.bash_completion.d/misc $(wildcard .local/bin/*)
+	.bash_completion.d/misc $(find .local/bin/* ! -type d ! -name mutt-notmuch)
 
 XORG_FILES ?= .xsession .Xdefaults .xbindkeysrc
 XMONAD_FILES ?= .xmonad/xmonad.hs .xmobarrc
 DRUPAL_FILES ?= .bash/drush.sh .ctags
 MUTT_FILES ?= .mutt/colors.muttrc .mutt/muttrc .mutt/sig .msmtprc .offlineimaprc .mailcap \
-							.mutt/certificates/Equifax_Secure_CA.cert
+							.local/bin/mutt-notmuch .notmuch-config
 TMUX_FILES ?= .tmux.conf .bash_completion.d/tmux
 TODO_FILES ?= .todo.cfg
 IRSSI_FILES ?= .irssi/dark.theme

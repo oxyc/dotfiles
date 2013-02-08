@@ -89,12 +89,17 @@ set forward_quote                                                  # include mes
 # Mailboxes
 set spoolfile = "+gmail/INBOX"                                    # Default mailbox
 mailboxes +gmail/INBOX \
+          +gmail/oxyfi \
+          +gmail/Genero \
+          +gmail/Arcada \
+          +gmail/GDrive \
+          +gmail/Drupal \
+          +gmail/Basecamp \
+          +gmail/Newsletters \
           +gmail/archive \
           +gmail/sent \
           +gmail/drafts \
-          +gmail/Genero \
-          +gmail/Arcada \
-          +gmail/oxy.fi \
+          +temporary/search \
 
 set mbox             = "+gmail/archive"
 set postponed        = "+gmail/drafts"
@@ -124,6 +129,7 @@ bind pager G        bottom
 bind index gg       first-entry
 bind index G        last-entry
 bind index,pager R  group-reply
+bind index,pager N  search-opposite # Shadow mark as read
 bind index \Cp      recall-message
 bind index <space>  collapse-thread
 
@@ -136,12 +142,18 @@ macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 macro index,pager \cb "<pipe-message> urlscan<enter>" "call urlscan to extract URLS out of a message"
 macro attach,compose \cb "<pipe-entry> urlscan<enter>" "call urlscan to extract URLS out of a message"
+macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
 
 macro index gmail "<change-folder>+gmail/inbox<enter>"
 macro index arcada "<change-folder>+arcada/INBOX<enter>"
 macro generic "1" ":set from=mail@oxy.fi"
 macro generic "2" ":set from=oskar.scholdstrom@arcada.fi"
 macro generic "3" ":set from=oskar.scholdstrom@gmail.com"
+
+# notmuch fulltext search
+macro index S "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch -G ~/.mail/temporary/search<enter><change-folder-readonly>+temporary/search<enter>" "search mail (using notmuch)"
+macro index a "<limit>all\n" "show all messages (undo limit)"
+
 
 # Source
 source ~/.mutt/colors.muttrc

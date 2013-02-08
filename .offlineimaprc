@@ -17,6 +17,7 @@ footer = "\n"
 localrepository = Gmail-Local
 remoterepository = Gmail-Remote
 status_backend = sqlite
+postsynchook = notmuch new
 
 [Repository Gmail-Local]
 type = Maildir
