@@ -3,7 +3,7 @@ tmux_append=$1
 session=$(basename ${BASH_SOURCE[0]})
 
 # 1. Irssi
-tmux new-session -d -s $session -n 'irssi' $tmux_append 'ssh -t tlk screen -rd'
+tmux new-session -d -s $session -n 'irssi' $tmux_append 'mosh tlk'
 
 # 2. Mutt
 tmux new-window -t $session:2 -n 'mutt' $tmux_append 'mutt; bash'

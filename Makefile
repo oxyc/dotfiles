@@ -7,7 +7,7 @@ XMONAD_FILES ?= .xmonad/xmonad.hs .xmobarrc
 DRUPAL_FILES ?= .bash/drush.sh .ctags
 MUTT_FILES ?= .mutt/colors.muttrc .mutt/muttrc .mutt/sig .msmtprc .offlineimaprc .mailcap \
 							.local/bin/mutt-notmuch .notmuch-config
-TMUX_FILES ?= .tmux.conf .bash_completion.d/tmux
+TMUX_FILES ?= .tmux.conf .bash_completion.d/tmux $(wildcard .tmux/sessions/*)
 TODO_FILES ?= .todo.cfg
 IRSSI_FILES ?= .irssi/dark.theme
 GTK_FILES ?= .gtkrc-2.0
