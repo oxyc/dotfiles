@@ -112,9 +112,10 @@ unhdr_order *
 hdr_order from: to: cc: date: subject:                             # and in this order
 
 # Hooks
-folder-hook oxy/* set from=mail@oxy.fi
-folder-hook arcada/* set from=oskar.scholdstrom@arcada.fi
 folder-hook gmail/* set from=oskar.scholdstrom@gmail.com
+folder-hook gmail/oxyfi/* set from=mail@oxy.fi
+folder-hook gmail/Arcada/* set from=oskar.scholdstrom@arcada.fi
+folder-hook gmail/Genero/* set from=oskar.scholdstrom@gmail.com
 
 # Bindings
 bind index <tab>    sync-mailbox
