@@ -1,3 +1,7 @@
+# Make changes take effect: pkill -HUP xbindkeys && xbindkeys
+
+# Multimedia keys
+
 "amixer set Master playback 1+"
   m:0x0 + c:123
   XF86AudioRaiseVolume
@@ -14,15 +18,6 @@
   m:0x0 + c:199
   XF86ScreenSaver
 
-# Paste from clipboard, both with ctrl+shift+v and alt+middlemouse
-"xvkbd -xsendevent -text "$(xclip -selection clipboard -o)""
-  m:0x5 + c:55
-  Control+Shift + v
-
-"xvkbd -xsendevent -text "$(xclip -selection clipboard -o)""
-  m:0x8 + c:64
-  Alt + Alt_L
-
 "ncmpcpp prev"
   m:0x0 + c:173
   XF86AudioPrev
@@ -34,6 +29,30 @@
 "ncmpcpp next"
   m:0x0 + c:171
   XF86AudioNext
+
+# Paste from clipboard, both with ctrl+shift+v and alt+middlemouse
+
+"xvkbd -xsendevent -text "$(xclip -selection clipboard -o)""
+  m:0x5 + c:55
+  Control+Shift + v
+
+"xvkbd -xsendevent -text "$(xclip -selection clipboard -o)""
+  m:0x8 + c:64
+  Alt + Alt_L
+
+# Vi bindings
+
+"xvkbd -xsendevent -text "\[Down]""
+  alt + j
+
+"xvkbd -xsendevent -text "\[Up]""
+  alt + k
+
+"xvkbd -xsendevent -text "\[Left]""
+  alt + h
+
+"xvkbd -xsendevent -text "\[Right]""
+  alt + l
 
 #"(Scheme function)"
 #    m:0x0 + c:160
