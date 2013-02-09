@@ -1,0 +1,122 @@
+[global]
+    font = InconsolataForPowerline-10
+    format = "%s\n%b"
+    sort = yes
+    alignment = right
+    bounce_freq = 1
+    show_age_threshold = -1
+    word_wrap = yes
+    ignore_newline = no
+
+    # Show how many messages are currently hidden (because of geometry)
+    indicate_hidden = yes
+
+
+    # the geometry of the window
+    # geometry [{width}]x{height}][+/-{x}+/-{y}]
+    # The geometry of the message window.
+    # The height is measured in number of notifications everything else in pixels. If the width
+    # is omitted but the height is given ("-geometry x2"), the message window
+    # expands over the whole screen (dmenu-like). If width is 0,
+    # the window expands to the longest message displayed.
+    # A positive x is measured from the left, a negative from the
+    # right side of the screen.  Y is measured from the top and down respectevly.
+    # The width can be negative. In this case the actual width is the
+    # screen width minus the width defined in within the geometry option.
+    geometry = "400x10-0+20"
+
+    transparency = 0
+    idle_threshold = 120
+    monitor = 0
+    follow = none
+
+    # should a notification popped up from history be sticky or
+    # timeout as if it would normally do.
+    sticky_history = yes
+    line_height = 0
+
+    separator_color = frame
+    separator_height = 1;
+    padding = 3
+    horizontal_padding = 5
+
+    startup_notification = false
+    dmenu = /usr/bin/dmenu -p dunst:
+    browser = /usr/bin/google-chrome
+
+[frame]
+    width = 1
+    color = "#222222"
+
+[shortcuts]
+    close = ctrl+space
+    close_all = ctrl+shift+space
+    context = ctrl+shift+period
+
+[urgency_low]
+    background = "#222222"
+    foreground = "#888888"
+    timeout = 20
+
+[urgency_normal]
+    background = "#555555"
+    foreground = "#ffffff"
+    timeout = 0
+
+[urgency_critical]
+    background = "#900000"
+    foreground = "#ffffff"
+    timeout = 0
+
+
+# Every section that isn't one of the above is interpreted as a rules
+# to override settings for certain messages.
+# Messages can be matched by 'appname', 'summary', 'body' or 'icon'
+# and you can override the 'timeout', 'urgency', 'foreground', 'background'
+# and 'format'.
+# Shell-like globbing will get expanded.
+#
+# SCRIPTING
+# you can specify a script that gets run when the rule matches by setting
+# the 'script' option.
+# The script will be called as follows:
+# script appname summary body icon urgency
+# where urgency can be "LOW", "NORMAL" or "CRITICAL".
+#
+# NOTE: if you don't want a notification to be displayed, set the format to ""
+# NOTE: It might be helpful to run dunst -print in a terminal in order to find
+# fitting options for rules.
+
+#[espeak]
+#    summary = "*"
+#    script = dunst_espeak.sh
+
+#[script-test]
+#    summary = "*script*"
+#    script = dunst_test.sh
+
+#[ignore]
+## This notification will not be displayed
+#    summary = "foobar"
+#    format = ""
+
+#[signed_on]
+#    appname = Pidgin
+#    summary = "*signed on*"
+#    urgency = low
+#
+#[signed_off]
+#    appname = Pidgin
+#    summary = *signed off*
+#    urgency = low
+#
+#[says]
+#    appname = Pidgin
+#    summary = *says*
+#    urgency = critical
+#
+#[twitter]
+#    appname = Pidgin
+#    summary = *twitter.com*
+#    urgency = normal
+#
