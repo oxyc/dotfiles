@@ -13,7 +13,7 @@ psgrep() {
 
 # One command to rule them all
 # http://dotfiles.org/~krib/.bashrc
-extract () {
+extract() {
   if [ -f $1 ] ; then
     case $1 in
       *.tar.bz2)  tar xjf $1      ;;
@@ -34,7 +34,7 @@ extract () {
 }
 
 # http://dotfiles.org/~krib/.bashrc
-bu () {
+bu() {
   if [ "$(dirname $1)" == "." ]; then
     mkdir -p ~/.backup/$(pwd)
     cp $1 ~/.backup/$(pwd)/$1-$(date +%Y%m%d%H%M).backup
@@ -45,34 +45,9 @@ bu () {
 }
 
 # http://dotfiles.org/~kparnell/.bashrc
-mkcdir () {
+mkcdir() {
   mkdir -p $1
   cd $1
-}
-
-# Start an HTTP server from a directory, optionally specifying the port
-# https://github.com/mathiasbynens/dotfiles/blob/master/.functions
-server() {
-  local port="${1:-8000}"
-  [[ -n $BROWSER ]] && $BROWSER "http://localhost:${port}/"
-  # Set the default Content-Type to `text/plain` instead of `application/octet-stream`
-  # And serve everything as UTF-8 (although not technically correct, this doesn’t break anything for binary files)
-  python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port"
-}
-
-# Base on http://dotfiles.org/~rprice/.bashrc
-record_desktop() {
-  local current_dir=$(pwd)
-  local output_dir='/tmp/screenrec'
-  local ip=$(dig +short myip.opendns.com @resolver1.opendns.com)
-  mkdir -p $output_dir && cd $output_dir && python -m SimpleHTTPServer 8000 &
-  if [ ! $? ]; then
-    cd $current_dir
-    echo "Preview with 'vlc http://${ip}:8000/out.mpg'"
-    echo "Begin recording in 5 sec"
-    sleep 5
-    ffmpeg -f x11grab -s wxga -r 25 -i :0.0  -sameq ${output_dir}/out.mpg
-  fi
 }
 
 # Attach tmux sessions
@@ -94,7 +69,7 @@ play() {
 
 # Sort the "du" output and use human-readable units.
 # https://github.com/janmoesen/tilde/blob/master/.bash/commands
-function duh {
+duh() {
   du -sk ${@:-*} | sort -n | while read size fname; do
     for unit in KiB MiB GiB TiB PiB EiB ZiB YiB; do
       if [ "$size" -lt 1024 ]; then
@@ -108,7 +83,7 @@ function duh {
 
 # Edit the files found with the previous "ack" command using Vim
 # https://github.com/janmoesen/tilde/blob/master/.bash/commands
-function vack {
+vack() {
   local cmd=''
   if [ $# -eq 0 ]; then
     cmd="$(fc -nl -1)"
@@ -134,7 +109,7 @@ function vack {
 
 # Git log with per-commit clickable GitHub URLs.
 # https://github.com/cowboy/dotfiles/commit/78fde838a429250e923f5611e233c6e4e942b377
-function gf() {
+gf() {
   local remote="$(git remote -v | awk '/^origin.*\(push\)$/ {print $2}')"
   [[ "$remote" ]] || return
   local user_repo="$(echo "$remote" | perl -pe 's/.*://;s/\.git$//')"
@@ -146,7 +121,7 @@ AWK
   )" | less -R
 }
 
-function rasterize() {
+rasterize() {
   local address="$1"
   local output="$2"
   if [[ $address && $output ]]; then

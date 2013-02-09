@@ -24,7 +24,6 @@ set -o vi
 # Make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# @TODO should LC_ALL also be set?
 export LANG='en_US.UTF-8'
 
 # For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
