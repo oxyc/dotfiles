@@ -14,6 +14,11 @@
   m:0x0 + c:199
   XF86ScreenSaver
 
+# Paste from clipboard with Ctrl-V
+"xvkbd -xsendevent -text "$(xclip -selection clipboard -o)""
+  m:0x4 + c:55
+  Control + v
+
 #"(Scheme function)"
 #    m:0x0 + c:160
 #    XF86ScreenSaver
