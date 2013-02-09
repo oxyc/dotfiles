@@ -10,6 +10,7 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Actions.SpawnOn
 import XMonad.Util.Run(spawnPipe)
 import qualified XMonad.StackSet as W
+import XMonad.Util.EZConfig(additionalKeys)
 
 
 myStartupHook = return ()
@@ -44,7 +45,9 @@ myLayout = smartBorders(avoidStruts(
 
 myKeyBindings = [
    -- Toggle status bar
-   ((mod4Mask, xK_b), sendMessage ToggleStruts)
+    ((mod4Mask, xK_b), sendMessage ToggleStruts)
+   -- Use history aware dmenu wrapper
+   , ((mod4Mask, xK_p), spawn "exe=`dmenu_path_c | yeganesh` && eval \"exec $exe\"")
   ]
 
 main = do
@@ -63,4 +66,4 @@ defaults = defaultConfig {
   , startupHook        = myStartupHook
   , layoutHook         = myLayout
   , handleEventHook    = docksEventHook
-}
+} `additionalKeys` myKeyBindings
