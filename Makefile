@@ -2,6 +2,7 @@ SHELL_FILES ?= .ackrc .bash_profile .bashrc .dircolors .gitconfig .inputrc .jshi
 	.bash/aliases.sh .bash/exports.sh .bash/functions.sh .bash/prompt.sh .bash/shell.sh \
 	.bash_completion.d/misc $(find .local/bin/* ! -type d ! -name mutt-notmuch)
 
+CRON_FILES ?= $(wildcard .cron/*)
 XORG_FILES ?= .xsession .Xdefaults .xbindkeysrc .xinitrc
 XMONAD_FILES ?= .xmonad/xmonad.hs .xmobarrc .config/dunst/dunstrc
 DRUPAL_FILES ?= .bash/drush.sh .ctags
@@ -40,6 +41,8 @@ install: clean xorg drupal mutt tmux todo irssi shell gtk
 # Main targets ----------------------------------------------------------------
 
 xorg: $(addprefix $(DEST)/,$(XORG_FILES))
+
+cron: $(addprefix $(DEST)/,$(CRON_FILES))
 
 gtk: $(addprefix $(DEST)/,$(GTK_FILES))
 
