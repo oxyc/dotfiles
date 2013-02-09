@@ -1,10 +1,16 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
-import XMonad.Layout.Fullscreen
-import XMonad.Actions.SpawnOn
-import XMonad.Util.Run(spawnPipe)
+import XMonad.Hooks.ManageDocks
 import XMonad.Layout.MouseResizableTile
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Fullscreen
+import XMonad.Layout.Tabbed
+import XMonad.Layout.LayoutCombinators hiding ((|||))
+import XMonad.Hooks.ManageHelpers
+import XMonad.Actions.SpawnOn
+import XMonad.Util.Run(spawnPipe)
+import qualified XMonad.StackSet as W
+
 
 myStartupHook = return ()
 -- myStartupHook = do
@@ -13,18 +19,32 @@ myStartupHook = return ()
 --   spawnOn "2:term" "urxvt"
 --   spawnOn "3:mutt" "urxvt -e 'mutt'"
 
-myManageHook = composeAll
+myManageHook = manageDocks <+> composeAll
   [ resource  =? "desktop_window" --> doIgnore
   , className =? "VirtualBox"     --> doShift "4:vm"
   , className =? "Thunar"         --> doFloat
   , className =? "Qbittorrent"    --> doShift "9:torrent"
   , className =? "Google-chrome"  --> doShift "1:web"
   , title     =? "mutt"           --> doShift "3:mutt"
+  , isFullscreen                  --> (doF W.focusDown <+> doFullFloat)
   ]
 
-myLayout = mouseResizableTile {
-    draggerType = BordersDragger -- Remove gap between tiles
-}
+-- "avoidStruts" make space for the status bar
+-- "smartBorders" only display borders if there is more than one window
+-- "noBorders"
+myLayout = smartBorders(avoidStruts(
+  -- Make tiles mouse resizable
+  -- "BordersDragger" remove gap between tiles
+  mouseResizableTile { draggerType = BordersDragger } |||
+  -- Tabs
+  tabbed shrinkText defaultTheme |||
+  -- Fullscreen
+  noBorders(Full)))
+
+myKeyBindings = [
+   -- Toggle status bar
+   ((mod4Mask, xK_b), sendMessage ToggleStruts)
+  ]
 
 main = do
   mobar <- spawnPipe "xmobar"
@@ -40,5 +60,6 @@ defaults = defaultConfig {
   , workspaces         = ["1:web","2:term","3:mutt","4:vm","5:media", "6", "7", "8", "9:torrent"]
   , manageHook         = myManageHook
   , startupHook        = myStartupHook
-  , layoutHook         = smartBorders $ myLayout
+  , layoutHook         = myLayout
+  , handleEventHook    = docksEventHook
 }
