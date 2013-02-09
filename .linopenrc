@@ -1,0 +1,15 @@
+terminal=urxvt
+
+# Mime types are a mess for pdf
+*.pdf:apvlv
+
+text:$EDITOR->interm
+image:qiv
+video:vlc
+directory:thunar
+
+?'^http:\/\/':$BROWSER
+?'^https:\/\/':$BROWSER
+?'^www.':$BROWSER
+
+default:echo
