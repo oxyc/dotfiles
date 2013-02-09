@@ -58,10 +58,8 @@ export PAGER='less'
 # rvm
 [[ -s ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm
 
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-  . /etc/bash_completion
-
-  for file in ~/.bash_completion.d/*; do
+if ! shopt -oq posix; then
+  for file in ~/.bash_completion.d/* /etc/bash_completion; do
     [ -r "$file" ] && source "$file"
   done
 fi
