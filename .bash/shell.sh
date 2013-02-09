@@ -51,6 +51,13 @@ export PAGER='less'
 [[ -d "$HOME/.local/bin" ]] && export PATH="$PATH:$HOME/.local/bin"
 [[ -d "$HOME/node_modules" ]] && export PATH="$PATH:$HOME/node_modules"
 [[ -d "$HOME/drush" ]] && export PATH="$PATH:$HOME/drush"
+[[ -d "$HOME/.rvm/bin" ]] && export PATH="$PATH:$HOME/.rvm/bin"
+
+# nvm
+[[ -s ~/.nvm/nvm.sh ]] && source ~/.nvm/nvm.sh
+
+# rvm
+[[ -s ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
   . /etc/bash_completion
@@ -61,9 +68,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 hash fasd 2>/dev/null && eval "$(fasd --init auto)"
-
-# Source nvm
-[[ -f "$HOME/.nvm/nvm.sh" ]] && . $HOME/.nvm/nvm.sh
 
 # When connecting to SSH, start or reattach screen session
 # http://dotfiles.org/~thayer/.bashrc
