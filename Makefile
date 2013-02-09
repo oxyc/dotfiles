@@ -2,7 +2,7 @@ SHELL_FILES ?= .ackrc .bash_profile .bashrc .dircolors .gitconfig .inputrc .jshi
 	.bash/aliases.sh .bash/exports.sh .bash/functions.sh .bash/prompt.sh .bash/shell.sh \
 	.bash_completion.d/misc $(find .local/bin/* ! -type d ! -name mutt-notmuch)
 
-XORG_FILES ?= .xsession .Xdefaults .xbindkeysrc
+XORG_FILES ?= .xsession .Xdefaults .xbindkeysrc .xinitrc
 XMONAD_FILES ?= .xmonad/xmonad.hs .xmobarrc
 DRUPAL_FILES ?= .bash/drush.sh .ctags
 MUTT_FILES ?= .mutt/colors.muttrc .mutt/muttrc .mutt/sig .mutt/mailcap .msmtprc .offlineimaprc \
