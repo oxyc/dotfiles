@@ -14,7 +14,7 @@ GTK_FILES ?= .gtkrc-2.0
 
 TARGETS_CLEAN ?= XORG XMONAD DRUPAL MUTT TMUX TODO IRSSI SHELL
 
-MUTT_DIRS ?= .mutt/cache/bodies .mutt/cache/headers .mutt/temp
+MUTT_DIRS ?= .mutt/cache/bodies .mutt/cache/headers .mutt/temp .goobookrc
 SHELL_DIRS ?= .backup
 TMUX_DIRS ?= .tmux/sessions .tmux/sockets
 TODO_DIRS ?= .todo
