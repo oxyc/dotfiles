@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Open grooveshark as a chrome app
+if type google-chrome &> /dev/null; then
+  google-chrome --app=http://www.grooveshark.com > /dev/null 2>&1
+fi

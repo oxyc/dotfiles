@@ -23,9 +23,6 @@ have ls++ && alias l='ls++'
 # Download mutt attachments into downloads folder
 have mutt && alias mutt='cd ~/downloads/mutt && mutt && cd -'
 
-# Open grooveshark as a chrome app
-have google-chrome && alias grooveshark='google-chrome --app=http://www.grooveshark.com > /dev/null 2>&1'
-
 # Git shortcuts
 alias ga='git add'
 alias gp='git push'
