@@ -5,7 +5,7 @@ SHELL_FILES ?= .ackrc .bash_profile .bashrc .dircolors .gitconfig .inputrc .jshi
 XORG_FILES ?= .xsession .Xdefaults .xbindkeysrc
 XMONAD_FILES ?= .xmonad/xmonad.hs .xmobarrc
 DRUPAL_FILES ?= .bash/drush.sh .ctags
-MUTT_FILES ?= .mutt/colors.muttrc .mutt/muttrc .mutt/sig .msmtprc .offlineimaprc .mailcap \
+MUTT_FILES ?= .mutt/colors.muttrc .mutt/muttrc .mutt/sig .mutt/mailcap .msmtprc .offlineimaprc \
 							.local/bin/mutt-notmuch .notmuch-config
 TMUX_FILES ?= .tmux.conf .bash_completion.d/tmux $(wildcard .tmux/sessions/*)
 TODO_FILES ?= .todo.cfg

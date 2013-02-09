@@ -5,6 +5,7 @@ set message_cachedir = ~/.mutt/cache/bodies                  # where to store bo
 set certificate_file = ~/.mutt/certificates                  # where to store certs
 set signature        = ~/.mutt/sig                           # my signature file
 set tmpdir           = ~/.mutt/temp                          # where to keep temp files
+set mailcap_path     = ~/.mutt/mailcap
 set editor           = "vim +/^$ +:s/^$/\\\\r\\\\r/ +:noh -c 'normal! k' -c 'set nolist' -c 'redraw'" # use vim
 
 # Main Options
