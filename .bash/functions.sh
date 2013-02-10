@@ -183,26 +183,3 @@ windowsize() {
   local height=${2:-400}
   wmctrl -r :ACTIVE: -e 0,-1,-1,$width,$height
 }
-
-# Message format: "11:47:21 @       nick> oxy: ..."
-irc() {
-  local pid_file=/tmp/ircnotify
-  if [[ -f $pid_file ]]; then
-    local pid=$(cat $pid_file)
-    kill $pid >/dev/null 2>&1
-  fi
-
-  ssh -f tlk "tail -n0 -q -f ~/irclogs/*/*.log | grep --line-buffered '>.*oxy' | sed -u -e 's/^.*\\s*.*>//g'" \
-    | xargs -I % notify-send % &
-
-  # $! doesnt work because of -f
-  local ssh_pid=$(ps aux | grep 'ssh -f tlk tail' | awk '{print $2}')
-  local xargs_pid=$(ps aux | grep 'xargs -I % notify-send %' | awk '{print $2}')
-  echo $ssh_pid >| $pid_file
-
-  mosh tlk && {
-    kill $xargs_pid >/dev/null 2>&1
-    kill $ssh_pid >/dev/null 2>&1
-    rm $pid_file
-  }
-}
