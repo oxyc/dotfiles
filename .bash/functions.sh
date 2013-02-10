@@ -144,9 +144,13 @@ rasterize() {
   fi
 }
 
+# Usage: dimscreen 0-100
 dimscreen() {
-  local amount="${1:-0}"
-  sudo bash -c "for i in /sys/class/backlight/acpi_video*/brightness; do echo $amount > \$i; done"
+  local max=$(cat /sys/class/backlight/acpi_video0/max_brightness)
+  local amount="${1:-$max}"
+  local dim=$(printf "%.0f" $(awk -v m=$max -v a=$amount 'BEGIN { print m * a / 100}'))
+
+  sudo bash -c "for i in /sys/class/backlight/acpi_video*/brightness; do echo $dim > \$i; done"
 }
 
 toggletouch() {

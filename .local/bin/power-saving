@@ -1,7 +1,10 @@
 #!/bin/sh
 
+[[ "$(id -u)" != "0" ]] && { echo "Must be root to run this command"; exit 1; }
+
 eth_interfaces="$(\ip link show | awk -F ': ' '{print $2}' | grep '^e')"
-dim=7 # 1-15
+max_brightness=$(cat /sys/class/backlight/acpi_video0/max_brightness)
+dim=$(printf "%.0f" $(awk -v m=$max_brightness 'BEGIN { print m * 0.5}'))
 
 start() {
   echo "Enabling power saving mode"
@@ -18,13 +21,17 @@ start() {
   # CPU
   for i in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo powersave > $i; done
 
-  # @TODO
+  # Be smart about when to do IO
   echo 5 > /proc/sys/vm/laptop_mode
+  # How much memory can be used by dirty data.
   echo 90 > /proc/sys/vm/dirty_ratio
+  # Lower memory where pdflush is told to stop when it is writing dirty data.
   echo 1 > /proc/sys/vm/dirty_background_ratio
 
-  echo 60000 > /proc/sys/vm/dirty_expire_centisecs
-  echo 60000 > /proc/sys/vm/dirty_writeback_centisecs
+  # set buffer writes to once every 600 sec.
+  # a power failure would loose this amount of data.
+  echo 6000 > /proc/sys/vm/dirty_expire_centisecs
+  echo 6000 > /proc/sys/vm/dirty_writeback_centisecs
 
   # Reduce power for SATA link power management
   for i in /sys/class/scsi_host/host*/link_power_management_policy; do echo min_power > $i; done
@@ -64,11 +71,13 @@ stop() {
   # CPU
   for i in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo ondemand > $i; done
 
-  # @TODO
+  # Disable laptop mode
   echo 0 > /proc/sys/vm/laptop_mode
+  # Decrease dirty data
   echo 30 > /proc/sys/vm/dirty_ratio
   echo 30 > /proc/sys/vm/dirty_background_ratio
 
+  # set buffer writes to once every 6 sec.
   echo 600 > /proc/sys/vm/dirty_expire_centisecs
   echo 600 > /proc/sys/vm/dirty_writeback_centisecs
 
@@ -89,7 +98,7 @@ stop() {
   # xset -dpms
 
   # Dim screen
-  for i in /sys/class/backlight/acpi_video*/brightness; do echo 15 > $i; done
+  for i in /sys/class/backlight/acpi_video*/brightness; do echo $max_brightness > $i; done
 }
 
 detectMode() {
