@@ -3,7 +3,7 @@
 pid_file=/tmp/ircnotify
 
 getPID() {
-  ps aux | \grep "$1" | \grep -v "grep $1" | awk 'BEGIN { ORS=" " } { print $0 }'
+  ps aux | \grep "$1" | \grep -v "grep $1" | awk 'BEGIN { ORS=" " } { print $2 }'
 }
 
 shutdownProcess() {
