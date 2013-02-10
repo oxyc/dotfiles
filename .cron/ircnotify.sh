@@ -3,12 +3,12 @@
 pid_file=/tmp/ircnotify
 
 getPID() {
-  ps aux | \grep "$1" | \grep -v "grep $1" | awk 'BEGIN { ORS=" " } { print $2 }'
+  ps aux | \grep "$1" | awk 'BEGIN { ORS=" " } { print $2 }'
 }
 
 shutdownProcess() {
-  kill $(getPID 'ssh -f tlk tail') > /dev/null 2>&1
-  kill $(getPID 'xargs -I % notify-send %') > /dev/null 2>&1
+  kill $(getPID '[s]sh -f tlk tail') > /dev/null 2>&1
+  kill $(getPID '[x]args -I % notify-send %') > /dev/null 2>&1
   rm -f $pid_file
   exit
 }
