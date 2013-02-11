@@ -3,7 +3,7 @@ SHELL_FILES ?= .ackrc .bash_profile .bashrc .dircolors .gitconfig .inputrc .jshi
 	.bash_completion.d/misc $(find .local/bin/* ! -type d ! -name mutt-notmuch)
 
 CRON_FILES ?= $(wildcard .cron/*)
-XORG_FILES ?= .xsession .Xdefaults .xbindkeysrc .xinitrc
+XORG_FILES ?= .Xresources .xbindkeysrc .xinitrc $(wildcard .urxvt/*)
 XMONAD_FILES ?= .xmonad/xmonad.hs .xmobarrc .config/dunst/dunstrc
 DRUPAL_FILES ?= .bash/drush.sh .ctags
 MUTT_FILES ?= .mutt/colors.muttrc .mutt/muttrc .mutt/sig .mutt/mailcap .msmtprc .offlineimaprc \

@@ -1,3 +1,7 @@
+#!/bin/bash
+
+[[ -f $HOME/.Xresources ]] && xrdb -merge ~/.Xdefaults
+
 xsetroot -cursor_name left_ptr
 setxkbmap -layout se
 xbindkeys
