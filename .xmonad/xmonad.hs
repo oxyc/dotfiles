@@ -1,17 +1,18 @@
 import XMonad
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.DynamicLog -- ?
+import XMonad.Hooks.ManageDocks -- ?
+import XMonad.Hooks.ManageHelpers -- ?
 import XMonad.Layout.MouseResizableTile
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.Tabbed
-import XMonad.Layout.LayoutCombinators hiding ((|||))
-import XMonad.Hooks.ManageHelpers
-import XMonad.Actions.SpawnOn
-import XMonad.Util.Run(spawnPipe)
-import qualified XMonad.StackSet as W
-import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Layout.LayoutCombinators hiding ((|||)) -- ?
+import XMonad.Actions.SpawnOn -- Spawn on specified workspace
+import qualified XMonad.StackSet as W -- ?
+import XMonad.Util.Run(spawnPipe) -- Spawn
+import XMonad.Util.EZConfig(additionalKeys) -- Key bindings
 
+myModKey = mod1Mask
 
 myStartupHook = return ()
 -- myStartupHook = do
@@ -45,9 +46,9 @@ myLayout = smartBorders(avoidStruts(
 
 myKeyBindings = [
    -- Toggle status bar
-    ((mod4Mask, xK_b), sendMessage ToggleStruts)
+     ((myModKey, xK_b), sendMessage ToggleStruts)
    -- Use history aware dmenu wrapper
-   , ((mod4Mask, xK_p), spawn "exe=`dmenu_path_c | yeganesh` && eval \"exec $exe\"")
+   , ((myModKey, xK_p), spawn "exe=`dmenu_path_c | yeganesh` && eval \"exec $exe\"")
   ]
 
 main = do
@@ -56,7 +57,7 @@ main = do
 
 defaults = defaultConfig {
     terminal           = "urxvt"
-  , modMask            = mod4Mask
+  , modMask            = myModKey
   , borderWidth        = 1
   , focusFollowsMouse  = True
   , focusedBorderColor = "#ff0000"
