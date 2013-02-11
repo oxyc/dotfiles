@@ -8,7 +8,7 @@ have() {
 
 # Filter through running processes
 psgrep() {
-  ps aux | grep -e $1
+  ps aux | \grep -e "$@" | \grep -v "grep -e $@"
 }
 
 # One command to rule them all
