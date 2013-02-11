@@ -16,8 +16,8 @@ URxvt*scrollBar:          false
 URxvt*internalBorder:     0
 
 ! Transparent background
-URxvt*depth:              32
-URxvt*background:         rgba:0000/0000/0000/dddd
+!URxvt*depth:              32
+!URxvt*background:         rgba:0000/0000/0000/dddd
 
 ! Fonts
 URxvt*foreground:         #aaaaaa
