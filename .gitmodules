@@ -7,3 +7,6 @@
 [submodule ".local/lib/fasd"]
 	path = .local/lib/fasd
 	url = git://github.com/clvv/fasd.git
+[submodule ".local/lib/urxvt-perls"]
+	path = .local/lib/urxvt-perls
+	url = git://github.com/muennich/urxvt-perls.git

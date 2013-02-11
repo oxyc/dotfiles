@@ -54,6 +54,12 @@ URxvt*matcher.pattern.1:  \\bwww\\.[\\w-]+\\.[\\w./?&@#-]*[\\w/-]
 URxvt.iso14755_52:        false
 URxvt.iso14755:           false
 
+! Support alt-keys in irssi
+! http://irssi.org/beginner/
+URxvt*eightBitInput:       false
+URxvt*metaSendsEscape:     true
+URxvt*modifier:            super
+
 ! @todo
 ! URxvt*keysym.S-Prior:     ^[[5;2~
 ! URxvt*keysym.S-Next:      ^[[6;2~
@@ -84,11 +90,6 @@ XTerm*selectToClipboard:  true
 
 ! http://j.rigelseven.com/read/55816/
 XTerm*highlightSelection:  true
-
-! Support alt-keys in irssi
-! http://irssi.org/beginner/
-XTerm*eightBitInput:       false
-XTerm*metaSendsEscape:     true
 
 ! http://blog.ssokolow.com/archives/2011/05/01/modernizing-xterms-paste/
 ! Meta is <Alt>
