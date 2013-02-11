@@ -1,7 +1,7 @@
 #/bin/bash
 
 pid_file=/tmp/ircnotify
-export DISPLAY=":0.0"
+display=":0.0"
 
 getPID() {
   ps aux | \grep "$1" | awk 'BEGIN { ORS=" " } { print $2 }'
@@ -22,4 +22,4 @@ trap shutdownProcess INT TERM EXIT
 
 # Start listening in a blocking state
 ssh -f tlk "tail -n0 -q -f ~/irclogs/*/*.log | grep --line-buffered '>.*oxy' | sed -u -e 's/^.*\\s*.*>//g'" \
-  | xargs -I % notify-send %
+  | DISPLAY="$display" xargs -I % notify-send %
