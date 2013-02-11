@@ -1,6 +1,7 @@
 #/bin/bash
 
 pid_file=/tmp/ircnotify
+export DISPLAY=":0.0"
 
 getPID() {
   ps aux | \grep "$1" | awk 'BEGIN { ORS=" " } { print $2 }'
