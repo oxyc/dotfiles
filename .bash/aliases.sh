@@ -23,6 +23,9 @@ have ls++ && alias l='ls++'
 # Download mutt attachments into downloads folder
 have mutt && alias mutt='cd ~/downloads/mutt && mutt && cd -'
 
+# Place scrot files in specified directory
+have scrot && alias scrot='scrot ~/pictures/screenshots/%Y-%m-%d_%H%M%S.png'
+
 # Git shortcuts
 alias ga='git add'
 alias gp='git push'
