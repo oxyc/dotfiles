@@ -62,7 +62,8 @@ stop() {
 
   # USB autosuspend
   for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 600 > $i; done
-  for i in /sys/bus/usb/devices/*/power/control; do echo auto > $i; done
+  # http://www.mjmwired.net/kernel/Documentation/usb/power-management.txt#130
+  for i in /sys/bus/usb/devices/*/power/control; do echo on > $i; done
 
   # Enable the NMI watchdog
   echo 1 > /proc/sys/kernel/watchdog
