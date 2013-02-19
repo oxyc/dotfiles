@@ -1,0 +1,38 @@
+#!/bin/bash
+
+BATTERY_DIRS=/sys/class/power_supply/BAT*/
+AC_DIR=/sys/class/power_supply/AC/
+
+usage() {
+  echo "Usage: battery [command] [arg]
+
+Commands:
+  capacity  Display battery capacity as a percentage. Takes an optional
+            battery identifier, eg. BAT0.
+  charging  Display whether the battery is charging or not. 1 for yes, 0 for no.
+  ac        Display whether AC is used. 1 for yes, 0 for no.
+"
+}
+
+capacity() {
+  for i in $BATTERY_DIRS; do
+    [[ "$1" ]] && [[ "$1" != $(basename $i) ]] && continue
+    cat $i/capacity
+  done
+}
+
+charging() {
+  for i in $BATTERY_DIRS; do
+    [[ "$1" ]] && [[ "$1" != $(basename $i) ]] && continue
+    [[ $(cat $i/status) == "Charging" ]] && echo 1 || echo 0
+  done
+}
+
+ac() {
+  cat $AC_DIR/online
+}
+
+case $1 in
+  capacity|charging|ac) "$1" "$2" ;;
+  *) usage ;;
+esac
