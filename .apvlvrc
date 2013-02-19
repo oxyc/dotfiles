@@ -1,0 +1,6 @@
+set content=yes
+set scrollbar=yes
+set visualmode=no
+set wrapscan=yes
+set autoreload=2
+set doubleclick=page

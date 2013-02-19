@@ -1,4 +1,4 @@
-SHELL_FILES ?= .ackrc .bash_profile .bashrc .dircolors .gitconfig .inputrc .jshintrc .lftprc .ls++.conf .linopenrc \
+SHELL_FILES ?= .ackrc .bash_profile .bashrc .dircolors .gitconfig .inputrc .jshintrc .lftprc .ls++.conf .linopenrc .apvlvrc \
 	.bash/aliases.sh .bash/exports.sh .bash/functions.sh .bash/prompt.sh .bash/shell.sh \
 	.bash_completion.d/misc $(find .local/bin/* ! -type d ! -name mutt-notmuch)
 
