@@ -12,7 +12,7 @@ import qualified XMonad.StackSet as W -- ?
 import XMonad.Util.Run(spawnPipe) -- Spawn
 import XMonad.Util.EZConfig(additionalKeys) -- Key bindings
 
-myModKey = mod1Mask
+myModKey = mod1Mask -- Set modifier key to alt (default)
 
 myStartupHook = return ()
 -- myStartupHook = do

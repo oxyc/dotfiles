@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[[ -f $HOME/.Xresources ]] && xrdb -merge ~/.Xresources
+[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
 xsetroot -cursor_name left_ptr
 setxkbmap -layout se
