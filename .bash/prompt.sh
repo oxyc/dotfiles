@@ -1,8 +1,10 @@
 #!/bin/bash
 # git magic inspired by https://github.com/gf3/dotfiles/blob/master/.bash_prompt
 
+# Use status -uno to only traverse tracked files, alot faster.
+# @see https://github.com/mathiasbynens/dotfiles/issues/184
 parse_git_dirty() {
-  [[ $(git status 2> /dev/null | tail -n1) != *"working directory clean"* ]] && echo "*"
+  [[ $(git status -uno 2> /dev/null | tail -n1) != *"working directory clean"* ]] && echo "*"
 }
 
 parse_git_branch() {
