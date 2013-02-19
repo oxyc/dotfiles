@@ -1,7 +1,8 @@
 #/bin/bash
+# Requires .local/bin/notify
 
+PATH="$PATH:$HOME/.local/bin:/usr/sbin"
 pid_file=/tmp/ircnotify
-display=":0.0"
 
 getPID() {
   ps aux | \grep "$1" | awk 'BEGIN { ORS=" " } { print $2 }'
@@ -9,7 +10,7 @@ getPID() {
 
 shutdownProcess() {
   kill $(getPID '[s]sh -f tlk tail') > /dev/null 2>&1
-  kill $(getPID '[x]args -I % notify-send %') > /dev/null 2>&1
+  kill $(getPID '[x]args -I % notify %') > /dev/null 2>&1
   rm -f $pid_file
   exit
 }
@@ -22,4 +23,4 @@ trap shutdownProcess INT TERM EXIT
 
 # Start listening in a blocking state
 ssh -f tlk "tail -n0 -q -f ~/irclogs/*/*.log | grep --line-buffered '>.*oxy' | sed -u -e 's/^.*\\s*.*>//g'" \
-  | DISPLAY="$display" xargs -I % notify-send %
+  | xargs -I % notify %
