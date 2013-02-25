@@ -183,3 +183,9 @@ windowsize() {
   local height=${2:-400}
   wmctrl -r :ACTIVE: -e 0,-1,-1,$width,$height
 }
+
+yslow() {
+  [ ! -f ~/.local/lib/yslow.js ] && echo "Couldn't find yslow in ~/.local/lib/yslow.js" && return
+  [[ $# -eq 1 ]] && local flags='--info grade --format tap'
+  phantomjs ~/.local/lib/yslow.js $flags "$@"
+}

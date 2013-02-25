@@ -20,6 +20,8 @@ SHELL_DIRS ?= .backup
 TMUX_DIRS ?= .tmux/sessions .tmux/sockets
 TODO_DIRS ?= .todo
 
+LIB_DIR ?= ~/.local/lib
+
 BACKUP ?= $(HOME)/.dotfiles-backup/$(shell date +"%Y%m%d_%H%M")
 
 DEST ?= $(HOME)
@@ -63,6 +65,16 @@ irssi: $(addprefix $(DEST)/,$(IRSSI_FILES))
 
 shell: $(addprefix $(DEST)/,$(SHELL_FILES))
 	@mkdir -p $(addprefix $(DEST)/,$(SHELL_DIRS))
+
+yslow:
+	@git clone git://github.com/marcelduran/yslow.git /tmp/yslow \
+		&& pushd /tmp/yslow \
+		&& make -s phantomjs \
+		&& mv build/phantomjs/yslow.js $(LIB_DIR)/ \
+		&& popd \
+		&& rm -rf /tmp/yslow
+
+node: yslow
 
 # Helpers ---------------------------------------------------------------------
 
