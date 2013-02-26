@@ -1,0 +1,62 @@
+#!/usr/bin/env phantomjs
+// https://github.com/ariya/phantomjs/blob/master/examples/rasterize.js
+var page = require('webpage').create()
+  , system = require('system')
+  , args = system.args.slice(1)
+  , width = 1200
+  , size = 1
+  , address, output, zoom, i = 0;
+
+function usage() {
+  console.log('Usage: rasterize.js [options] URL filename\n')
+  console.log('Options:');
+  console.log('  -s|--size      Output size: "5in*7.5in", "10cm*20cm", "A4", "Letter"');
+  console.log('  -z|--zoom      Zoom level. Defaults to 1');
+  console.log('  -w|--width     Viewport width Defaults to 1200');
+  phantom.exit(1);
+}
+
+while (/^-/.test(args[i])) {
+  switch (args[i++]) {
+    case '-h': case '--help':
+      usage();
+      break;
+    case '-s': case '--size':
+      size = args[i].split('*');
+      if (2 === size.length)
+        size = { width: size[0], height: size[1], margin: '0px' };
+      else
+        size = { format: size[0], orientation: 'portrait', margin: '1cm' };
+      break;
+    case '-w': case '--width':
+      width = args[i];
+      break;
+    case '-z': case '--zoom':
+      zoom = args[i];
+      break;
+    default:
+      usage();
+      break;
+  }
+  i++;
+}
+
+address = /^http/.test(args[i]) ? args[i++] : 'http://' + args[i++];
+output = args[i++];
+
+if (typeof output === 'undefined') usage();
+
+page.viewportSize = { width: width, height: 600 };
+page.paperSize = size;
+page.zoomFactor = zoom;
+
+page.open(address, function (status) {
+  if (status !== 'success') {
+    console.log('Unable to load the address: ' + address);
+    return phantom.exit();
+  }
+  window.setTimeout(function () {
+    page.render(output);
+    phantom.exit();
+  }, 200);
+});
