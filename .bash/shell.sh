@@ -21,6 +21,9 @@ set -o noclobber;
 # Vi-like behavior for bash
 set -o vi
 
+# Allow alias expansion in non-interactive terminals, eg. dmenu
+shopt -s expand_aliases
+
 # Make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
