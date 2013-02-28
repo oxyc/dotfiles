@@ -121,29 +121,6 @@ AWK
   )" | less -R
 }
 
-rasterize() {
-  local address="$1"
-  local output="$2"
-  if [[ $address && $output ]]; then
-    phantomjs <(echo "
-      var page = new WebPage();
-      page.viewportSize = { width: 600, height: 600 };
-      page.open(${address}, function (status) {
-        if (status !== 'success') console.log('Unable to load the address!');
-        else {
-          window.setTimeout(function() {
-            page.render(${output});
-            phantom.exit();
-          }, 200);
-        }
-      };
-    ")
-  else
-    echo "Usage: rasterize URL filename"
-    exit 1
-  fi
-}
-
 # Usage: dimscreen 0-100
 dimscreen() {
   local max=$(cat /sys/class/backlight/acpi_video0/max_brightness)
