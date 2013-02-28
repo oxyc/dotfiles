@@ -44,7 +44,7 @@ myManageHook =
 defaultLayout = smartBorders $ avoidStruts (
   -- Master window on the left and remaining tiled on the right side.
       mouseResizableTile { draggerType = BordersDragger, masterFrac = masterFraction }
-  -- Master window on bottom and remaining tiled at the top @TODO proper tiling
+  -- Master window on top and remaining tiled at the bottom.
   ||| Mirror (ResizableTall 1 (3/100) (masterFraction) [])
   -- Fullscreen
   ||| noBorders (Full))
