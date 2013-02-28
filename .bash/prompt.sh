@@ -14,8 +14,10 @@ __prompt() {
   [ $HOSTNAME != $DEFAULT_HOSTNAME ] && local user=" $USER@$HOSTNAME"
   local branch=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d;s/* \(.*\)/\1/')
   local dirty=$(git diff --quiet --ignore-submodules HEAD 2>/dev/null; [ $? -eq 1 ] && echo '*')
+  [ -n "$ssh" ] && branch="${ssh}${branch}"
+  [ -n "$branch" ] && branch=" $branch"
 
-  echo " ${ssh}${branch}${dirty}${user}"
+  echo "${branch}${dirty}${user}"
 }
 
 PS1="\n\[$WHITE\]\W\[$GRAY\]\$(__prompt)\[$WHITE\]:\[$RESET\] "
