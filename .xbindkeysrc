@@ -33,26 +33,21 @@
 # Paste from clipboard, both with ctrl+shift+v and alt+middlemouse
 
 "xvkbd -xsendevent -text "$(xclip -selection clipboard -o)""
-  m:0x5 + c:55
   Control+Shift + v
-
-"xvkbd -xsendevent -text "$(xclip -selection clipboard -o)""
-  m:0x8 + c:64
-  Alt + Alt_L
 
 # Vi bindings
 
-"xvkbd -xsendevent -text "\[Down]""
-  alt + j
+"xvkbd -xsendevent -text "\[Down]"
+  Mod4 + j
 
-"xvkbd -xsendevent -text "\[Up]""
-  alt + k
+"xvkbd -xsendevent -text "\[Up]"
+  Mod4 + k
 
-"xvkbd -xsendevent -text "\[Left]""
-  alt + h
+"xvkbd -xsendevent -text "\[Left]"
+  Mod4 + h
 
-"xvkbd -xsendevent -text "\[Right]""
-  alt + l
+"xvkbd -xsendevent -text "\[Right]"
+  Mod4 + l
 
 #"(Scheme function)"
 #    m:0x0 + c:160
