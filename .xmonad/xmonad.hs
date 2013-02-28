@@ -87,8 +87,8 @@ myKeyBindings = [
     , ((myModKey .|. shiftMask, xK_j), windows W.swapDown)
     , ((myModKey .|. shiftMask, xK_k), windows W.swapUp)
     -- Shrink/Expand master area.
-    , ((myModKey .|. shiftMask, xK_h), sendMessage Shrink) -- Why doesnt this work without shiftmask?
-    , ((myModKey .|. shiftMask, xK_l), sendMessage Expand)
+    , ((myModKey, xK_h), sendMessage Shrink)
+    , ((myModKey, xK_l), sendMessage Expand)
     -- Push window back into tilling.
     , ((myModKey, xK_t),               withFocused $ windows . W.sink)
     -- Change the number of windows in the master area.
