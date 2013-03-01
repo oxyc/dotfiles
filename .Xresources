@@ -5,6 +5,14 @@ Xft.hintstyle:            hintfull
 Xft.lcdfilter:            lcddefault
 Xft.rgba:                 rgb
 
+! Dzen2
+
+dzen2.font:               -*-InconsolataForPowerline-medium-r-*-*-13-*-*-*-*-*-*-*
+dzen2.background:         #111111
+dzen2.foreground:         #aaaaaa
+
+! URxvt
+
 URxvt.termName:           rxvt-256color
 *customization:           -color
 URxvt.title:              Terminal
