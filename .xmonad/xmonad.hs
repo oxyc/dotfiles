@@ -42,12 +42,12 @@ myManageHook =
   manageDocks -- Manage dzen
   <+> composeAll -- Set custom manage hooks
     [ resource  =? "desktop_window"       --> doIgnore
-    , resource  =? "www.grooveshark.com"  --> doShift (myWorkspaces !! 8)
-    , className =? "VirtualBox"           --> doShift (myWorkspaces !! 7)
+    , resource  =? "www.grooveshark.com"  --> doShift (myWorkspaces !! 7)
+    , className =? "VirtualBox"           --> doShift (myWorkspaces !! 6)
     , className =? "Thunar"               --> doFloat
-    , className =? "Transmission-gtk"     --> doShift (myWorkspaces !! 9)
-    , className =? "Google-chrome"        --> doShift (myWorkspaces !! 1)
-    , title     =? "mutt"                 --> doShift (myWorkspaces !! 6)
+    , className =? "Transmission-gtk"     --> doShift (myWorkspaces !! 8)
+    , className =? "Google-chrome"        --> doShift (myWorkspaces !! 0)
+    , title     =? "mutt"                 --> doShift (myWorkspaces !! 5)
     -- Make fullscreen and dont swap tiles.
     , isFullscreen                        --> (doFullFloat <+> doF W.swapUp)
     -- Keep master position when opening new tiles.
@@ -139,12 +139,12 @@ myKeyBindings = [
 -- Settings
 
 myModKey          = mod1Mask
-font              = "-*-InconsolataForPowerline-medium-r-*-*-13-*-*-*-*-*-*-*"
 background        = "#111111"
 foregroundActive  = "#ebac54"
 foreground        = "#aaaaaa"
 bitmapsDir        = "/home/oxy/.xmonad/icons"
-leftBar           = "dzen2 -x 0 -y 0 -w 1200 -ta l -bg " ++ background ++ " -fg "++ foreground ++" -fn "++ font
+-- dzen font is set in .Xresources
+leftBar           = "dzen2 -x 0 -y 0 -w 1200 -ta l -bg " ++ background ++ " -fg "++ foreground
 rightBar          = "conky -qc /home/oxy/.xmonad/conky | dzen2 -x 1200 -y 0 -ta r -w 400"
 
 -- Startup
