@@ -1,0 +1,21 @@
+short_units yes
+background yes
+out_to_console yes
+out_to_x no
+update_interval 10
+
+TEXT
+^i(/home/oxy/.xmonad/icons/mail.xbm)  \
+${new_mails 60 /home/oxy/.mail/gmail/INBOX} \
+${new_mails 60 /home/oxy/.mail/gmail/oxyfi} \
+${new_mails 60 /home/oxy/.mail/gmail/Arcada} \
+${if_match "${laptop_mode}" != "0"}\
+ ^i(/home/oxy/.xmonad/icons/bat_low_01.xbm)\
+ ^fg(\#666666)${battery_time BAT0}\
+ ^fg(\#aaaaaa)${battery_percent BAT0}% \
+${else}\
+ ^fg(\#666666)^i(/home/oxy/.xmonad/icons/ac_01.xbm)\
+ ^fg(\#666666)${battery_percent BAT0}% \
+${endif}\
+^fg(\#aaaaaa) ${time %a %b %d} \
+^fg(\#ebac54)${time %H:%M}  \

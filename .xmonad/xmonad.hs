@@ -1,68 +1,105 @@
 import XMonad
-import XMonad.Hooks.DynamicLog -- ?
-import XMonad.Hooks.ManageHelpers --
-import XMonad.Hooks.ManageDocks -- Manage xmobar
+
+import Data.List -- Clickable workspaces
+import XMonad.Hooks.ManageHelpers
+import XMonad.Actions.SpawnOn -- Spawn on specified workspace
+import XMonad.Util.EZConfig(additionalKeys) -- Key bindings
+import XMonad.Util.Run(spawnPipe) -- Spawn
+import qualified XMonad.StackSet as W -- Swapping
+
+-- dzen
+import XMonad.Hooks.DynamicLog hiding (xmobar, xmobarPP, xmobarColor, sjanssenPP, byorgeyPP)
+import XMonad.Hooks.ManageDocks
+import System.IO (hPutStrLn)
+
+-- layouts
 import XMonad.Layout.MouseResizableTile
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.PerWorkspace (onWorkspace) -- set workspace layouts
 import XMonad.Layout.LayoutCombinators hiding ((|||)) -- ?
-import XMonad.Actions.SpawnOn -- Spawn on specified workspace
-import qualified XMonad.StackSet as W -- ?
-import XMonad.Util.Run(spawnPipe) -- Spawn
-import XMonad.Util.EZConfig(additionalKeys) -- Key bindings
 
-myModKey = mod1Mask -- Set modifier key to alt (default)
+import XMonad.Hooks.SetWMName -- Fix for Java GUIs
 
-myStartupHook = return ()
--- myStartupHook = do
---   spawnOn "1:web" "google-chrome"
---   spawnOn "1:web" "urxvt -e 'mosh tlk'"
---   spawnOn "2:term" "urxvt"
---   spawnOn "3:mutt" "urxvt -e 'mutt'"
+myWorkspaces = clickable $ [
+    "^i(" ++ bitmapsDir ++ "/arch.xbm) web"
+  , "^i(" ++ bitmapsDir ++ "/fs_01.xbm)"
+  , "3"
+  , "4"
+  , "5"
+  , "^i(" ++ bitmapsDir ++ "/mail.xbm)"
+  , "^i(" ++ bitmapsDir ++ "/dish.xbm)"
+  , "^i(" ++ bitmapsDir ++ "/note.xbm)"
+  , "^i(" ++ bitmapsDir ++ "/net_down_02.xbm)"
+  ]
+  -- Clickable workspaces
+  where clickable l = ["^ca(1,xdotool key alt+" ++ show (n) ++ ")" ++ ws ++ "^ca()" |
+                        (i,ws) <- zip [1..] l,
+                        let n = i ]
 
 myManageHook =
-  (doF W.swapDown) -- Keep master position when opening new tiles
-  <+> manageDocks -- Manage xmobar
+  manageDocks -- Manage dzen
   <+> composeAll -- Set custom manage hooks
     [ resource  =? "desktop_window"       --> doIgnore
-    , resource  =? "www.grooveshark.com"  --> doShift "8:music"
-    , className =? "VirtualBox"           --> doShift "4:vm"
+    , resource  =? "www.grooveshark.com"  --> doShift (myWorkspaces !! 8)
+    , className =? "VirtualBox"           --> doShift (myWorkspaces !! 7)
     , className =? "Thunar"               --> doFloat
-    , className =? "Transmission-gtk"     --> doShift "9:torrent"
-    , className =? "Google-chrome"        --> doShift "1:web"
-    , title     =? "mutt"                 --> doShift "3:mutt"
-    , isFullscreen                        --> (doF W.focusDown <+> doFullFloat)
+    , className =? "Transmission-gtk"     --> doShift (myWorkspaces !! 9)
+    , className =? "Google-chrome"        --> doShift (myWorkspaces !! 1)
+    , title     =? "mutt"                 --> doShift (myWorkspaces !! 6)
+    -- Make fullscreen and dont swap tiles.
+    , isFullscreen                        --> (doFullFloat <+> doF W.swapUp)
+    -- Keep master position when opening new tiles.
+    , isFullscreen =? False               --> (doF W.swapDown)
     ]
 
--- The default layout
---
--- * "avoidStruts" make space for the status bar
--- * "smartBorders" only display borders if there is more than one window
--- * "BordersDragger" remove gap between tiles
-defaultLayout = smartBorders $ avoidStruts (
+----
+
+-- avoidStruts: make space for the status bar
+-- smartBorders: only display borders if there is more than one window
+-- BordersDragger: remove gap between tiles
+defaultLayout = smartBorders (
   -- Master window on the left and remaining tiled on the right side.
-      mouseResizableTile { draggerType = BordersDragger, masterFrac = masterFraction }
+      avoidStruts (mouseResizableTile { draggerType = BordersDragger, masterFrac = masterFraction })
   -- Master window on top and remaining tiled at the bottom.
-  ||| Mirror (ResizableTall 1 (3/100) (masterFraction) [])
+  ||| avoidStruts (Mirror (ResizableTall 1 (3/100) (masterFraction) []))
   -- Fullscreen
   ||| noBorders (Full))
 
   where
     masterFraction = 2/3
 
--- Fixed layouts
-videoLayout = avoidStruts $ noBorders (Full)
+-- Always keep mutt tile wide and on top.
 muttLayout = smartBorders $ avoidStruts $ Mirror (ResizableTall 1 (3/100) (2/3) [])
 
--- Attach the layouts
-myLayout =
-    onWorkspace "3:mutt" muttLayout
-  $ onWorkspace "7:video" videoLayout
+myLayoutHook =
+    onWorkspace (myWorkspaces !! 5) muttLayout
   $ defaultLayout
 
--- Key bindings
+----
+
+myLogHook h = dynamicLogWithPP $ defaultPP {
+    ppCurrent           = dzenColor foregroundActive background . pad
+  , ppVisible           = dzenColor "#ff00ff" background . pad
+  , ppHidden            = dzenColor "#eeeee" background . pad
+  , ppHiddenNoWindows   = dzenColor "#333333" background . pad
+  , ppUrgent            = dzenColor "#ff0000" background . pad
+  , ppWsSep             = ""
+  , ppSep               = "  |  "
+  , ppLayout            = dzenColor "#666666" background .
+                          (\x -> case x of
+                              "MouseResizableTile"   -> "^i(" ++ bitmapsDir ++ "/layout-tall.xbm)"
+                              "Mirror ResizableTall" -> "^i(" ++ bitmapsDir ++ "/layout-mtall.xbm)"
+                              "Full"                 -> "^i(" ++ bitmapsDir ++ "/full.xbm)"
+                              _                      -> x
+                          )
+  , ppTitle             = dzenColor foregroundActive background . dzenEscape
+  , ppOutput            = hPutStrLn h
+}
+
+----
+
 -- Some are deafults, but I want to have them documented
 myKeyBindings = [
     -- Toggle xmobar.
@@ -70,7 +107,8 @@ myKeyBindings = [
     -- Use history aware dmenu wrapper.
     , ((myModKey, xK_p),               spawn "exe=`dmenu_path_c | yeganesh` && eval \"exec $exe\"")
     -- Take screenshot and upload to imgur
-    , ((myModKey .|. shiftMask, xK_p), spawn "google-chrome $(scrot -e 'imgurbash $f 2>/dev/null')")
+    , ((0, xK_Print),                  spawn "scrot -e 'mv $f ~/pictures/screenshots/'")
+    , ((myModKey, xK_Print),           spawn "google-chrome $(scrot -e 'imgurbash $f 2>/dev/null')")
     -- Close focused window.
     , ((myModKey .|. shiftMask, xK_c), kill)
     -- Cycle through available layouts.
@@ -87,32 +125,43 @@ myKeyBindings = [
     , ((myModKey .|. shiftMask, xK_j), windows W.swapDown)
     , ((myModKey .|. shiftMask, xK_k), windows W.swapUp)
     -- Shrink/Expand master area.
-    , ((myModKey, xK_h), sendMessage Shrink)
-    , ((myModKey, xK_l), sendMessage Expand)
+    , ((myModKey, xK_h),               sendMessage Shrink)
+    , ((myModKey, xK_l),               sendMessage Expand)
     -- Push window back into tilling.
     , ((myModKey, xK_t),               withFocused $ windows . W.sink)
     -- Change the number of windows in the master area.
     , ((myModKey, xK_comma),           sendMessage (IncMasterN 1))
     , ((myModKey, xK_period),          sendMessage (IncMasterN (-1)))
     -- Restart xmonad.
-    , ((myModKey, xK_q),               restart "xmonad" True)
+    , ((mod1Mask, xK_q),               spawn "killall dzen2 conky; cd ~/.xmonad; ghc -threaded xmonad.hs; mv xmonad xmonad-x86_64-linux; xmonad --restart" )
   ]
 
-defaults = defaultConfig {
-    terminal           = "urxvt"
-  , modMask            = myModKey
-  , borderWidth        = 1
-  , focusFollowsMouse  = True
-  , focusedBorderColor = "#ff0000"
-  , normalBorderColor  = "#000000"
-  , workspaces         = ["1:web","2:term","3:mutt","4:vm","5:media", "6", "7:video", "8:music", "9:torrent"]
-  , manageHook         = myManageHook
-  , startupHook        = myStartupHook
-  , layoutHook         = myLayout
-  , handleEventHook    = docksEventHook
-} `additionalKeys` myKeyBindings
+-- Settings
+
+myModKey          = mod1Mask
+font              = "-*-InconsolataForPowerline-medium-r-*-*-13-*-*-*-*-*-*-*"
+background        = "#111111"
+foregroundActive  = "#ebac54"
+foreground        = "#aaaaaa"
+bitmapsDir        = "/home/oxy/.xmonad/icons"
+leftBar           = "dzen2 -x 0 -y 0 -w 1200 -ta l -bg " ++ background ++ " -fg "++ foreground ++" -fn "++ font
+rightBar          = "conky -qc /home/oxy/.xmonad/conky | dzen2 -x 1200 -y 0 -ta r -w 400"
 
 -- Startup
 main = do
-  mobar <- spawnPipe "xmobar"
-  xmonad =<< xmobar defaults
+  dzenLeftBar <- spawnPipe leftBar
+  dzenRightBar <- spawnPipe rightBar
+  xmonad $ defaultConfig {
+      terminal           = "urxvt"
+    , modMask            = myModKey
+    , borderWidth        = 1
+    , focusFollowsMouse  = True
+    , focusedBorderColor = "#ff0000"
+    , normalBorderColor  = "#000000"
+    , workspaces         = myWorkspaces
+    , manageHook         = myManageHook
+    , logHook            = myLogHook dzenLeftBar
+    , layoutHook         = myLayoutHook
+    , handleEventHook    = docksEventHook
+    , startupHook        = setWMName "LG3D" -- Fix Java GUI
+  } `additionalKeys` myKeyBindings
