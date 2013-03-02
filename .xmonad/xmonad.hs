@@ -22,16 +22,29 @@ import XMonad.Layout.LayoutCombinators hiding ((|||)) -- ?
 
 import XMonad.Hooks.SetWMName -- Fix for Java GUIs
 
-myWorkspaces = clickable $ [
-    "^i(" ++ bitmapsDir ++ "/arch.xbm) web"
-  , "^i(" ++ bitmapsDir ++ "/fs_01.xbm)"
+-- Settings
+
+myModKey          = mod1Mask
+background        = "#111111"
+foregroundActive  = "#ebac54"
+foreground        = "#aaaaaa"
+
+-- dzen font is set in .Xresources
+leftBar           = "dzen2 -x 0 -y 0 -w 1200 -ta l -bg " ++ background ++ " -fg "++ foreground
+rightBar          = "conky -qc /home/oxy/.xmonad/conky | dzen2 -x 1200 -y 0 -ta r -w 400"
+
+includeIcon x = "^i(/home/oxy/.xmonad/icons/" ++ x ++ ".xbm)"
+
+myWorkspaces = clickable $
+  [ includeIcon ("arch") ++ " web"
+  , includeIcon ("fs_01")
   , "3"
   , "4"
   , "5"
-  , "^i(" ++ bitmapsDir ++ "/mail.xbm)"
-  , "^i(" ++ bitmapsDir ++ "/dish.xbm)"
-  , "^i(" ++ bitmapsDir ++ "/note.xbm)"
-  , "^i(" ++ bitmapsDir ++ "/net_down_02.xbm)"
+  , includeIcon ("mail")
+  , includeIcon ("dish")
+  , includeIcon ("note")
+  , includeIcon ("net_down_02")
   ]
   -- Clickable workspaces
   where clickable l = ["^ca(1,xdotool key alt+" ++ show (n) ++ ")" ++ ws ++ "^ca()" |
@@ -56,10 +69,16 @@ myManageHook =
 
 ----
 
+-- Always keep mutt tile wide and on top.
+muttLayout = smartBorders $ avoidStruts $ Mirror (ResizableTall 1 (3/100) (2/3) [])
+
 -- avoidStruts: make space for the status bar
 -- smartBorders: only display borders if there is more than one window
 -- BordersDragger: remove gap between tiles
-defaultLayout = smartBorders (
+myLayoutHook =
+    onWorkspace (myWorkspaces !! 5) muttLayout
+
+  $ smartBorders (
   -- Master window on the left and remaining tiled on the right side.
       avoidStruts (mouseResizableTile { draggerType = BordersDragger, masterFrac = masterFraction })
   -- Master window on top and remaining tiled at the bottom.
@@ -70,13 +89,6 @@ defaultLayout = smartBorders (
   where
     masterFraction = 2/3
 
--- Always keep mutt tile wide and on top.
-muttLayout = smartBorders $ avoidStruts $ Mirror (ResizableTall 1 (3/100) (2/3) [])
-
-myLayoutHook =
-    onWorkspace (myWorkspaces !! 5) muttLayout
-  $ defaultLayout
-
 ----
 
 myLogHook h = dynamicLogWithPP $ defaultPP {
@@ -86,15 +98,18 @@ myLogHook h = dynamicLogWithPP $ defaultPP {
   , ppHiddenNoWindows   = dzenColor "#333333" background . pad
   , ppUrgent            = dzenColor "#ff0000" background . pad
   , ppWsSep             = ""
-  , ppSep               = "  |  "
-  , ppLayout            = dzenColor "#666666" background .
-                          (\x -> case x of
-                              "MouseResizableTile"   -> "^i(" ++ bitmapsDir ++ "/layout-tall.xbm)"
-                              "Mirror ResizableTall" -> "^i(" ++ bitmapsDir ++ "/layout-mtall.xbm)"
-                              "Full"                 -> "^i(" ++ bitmapsDir ++ "/full.xbm)"
+  , ppSep               = "  \57521  " -- 
+  , ppLayout            = dzenColor "#666666" background
+                          . wrap "^ca(1,xdotool key alt+space)" "^ca()" -- toggle layout
+                          . (\x -> case x of
+                              "MouseResizableTile"   -> includeIcon("layout-tall")
+                              "Mirror ResizableTall" -> includeIcon("layout-mtall")
+                              "Full"                 -> includeIcon("full")
                               _                      -> x
                           )
-  , ppTitle             = dzenColor foregroundActive background . dzenEscape
+  , ppTitle             = dzenColor foregroundActive background
+                          . wrap "^ca(1,xdotool key alt+k)" "^ca()" -- change focus
+                          . dzenEscape
   , ppOutput            = hPutStrLn h
 }
 
@@ -106,8 +121,9 @@ myKeyBindings = [
       ((myModKey, xK_b),               sendMessage ToggleStruts)
     -- Use history aware dmenu wrapper.
     , ((myModKey, xK_p),               spawn "exe=`dmenu_path_c | yeganesh` && eval \"exec $exe\"")
-    -- Take screenshot and upload to imgur
+    -- Take a screenshot
     , ((0, xK_Print),                  spawn "scrot -e 'mv $f ~/pictures/screenshots/'")
+    -- Take screenshot and upload to imgur
     , ((myModKey, xK_Print),           spawn "google-chrome $(scrot -e 'imgurbash $f 2>/dev/null')")
     -- Close focused window.
     , ((myModKey .|. shiftMask, xK_c), kill)
@@ -135,17 +151,6 @@ myKeyBindings = [
     -- Restart xmonad.
     , ((mod1Mask, xK_q),               spawn "killall dzen2 conky; cd ~/.xmonad; ghc -threaded xmonad.hs; mv xmonad xmonad-x86_64-linux; xmonad --restart" )
   ]
-
--- Settings
-
-myModKey          = mod1Mask
-background        = "#111111"
-foregroundActive  = "#ebac54"
-foreground        = "#aaaaaa"
-bitmapsDir        = "/home/oxy/.xmonad/icons"
--- dzen font is set in .Xresources
-leftBar           = "dzen2 -x 0 -y 0 -w 1200 -ta l -bg " ++ background ++ " -fg "++ foreground
-rightBar          = "conky -qc /home/oxy/.xmonad/conky | dzen2 -x 1200 -y 0 -ta r -w 400"
 
 -- Startup
 main = do
