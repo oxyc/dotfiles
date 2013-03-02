@@ -22,6 +22,7 @@ import XMonad.Layout.PerWorkspace (onWorkspace) -- set workspace layouts
 import XMonad.Layout.LayoutCombinators hiding ((|||)) -- ?
 
 import XMonad.Hooks.SetWMName -- Fix for Java GUIs
+import XMonad.Hooks.EwmhDesktops
 
 -- Settings
 
@@ -172,7 +173,7 @@ myKeyBindings = [
 main = do
   dzenLeftBar <- spawnPipe leftBar
   dzenRightBar <- spawnPipe rightBar
-  xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig {
+  xmonad $ ewmh $ withUrgencyHook NoUrgencyHook $ defaultConfig {
       terminal           = "urxvt"
     , modMask            = myModKey
     , borderWidth        = 1

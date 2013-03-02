@@ -1,0 +1,10 @@
+#!/bin/bash
+# http://coderedd.net/r/archlinux/comments/tbj6w/setting_wm_urgent_hint/
+
+find="$1"
+# Default to parent process
+[ ! "$find" ] && find=$(ps aux | \grep $PPID | grep -v 'grep' | awk '{print $11 }')
+
+for i in $(xdotool search --classname $find); do
+  xdotool set_window --urgency 1 $i
+done
