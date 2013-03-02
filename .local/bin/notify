@@ -2,6 +2,7 @@
 
 notify() {
   DISPLAY=${DISPLAY:-:0.0} notify-send --urgency=${2:-normal} "$1"
+  [[ -n $BELL ]] && echo -en '\a' >> /dev/$BELL
 }
 
 if [[ -z $1 ]]; then

@@ -2,11 +2,12 @@
 # Requires .local/bin/notify
 
 PATH="$PATH:$HOME/.local/bin:/usr/sbin"
-pid_file=/tmp/ircnotify
 
-getPID() {
-  ps aux | \grep "$1" | awk 'BEGIN { ORS=" " } { print $2 }'
-}
+getPID() { ps aux | \grep "$1" | awk 'BEGIN { ORS=" " } { print $2 }'; }
+getPTS() { ps aux | \grep "$1" | awk 'BEGIN { ORS=" " } { print $7 }'; }
+
+pid_file=/tmp/ircnotify
+export IRC_PTS=$(getPTS '\(ssh\|mosh-client\) tlk')
 
 shutdownProcess() {
   kill $(getPID '[s]sh -f tlk tail') > /dev/null 2>&1
@@ -23,4 +24,4 @@ trap shutdownProcess INT TERM EXIT
 
 # Start listening in a blocking state
 ssh -f tlk "tail -n0 -q -f ~/irclogs/*/*.log | grep --line-buffered '>.*oxy' | sed -u -e 's/^.*\\s*.*>//g'" \
-  | xargs -I % notify %
+  | BELL=$IRC_PTS xargs -I % notify %

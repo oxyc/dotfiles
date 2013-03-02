@@ -20,6 +20,7 @@ Urxvt.loginShell:         true
 
 URxvt*geometry:           150x40
 URxvt*visualBell:         false
+URxvt*urgentOnBell:       true
 URxvt*scrollBar:          false
 URxvt*internalBorder:     0
 

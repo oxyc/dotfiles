@@ -2,6 +2,7 @@ import XMonad
 
 import Data.List -- Clickable workspaces
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.UrgencyHook
 import XMonad.Actions.SpawnOn -- Spawn on specified workspace
 import XMonad.Util.EZConfig(additionalKeys) -- Key bindings
 import XMonad.Util.Run(spawnPipe) -- Spawn
@@ -156,7 +157,7 @@ myKeyBindings = [
 main = do
   dzenLeftBar <- spawnPipe leftBar
   dzenRightBar <- spawnPipe rightBar
-  xmonad $ defaultConfig {
+  xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig {
       terminal           = "urxvt"
     , modMask            = myModKey
     , borderWidth        = 1
