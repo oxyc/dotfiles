@@ -128,13 +128,16 @@ myLogHook h = dynamicLogWithPP $ defaultPP {
 myKeyBindings = [
     -- Toggle xmobar.
       ((myModKey, xK_b),               sendMessage ToggleStruts)
-    -- Use history aware dmenu wrapper.
-    , ((myModKey, xK_p),               spawn yeganesh)
     -- Take a screenshot
     , ((0, xK_Print),                  spawn "scrot -e 'mv $f ~/pictures/screenshots/'")
     -- Take screenshot and upload to imgur
     , ((myModKey, xK_Print),           spawn "google-chrome $(scrot -e 'imgurbash $f 2>/dev/null')")
+    -- Use history aware dmenu wrapper.
+    , ((myModKey, xK_p),               spawn yeganesh)
+    -- launch file browser
+    , ((myModKey, xK_o),               spawn "thunar")
     -- Close focused window.
+    , ((myModKey, xK_c), kill)
     , ((myModKey .|. shiftMask, xK_c), kill)
     -- Cycle through available layouts.
     , ((myModKey, xK_space),           sendMessage NextLayout)
@@ -152,6 +155,9 @@ myKeyBindings = [
     -- Shrink/Expand master area.
     , ((myModKey, xK_h),               sendMessage Shrink)
     , ((myModKey, xK_l),               sendMessage Expand)
+    -- Shrink/Expand slave area.
+    , ((myModKey, xK_u),               sendMessage ShrinkSlave)
+    , ((myModKey, xK_i),               sendMessage ExpandSlave)
     -- Push window back into tilling.
     , ((myModKey, xK_t),               withFocused $ windows . W.sink)
     -- Change the number of windows in the master area.
@@ -159,6 +165,7 @@ myKeyBindings = [
     , ((myModKey, xK_period),          sendMessage (IncMasterN (-1)))
     -- Restart xmonad.
     , ((mod1Mask, xK_q),               spawn "killall dzen2 conky; cd ~/.xmonad; ghc -threaded xmonad.hs; mv xmonad xmonad-x86_64-linux; xmonad --restart" )
+    , ((mod1Mask .|. shiftMask, xK_q), spawn "killall dzen2 conky; cd ~/.xmonad; ghc -threaded xmonad.hs; mv xmonad xmonad-x86_64-linux; xmonad --restart" )
   ]
 
 -- Startup
