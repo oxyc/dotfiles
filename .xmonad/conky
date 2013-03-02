@@ -3,19 +3,43 @@ background yes
 out_to_console yes
 out_to_x no
 update_interval 10
+mail_spool $HOME/.mail/gmail
+
+# Gray
+template0  ${execi 10000 echo "^fg(\#aaaaaa)"}
+# Active
+template2  ${execi 10000 echo "^fg(\#ebac40)"}
+
+# Icons path
+template4  ${execi 10000 echo "^i(/home/oxy/.xmonad/icons/\1.xbm)"}
+
+# Mailbox unread count
+template7 ${new_mails $HOME/.mail/gmail/\1}
+
+# Colorize mail icon if boxes have new email
+template8 ${if_match ${template7 \1} > 0}${template2}${else}${if_match ${template7 \2} > 0}${template2}${else}${if_match ${template7 \3} > 0}${template2}${else}${template1}${endif}${endif}${endif}
+
+# Colorized battery icon
+template9 ${if_match ${battery_percent BAT0} > 95}${template4 bat_full_02}${else}${if_match ${battery_percent BAT0} > 50}${template4 bat_low_02}${else}${template2}${template4 bat_empty_02}${endif}${endif}
 
 TEXT
-^i(/home/oxy/.xmonad/icons/mail.xbm)  \
-${new_mails 60 /home/oxy/.mail/gmail/INBOX} \
-${new_mails 60 /home/oxy/.mail/gmail/oxyfi} \
-${new_mails 60 /home/oxy/.mail/gmail/Arcada} \
-${if_match "${laptop_mode}" != "0"}\
- ^i(/home/oxy/.xmonad/icons/bat_low_01.xbm)\
- ^fg(\#666666)${battery_time BAT0}\
- ^fg(\#aaaaaa)${battery_percent BAT0}% \
+${template8 INBOX oxyfi arcada}${template4 mail}\
+ ^fg(\#aaaaaa)\
+ ${template7 INBOX}\
+ ${template7 oxyfi}\
+ ${template7 arcada}\
+  \
+${if_match "${laptop_mode}" != "0"}\
+^fg(\#666666)\
+ ${battery_time BAT0}\
+ ^fg(\#222222)^bg()^bg(\#222222)\
+ ^fg(\#aaaaaa)${template9}^fg(\#aaaaaa) ${battery_percent BAT0}% \
 ${else}\
- ^fg(\#666666)^i(/home/oxy/.xmonad/icons/ac_01.xbm)\
+^fg(\#222222)^bg()^bg(\#222222)\
+ ^fg(\#666666)${template4 ac_01}\
  ^fg(\#666666)${battery_percent BAT0}% \
 ${endif}\
-^fg(\#aaaaaa) ${time %a %b %d} \
-^fg(\#ebac54)${time %H:%M}  \
+^fg(\#333333)^bg(\#222222)^bg(\#333333)\
+^fg(\#aaaaaa) ${time %a %b %d} \
+^fg(\#666666)^bg(\#333333)^bg(\#666666)\
+^fg(\#333333) ${time %H:%M} \
