@@ -29,10 +29,18 @@ myModKey          = mod1Mask
 background        = "#111111"
 foregroundActive  = "#ebac54"
 foreground        = "#aaaaaa"
+font            = "InconsolataForPowerline-10" -- requires dmenu with xft patch
 
 -- dzen font is set in .Xresources
 leftBar           = "dzen2 -x 0 -y 0 -w 1200 -ta l -bg " ++ background ++ " -fg "++ foreground
 rightBar          = "conky -qc /home/oxy/.xmonad/conky | dzen2 -x 1200 -y 0 -ta r -w 400"
+dmenuFlags        = "-nb '" ++ background
+                    ++ "' -nf '" ++ foreground
+                    ++ "' -sb '" ++ foregroundActive
+                    ++ "' -sf '" ++ background
+                    ++ "' -fn '" ++ font
+                    ++ "'"
+yeganesh          = "exe=\"$(dmenu_path_c | yeganesh -- " ++ dmenuFlags ++ ")\" && eval \"exec $exe\""
 
 includeIcon x     = "^i(/home/oxy/.xmonad/icons/" ++ x ++ ".xbm)"
 
@@ -121,7 +129,7 @@ myKeyBindings = [
     -- Toggle xmobar.
       ((myModKey, xK_b),               sendMessage ToggleStruts)
     -- Use history aware dmenu wrapper.
-    , ((myModKey, xK_p),               spawn "exe=`dmenu_path_c | yeganesh` && eval \"exec $exe\"")
+    , ((myModKey, xK_p),               spawn yeganesh)
     -- Take a screenshot
     , ((0, xK_Print),                  spawn "scrot -e 'mv $f ~/pictures/screenshots/'")
     -- Take screenshot and upload to imgur
