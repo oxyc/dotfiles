@@ -23,7 +23,7 @@
     # right side of the screen.  Y is measured from the top and down respectevly.
     # The width can be negative. In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "400x10-0+20"
+    geometry = "400x10-1+17"
 
     transparency = 0
     idle_threshold = 120
@@ -56,12 +56,12 @@
 [urgency_low]
     background = "#222222"
     foreground = "#888888"
-    timeout = 20
+    timeout = 5
 
 [urgency_normal]
     background = "#555555"
     foreground = "#ffffff"
-    timeout = 0
+    timeout = 10
 
 [urgency_critical]
     background = "#900000"
