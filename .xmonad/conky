@@ -41,6 +41,6 @@ ${else}\
  ^fg(\#666666)${battery_percent BAT0}% \
 ${endif}\
 ^fg(\#333333)^bg(\#222222)^bg(\#333333)\
-^fg(\#aaaaaa) ${time %a %b %d} \
-^fg(\#666666)^bg(\#333333)^bg(\#666666)\
+^fg(\#aaaaaa)^ca(1, flock -n /tmp/cal.lock /home/oxy/.xmonad/scripts/cal.sh) ${time %a %b %d}^ca()\
+ ^fg(\#666666)^bg(\#333333)^bg(\#666666)\
 ^fg(\#333333) ${time %H:%M} \

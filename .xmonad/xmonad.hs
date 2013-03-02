@@ -29,7 +29,7 @@ myModKey          = mod1Mask
 background        = "#111111"
 foregroundActive  = "#ebac54"
 foreground        = "#aaaaaa"
-font            = "InconsolataForPowerline-10" -- requires dmenu with xft patch
+font              = "InconsolataForPowerline-10" -- requires dmenu with xft patch
 
 -- dzen font is set in .Xresources
 leftBar           = "dzen2 -x 0 -y 0 -w 1200 -ta l -bg " ++ background ++ " -fg "++ foreground
