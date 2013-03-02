@@ -34,7 +34,7 @@ foreground        = "#aaaaaa"
 leftBar           = "dzen2 -x 0 -y 0 -w 1200 -ta l -bg " ++ background ++ " -fg "++ foreground
 rightBar          = "conky -qc /home/oxy/.xmonad/conky | dzen2 -x 1200 -y 0 -ta r -w 400"
 
-includeIcon x = "^i(/home/oxy/.xmonad/icons/" ++ x ++ ".xbm)"
+includeIcon x     = "^i(/home/oxy/.xmonad/icons/" ++ x ++ ".xbm)"
 
 myWorkspaces = clickable $
   [ includeIcon ("arch") ++ " web"
