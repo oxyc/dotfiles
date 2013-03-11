@@ -1,0 +1,9 @@
+#!/bin/bash
+tmux_append=$1
+session=$(basename ${BASH_SOURCE[0]})
+
+# 1. Weechat
+tmux new-session -d -s $session -n 'irc' $tmux_append 'weechat-curses'
+
+# Disable statusbar
+tmux set -g status off
