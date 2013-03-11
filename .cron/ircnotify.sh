@@ -23,5 +23,11 @@ echo $$ >| $pid_file
 trap shutdownProcess INT TERM EXIT
 
 # Start listening in a blocking state
-ssh -f tlk "tail -n0 -q -f ~/irclogs/*/*.log | grep --line-buffered '>.*oxy' | sed -u -e 's/^.*\\s*.*>//g'" \
-  | BELL=$IRC_PTS xargs -I % notify %
+ssh -f irc "tail -n0 -q -f ~/.weechat/logs/irc.*.weechatlog | awk -Winteractive '\
+  /[0-9]+/ {\
+    if (\$3 !~ \"oxy|--\") {\
+      s=\"\";\
+      for (i=3; i<=NF;i++) s = s \$i \" \";\
+      if (s ~ \"oxy\") print s;\
+    }\
+  }'" | BELL=$IRC_PTS xargs -I % notify %
