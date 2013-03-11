@@ -10,8 +10,8 @@ MUTT_FILES ?= .mutt/colors.muttrc .mutt/muttrc .mutt/sig .mutt/mailcap .msmtprc 
 							.local/bin/mutt-notmuch .notmuch-config
 TMUX_FILES ?= .tmux.conf .bash_completion.d/tmux $(wildcard .tmux/sessions/*)
 TODO_FILES ?= .todo.cfg
-IRSSI_FILES ?= .irssi/dark.theme
 GTK_FILES ?= .gtkrc-2.0
+WEECHAT_FILES ?= $(wildcard .weechat/*)
 
 TARGETS_CLEAN ?= XORG XMONAD DRUPAL MUTT TMUX TODO IRSSI SHELL
 
@@ -34,7 +34,7 @@ fetch-github:
 	@git pull origin master
 	@git submodule foreach git pull origin master
 
-install: clean xorg drupal mutt tmux todo irssi shell gtk
+install: clean xorg drupal mutt tmux todo weechat shell gtk
 	@if ! perl -MTerm::ExtendedColor -e 1 2>/dev/null; then \
 		cpan Term::ExtendedColor; \
 	fi
@@ -61,7 +61,7 @@ tmux: $(addprefix $(DEST)/,$(TMUX_FILES))
 todo: $(addprefix $(DEST)/,$(TODO_FILES))
 	@mkdir -p $(addprefix $(DEST)/$(TODO_DIRS))
 
-irssi: $(addprefix $(DEST)/,$(IRSSI_FILES))
+weechat: $(addprefix $(DEST)/,$(WEECHAT_FILES))
 
 shell: $(addprefix $(DEST)/,$(SHELL_FILES))
 	@mkdir -p $(addprefix $(DEST)/,$(SHELL_DIRS))
@@ -102,4 +102,4 @@ clean-target: $(addprefix $(BACKUP)/,$($(CLEAN)_FILES))
 clean:
 	@$(foreach target,$(TARGETS_CLEAN), make -s CLEAN=$(target) clean-target;)
 
-.PHONY: xorg xmonad drupal mutt tmux todo irssi shell clean-target clean install gtk
+.PHONY: xorg xmonad drupal mutt tmux todo weechat shell clean-target clean install gtk
