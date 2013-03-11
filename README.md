@@ -1,5 +1,6 @@
 ## Installation
 
+*__This README is outdated__, and the repo has changed drastically, read the Makefile if you know what you're doing*
 
 ```bash
 make install
