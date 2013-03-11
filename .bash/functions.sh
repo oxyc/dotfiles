@@ -166,3 +166,74 @@ yslow() {
   [[ $# -eq 1 ]] && local flags='--info grade --format tap'
   phantomjs ~/.local/lib/yslow.js $flags "$@"
 }
+
+# Show all the names (CNs and SANs) listed in the SSL certificate
+# for a given domain
+getcertnames() {
+  if [ -z "${1}" ]; then
+    echo "ERROR: No domain specified."
+    return 1
+  fi
+
+  domain="${1}"
+  echo "Testing ${domain}…"
+  echo # newline
+
+  tmp=$(echo -e "GET / HTTP/1.0\nEOT" \
+    | openssl s_client -connect "${domain}:443" 2>&1);
+
+  if [[ "${tmp}" = *"-----BEGIN CERTIFICATE-----"* ]]; then
+    certText=$(echo "${tmp}" \
+      | openssl x509 -text -certopt "no_header, no_serial, no_version, \
+      no_signame, no_validity, no_issuer, no_pubkey, no_sigdump, no_aux");
+      echo "Common Name:"
+      echo # newline
+      echo "${certText}" | grep "Subject:" | sed -e "s/^.*CN=//";
+      echo # newline
+      echo "Subject Alternative Name(s):"
+      echo # newline
+      echo "${certText}" | sed -ne "/Subject Alternative Name:/{n;p}" \
+        | awk -F ':' 'BEGIN { RS="," } { print $2 }'
+      return 0
+  else
+    echo "ERROR: Certificate not found.";
+    return 1
+  fi
+}
+
+# Simple calculator
+# = 1 + 3
+= () {
+  local result=""
+  result="$(printf "scale=10;$*\n" | bc -l | tr -d '\\\n')"
+  #                       └─ default (when `--mathlib` is used) is 20
+  #
+  if [[ "$result" == *.* ]]; then
+    # improve the output for decimal numbers
+    printf "$result" |
+    sed -e 's/^\./0./'        `# add "0" for cases like ".5"` \
+        -e 's/^-\./-0./'      `# add "0" for cases like "-.5"`\
+        -e 's/0*$//;s/\.$//'   # remove trailing zeros
+  else
+    printf "$result"
+  fi
+  printf "\n"
+}
+
+# Escape UTF-8 characters into their 3-byte format
+escape() {
+  printf "\\\x%s" $(printf "$@" | xxd -p -c1 -u)
+  echo
+}
+
+# Decode \x{ABCD}-style Unicode escape sequences
+unidecode() {
+  perl -e "binmode(STDOUT, ':utf8'); print \"$@\""
+  echo
+}
+
+# Get a character’s Unicode code point
+codepoint() {
+  perl -e "use utf8; print sprintf('U+%04X', ord(\"$@\"))"
+  echo
+}
