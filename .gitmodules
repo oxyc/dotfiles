@@ -10,3 +10,6 @@
 [submodule ".local/lib/urxvt-perls"]
 	path = .local/lib/urxvt-perls
 	url = git://github.com/muennich/urxvt-perls.git
+[submodule ".local/lib/tmuxifier"]
+	path = .local/lib/tmuxifier
+	url = https://github.com/jimeh/tmuxifier.git
