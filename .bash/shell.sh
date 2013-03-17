@@ -64,6 +64,10 @@ export HISTIGNORE="ls:l:ll:lsd:cd:cd -:pwd:"
 # Some distros won't check home path for inputrc.
 export INPUTRC="$HOME/.inputrc"
 
+# Fix ls++ on remote shells without a DISPLAY global.
+# https://github.com/trapd00r/ls--/issues/18#issuecomment-15020402
+[[ -z $DISPLAY ]] && export DISPLAY=1
+
 # Some default packages
 export EDITOR='vim'
 export VISUAL='vim'
