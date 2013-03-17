@@ -64,6 +64,10 @@ export HISTIGNORE="ls:l:ll:lsd:cd:cd -:pwd:"
 # Some distros won't check home path for inputrc.
 export INPUTRC="$HOME/.inputrc"
 
+# Improve yaourt color combinations.
+# http://archlinux.fr/man/package-query.8.html#_environment_variables_a_id_ev_a
+[ -x /usr/bin/yaourt ] && export YAOURT_COLORS="other=0;31:nb=0;33:pkg=0;97:installed=0;31;7:lver=0;33:ver=0;96:od=0;93:votes=0;33;3:dsc=0;90"
+
 # Fix ls++ on remote shells without a DISPLAY global.
 # https://github.com/trapd00r/ls--/issues/18#issuecomment-15020402
 [[ -z $DISPLAY ]] && export DISPLAY=1
