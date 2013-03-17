@@ -24,9 +24,7 @@ URxvt*urgentOnBell:       true
 URxvt*scrollBar:          false
 URxvt*internalBorder:     0
 
-! Transparent background
 URxvt.depth:              32
-! URxvt*background:         rgba:0000/0000/0000/cccc
 
 ! Fonts
 URxvt*font:               xft:InconsolataForPowerline:medium:pixelsize=14
@@ -37,7 +35,7 @@ URxvt.xftAntialias:       true
 ! urxvt will force a screen refresh on each new line it received
 URxvt*jumpScroll:         false
 
-! Remove ! if lines are disappear
+! Remove ! if lines disappear
 ! URxvt*skipScroll:         false
 
 URxvt*saveLines:          10000
@@ -59,10 +57,11 @@ URxvt.iso14755:           false
 
 ! Support alt-keys in irssi
 ! http://irssi.org/beginner/
-URxvt*eightBitInput:       false
-URxvt*metaSendsEscape:     true
+URxvt*eightBitInput:      false
+URxvt*metaSendsEscape:    true
+
 ! Use super instead of alt
-URxvt*modifier:            super
+URxvt*modifier:           super
 
 ! Colorscheme ---
 

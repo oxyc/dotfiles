@@ -54,7 +54,9 @@ export HISTCONTROL="ignoredups:ignorespace:erasedups"
 
 # After each command, save and reload history
 # http://unix.stackexchange.com/questions/1288/preserve-bash-history-in-multiple-terminal-windows
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+# @TODO the following code places ; in front which breaks the command, track it down!
+# - printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"
+export PROMPT_COMMAND="_fasd_prompt_func; history -a; history -c; history -r;"
 
 # Make some commands not show up in history
 export HISTIGNORE="ls:l:ll:lsd:cd:cd -:pwd:"
