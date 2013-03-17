@@ -1,6 +1,6 @@
 SHELL_FILES ?= .ackrc .bash_profile .bashrc .dircolors .gitconfig .inputrc .jshintrc .lftprc .ls++.conf .linopenrc .apvlvrc \
 	.bash/aliases.sh .bash/colors.sh .bash/exports.sh .bash/functions.sh .bash/prompt.sh .bash/shell.sh \
-	.bash_completion.d/misc $(find .local/bin/* ! -type d ! -name mutt-notmuch)
+	.bash_completion.d/misc $(wildcard .local/bin/*)
 
 CRON_FILES ?= $(wildcard .cron/*)
 XORG_FILES ?= .Xresources .xbindkeysrc .xinitrc $(wildcard .urxvt/*)
@@ -65,6 +65,8 @@ weechat: $(addprefix $(DEST)/,$(WEECHAT_FILES))
 
 shell: $(addprefix $(DEST)/,$(SHELL_FILES))
 	@mkdir -p $(addprefix $(DEST)/,$(SHELL_DIRS))
+	@git submodule init
+	@git submodule update
 
 yslow:
 	@git clone git://github.com/marcelduran/yslow.git /tmp/yslow \
