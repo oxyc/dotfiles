@@ -237,3 +237,12 @@ codepoint() {
   perl -e "use utf8; print sprintf('U+%04X', ord(\"$@\"))"
   echo
 }
+
+# Browserstack tunnel
+bst() {
+  [[ $# -eq 0 ]] && local args="$PWD" || local args="$@"
+  [[ -d "$args" ]] && local flags="-f"
+
+  $BROWSER "http://www.browserstack.com"
+  java -jar ~/.local/lib/BrowserStackTunnel.jar $flags "$BROWSERSTACK_KEY" $args
+}

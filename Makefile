@@ -78,6 +78,9 @@ yslow:
 
 node: yslow
 
+browserstack:
+	@wget -O $(LIB_DIR)/BrowserStackTunnel.jar http://www.browserstack.com/BrowserStackTunnel.jar
+
 # Helpers ---------------------------------------------------------------------
 
 # Symlink a dotfile from the repo to $HOME
