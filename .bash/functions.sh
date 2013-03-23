@@ -241,7 +241,10 @@ codepoint() {
 # Browserstack tunnel
 bst() {
   [[ $# -eq 0 ]] && local args="$PWD" || local args="$@"
-  [[ -d "$args" ]] && local flags="-f"
+  if [[ -d "$args" ]]; then
+    args="$(readlink -f $args)"
+    local flags="-f"
+  fi
 
   $BROWSER "http://www.browserstack.com"
   java -jar ~/.local/lib/BrowserStackTunnel.jar $flags "$BROWSERSTACK_KEY" $args
