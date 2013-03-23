@@ -27,7 +27,7 @@ shopt -s dotglob
 shopt -s globstar
 
 # Case-insensitive globbing.
-shopt -s nocaseglob;
+shopt -s nocaseglob
 
 # Extended globbing patterns.
 # http://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html#Pattern-Matching
@@ -35,15 +35,12 @@ shopt -s extglob
 
 # Do not overwrite files when redirecting using ">".
 # Note that you can still override this with ">|".
-set -o noclobber;
+set -o noclobber
 
 # Vi-like behavior for bash
 set -o vi
 
-# Make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-export LANG='en_US.UTF-8'
+export LANG="en_US.UTF-8"
 
 # For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 export HISTSIZE=4096
@@ -73,15 +70,18 @@ export INPUTRC="$HOME/.inputrc"
 [[ -z $DISPLAY ]] && export DISPLAY=1
 
 # Some default packages
-export EDITOR='vim'
-export VISUAL='vim'
-export PAGER='less'
+export EDITOR="vim"
+export VISUAL="vim"
+export PAGER="less"
 [[ -f $(which google-chrome) ]] && export BROWSER=$(which google-chrome)
 
 # PATH additions
 for dir in bin .local/bin node_modules/.bin drush .rvm/bin; do
-  [[ -d "$HOME/$dir" ]] && export PATH="$PATH:$HOME/$dir"
+  [[ -d "$HOME/$dir" ]] && PATH="$PATH:$HOME/$dir"
 done
+
+# Remove path duplicates
+PATH=$(echo "$PATH" | awk -v RS=':' -v ORS=":" '!a[$1]++')
 
 # nvm
 [[ -s ~/.nvm/nvm.sh ]] && source ~/.nvm/nvm.sh
