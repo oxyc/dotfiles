@@ -29,6 +29,10 @@ have mutt && alias mutt="cd ~/downloads/mutt && mutt && cd -"
 # Place scrot files in specified directory
 have scrot && alias scrot="scrot ~/pictures/screenshots/%Y-%m-%d_%H%M%S.png"
 
+# Enable mouse over mosh
+# https://github.com/keithw/mosh/issues/101#issuecomment-12317162
+have mosh && alias mosh="perl -E ' print \"\e[?1005h\e[?1002h\" '; mosh"
+
 # Git shortcuts
 alias ga="git add"
 alias gp="git push"
