@@ -64,10 +64,10 @@ myWorkspaces = clickable $
 myManageHook =
   manageDocks -- Manage dzen
   <+> composeAll -- Set custom manage hooks
-    [ resource  =? "desktop_window"       --> doIgnore
+    [ resource  =? "desktop_window"       --> (doIgnore <+> doF W.swapUp)
     , resource  =? "www.grooveshark.com"  --> doShift (myWorkspaces !! 7)
     , className =? "VirtualBox"           --> doShift (myWorkspaces !! 6)
-    , className =? "Thunar"               --> doFloat
+    , className =? "Thunar"               --> (doFloat <+> doF W.swapUp)
     , className =? "Transmission-gtk"     --> doShift (myWorkspaces !! 8)
     , className =? "Google-chrome"        --> doShift (myWorkspaces !! 0)
     , title     =? "mutt"                 --> doShift (myWorkspaces !! 5)
