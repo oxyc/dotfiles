@@ -96,7 +96,7 @@ stop() {
   # while read i; do ethtool -s "$i" wol g; done <<< "$eth_interfaces"
 
   # Energy Star feature
-  # xset -dpms
+  xset -dpms
 
   # Dim screen
   for i in /sys/class/backlight/acpi_video*/brightness; do echo $max_brightness > $i; done
