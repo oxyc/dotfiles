@@ -22,12 +22,15 @@ echo $$ >| $pid_file
 
 trap shutdownProcess INT TERM EXIT
 
-# Start listening in a blocking state
+# Start listening in a blocking state.
+# (1) Only check lines beginning with a date
+# (2) Not written by myself and not a status message
+# (5) Mentions my name as a separted word (i.e. not proxy)
 ssh -f irc "tail -n0 -q -f ~/.weechat/logs/irc.*.weechatlog | awk -Winteractive '\
   /[0-9]+/ {\
     if (\$3 !~ \"oxy|--\") {\
       s=\"\";\
       for (i=3; i<=NF;i++) s = s \$i \" \";\
-      if (s ~ \"oxy\") print s;\
+      if (s ~ \" oxy\") print s;\
     }\
   }'" | BELL=$IRC_PTS xargs -I % notify %
