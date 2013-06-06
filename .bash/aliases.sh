@@ -51,7 +51,7 @@ function gc() { git checkout "${@:-master}"; } # Checkout master by default
 alias gcb="gc -b"
 
 # Fasd shortcuts
-have && {
+have fasd && {
   alias o="fasd -f -e xdg-open"
   alias oo="fasd -fi -e xdg-open"
   alias z="fasd_cd -d"
@@ -67,9 +67,6 @@ alias sudo="sudo "
 if [ -x /usr/bin/dircolors ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
   alias ls="ls --color=auto"
-  alias grep="grep --color=auto"
-  alias fgrep="fgrep --color=auto"
-  alias egrep="egrep --color=auto"
 fi
 
 # IP addresses
