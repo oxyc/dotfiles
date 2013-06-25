@@ -1,4 +1,4 @@
-for file in ~/.bash/{colors,shell,functions,aliases,prompt,drush,exports,local}.sh; do
+for file in ~/.bash/{colors,functions,shell,aliases,prompt,drush,exports,local}.sh; do
   [ -r "$file" ] && source "$file"
 done
 unset file
