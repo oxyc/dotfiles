@@ -278,3 +278,8 @@ targz() {
   [ -f "${tmpFile}" ] && rm "${tmpFile}"
   echo "${tmpFile}.gz created successfully."
 }
+
+# https://github.com/mathiasbynens/dotfiles/pull/249
+tre() {
+  tree -aC -I '.git|node_modules|bower_components|.sass-cache' --dirsfirst "$@" | less -FRNX
+}

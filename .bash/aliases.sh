@@ -83,6 +83,8 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 # http://dotfiles.org/~ghost1227/.bashrc
 alias meminfo="echo -e '/proc/meminfo:\n';grep --color=auto '^[Mem|Swap]*[Free|Total]*:' /proc/meminfo && echo -e '\nfree -m:'; free -m"
 
+alias chromekill="ps aux | grep '[c]hrome --type=renderer' |  grep -v 'extension-process' | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
+
 # Make HTTP requests
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
   alias "$method"="lwp-request -m '$method'"

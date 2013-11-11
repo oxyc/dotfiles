@@ -23,4 +23,6 @@
 	email = public@oxy.fi
 [github]
 	user = oxyc
+
 [push]
+	default = simple
