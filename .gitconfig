@@ -18,11 +18,5 @@
     # Use colors in Git commands that are capable of colored output when outputting to the terminal
     ui = auto
 
-[user]
-	name = Oskar Schöldström
-	email = public@oxy.fi
-[github]
-	user = oxyc
-
 [push]
 	default = simple
