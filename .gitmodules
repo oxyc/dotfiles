@@ -1,15 +1,15 @@
 [submodule ".local/lib/ls--"]
 	path = .local/lib/ls--
-	url = git://github.com/trapd00r/ls--.git
+	url = https://github.com/trapd00r/ls--.git
 [submodule ".local/lib/todo.txt-cli"]
 	path = .local/lib/todo.txt-cli
-	url = git://github.com/ginatrapani/todo.txt-cli.git
+	url = https://github.com/ginatrapani/todo.txt-cli.git
 [submodule ".local/lib/fasd"]
 	path = .local/lib/fasd
-	url = git://github.com/clvv/fasd.git
+	url = https://github.com/clvv/fasd.git
 [submodule ".local/lib/urxvt-perls"]
 	path = .local/lib/urxvt-perls
-	url = git://github.com/muennich/urxvt-perls.git
+	url = https://github.com/muennich/urxvt-perls.git
 [submodule ".local/lib/tmuxifier"]
 	path = .local/lib/tmuxifier
 	url = https://github.com/jimeh/tmuxifier.git

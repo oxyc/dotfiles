@@ -5,7 +5,6 @@
       "google",
       "Drupal"
   ],
-
   "node" : true,
   "es5" : true,
   "browser" : true,

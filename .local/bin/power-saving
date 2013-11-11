@@ -107,6 +107,7 @@ detectMode() {
 }
 
 case $1 in
-  start|stop) "$1" ;;
+  start|on) start ;;
+  stop|off) stop ;;
   *) detectMode ;;
 esac

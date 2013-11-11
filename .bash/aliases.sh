@@ -18,8 +18,8 @@ alias vi="vim"
 alias open="xdg-open" # Install https://github.com/Cloudef/PKGBUILDS/tree/master/linopen
 
 # Shortcuts
-alias g="git"
 alias v="vim"
+have git && alias g="git"
 have todo.sh && alias t="todo.sh -d ~/.todo.cfg"
 have ls++ && alias l="ls++"
 
@@ -34,21 +34,23 @@ have scrot && alias scrot="scrot ~/pictures/screenshots/%Y-%m-%d_%H%M%S.png"
 have mosh && alias mosh="perl -E ' print \"\e[?1005h\e[?1002h\" '; mosh"
 
 # Git shortcuts
-alias ga="git add"
-alias gp="git push"
-alias gpa="gp --all"
-alias gu="git pull"
-alias gl="git log"
-alias gg="gl --decorate --oneline --graph --date-order --all"
-alias gs="git status"
-alias gd="git diff"
-alias gdc="gd --cached"
-alias gm="git commit -m"
-alias gma="git commit -am"
-alias gb="git branch"
-alias gba="git branch -a"
-function gc() { git checkout "${@:-master}"; } # Checkout master by default
-alias gcb="gc -b"
+have git && {
+  alias ga="git add"
+  alias gp="git push"
+  alias gpa="gp --all"
+  alias gu="git pull"
+  alias gl="git log"
+  alias gg="gl --decorate --oneline --graph --date-order --all"
+  alias gs="git status"
+  alias gd="git diff"
+  alias gdc="gd --cached"
+  alias gm="git commit -m"
+  alias gma="git commit -am"
+  alias gb="git branch"
+  alias gba="git branch -a"
+  function gc() { git checkout "${@:-master}"; } # Checkout master by default
+  alias gcb="gc -b"
+}
 
 # Fasd shortcuts
 have fasd && {

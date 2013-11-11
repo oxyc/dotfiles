@@ -1,7 +1,6 @@
 terminal=urxvt
 
 # Mime types are a mess for pdf
-
 interm:mutt
 
 text:$EDITOR->interm

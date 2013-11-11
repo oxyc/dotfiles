@@ -19,7 +19,7 @@ shutdownProcess() {
 }
 
 # Make sure we're not listening already
-[[ -f $pid_file ]] && [[ -s /proc/$(cat $pid_file)/exe ]] && { trap - INT TERM EXIT;  exit 0; }
+[[ -f $pid_file ]] && [[ -s /proc/$(cat $pid_file)/exe ]] && { trap - INT TERM EXIT; exit 0; }
 echo $$ >| $pid_file
 
 trap shutdownProcess INT TERM EXIT

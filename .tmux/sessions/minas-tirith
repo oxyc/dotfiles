@@ -4,11 +4,9 @@ session=$(basename ${BASH_SOURCE[0]})
 
 # 1. Vim & tail -f error.log
 tmux new-session -d -s $session -n 'vim' $tmux_append \
-  'bash -c "[[ -e ~/.vim_session ]] && vim -S ~/.vim_session"; bash' \; \
-  split-window -v -l 5 'sudo tail -f /var/log/apache2/error.log; bash' \; \
-  split-window -h 'cd /var/www; bash'
+  'bash -c "vim; bash' \; \
+  split-window -h -l 5 'sudo tail -f /var/log/apache2/error.log; bash' \; \
 
 tmux set status-right ''
 tmux select-window -t $session:2 $tmux_append
 tmux -2 attach-session -t $session $tmux_append
-
