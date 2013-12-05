@@ -8,9 +8,9 @@ alias .....="cd ../../../.."
 alias -- -="cd -"
 alias ll="ls -lah"
 alias lsd="ls -la | grep '^d'"
-alias clean="rm -f *~"
+alias clean="find . -regex '.*\(.AppleDouble\|.DS_Store\)$' -ls -exec rm -r {} \;"
 
-# Rewrites
+# Rewres
 alias df="df -h"
 alias du="du -hc"
 alias ping="ping -c 5"
@@ -18,7 +18,6 @@ alias vi="vim"
 alias open="xdg-open" # Install https://github.com/Cloudef/PKGBUILDS/tree/master/linopen
 
 # Shortcuts
-alias v="vim"
 have git && alias g="git"
 have todo.sh && alias t="todo.sh -d ~/.todo.cfg"
 have ls++ && alias l="ls++"

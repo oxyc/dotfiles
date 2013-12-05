@@ -50,19 +50,22 @@ mkcdir() {
   cd $1
 }
 
-# Attach tmux sessions
+# Tmux session wrapper
+# You can configure skeletons per hostname by adding them to ~/.tmux/sessions/$(hostname)
 play() {
   local session="${1:-$(hostname)}"
-  [[ -n $TMUX_SOCKET_DIR ]] && socket="-S ${TMUX_SOCKET_DIR}/${session}"
 
   if tmux has-session -t $session; then
-    tmux -2 attach-session -t $session $socket
+    echo "Attaching old session in 1..."; sleep 1
+    tmux -2 attach-session -t $session
   else
     if [[ -e ~/.tmux/sessions/$session ]]; then
-      echo "No session to attach, trying to create one"; wait 1
-      . ~/.tmux/sessions/$session $socket
+      echo "Session skeleton exists, running it in 1..."; sleep 1
+      . ~/.tmux/sessions/$session
     else
-      echo "No session exist for $session, looked in ~/.tmux/sessions/$session"
+      echo "Creating new session in 1..."; sleep 1
+      tmux new-session -d -s $session -n $session "bash"
+      tmux -2 attach-session -t $session
     fi
   fi
 }
@@ -81,29 +84,13 @@ duh() {
   done
 }
 
-# Edit the files found with the previous "ack" command using Vim
-# https://github.com/janmoesen/tilde/blob/master/.bash/commands
-vack() {
-  local cmd=''
-  if [ $# -eq 0 ]; then
-    cmd="$(fc -nl -1)"
-    cmd="${cmd:2}"
-  else
-    cmd='ack'
-    for x; do
-      cmd="$cmd $(printf '%q' "$x")"
-    done
-    echo "$cmd"
-  fi
-  if [ "${cmd:0:4}" != 'ack ' ]; then
-    $cmd
-    return $?
-  fi
+# Edit the files found with the previous "ag" command using Vim
+vag() {
   declare -a files
   while read -r file; do
     echo "$file"
     files+=("$file")
-  done < <(bash -c "${cmd/ack/ack -l}")
+  done < <(bash -c "ag -l $@")
   "${EDITOR:-vim}" "${files[@]}"
 }
 
