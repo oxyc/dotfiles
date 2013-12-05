@@ -26,7 +26,7 @@ export INPUTRC="$HOME/.inputrc"
 
 # Improve yaourt color combinations.
 # http://archlinux.fr/man/package-query.8.html#_environment_variables_a_id_ev_a
-have yaourt && export YAOURT_COLORS="\
+command -v yaourt >/dev/null && export YAOURT_COLORS="\
   other=0;$FG_red:\
   nb=0;$FG_yellow:\
   pkg=0;$FG_white:\
@@ -45,7 +45,7 @@ have yaourt && export YAOURT_COLORS="\
 export EDITOR="vim"
 export VISUAL="vim"
 export PAGER="less"
-have google-chrome && export BROWSER=$(which google-chrome)
+command -v google-chrome >/dev/null && export BROWSER=$(which google-chrome)
 
 # PATH additions
 for dir in bin .local/bin node_modules/.bin drush .rvm/bin; do

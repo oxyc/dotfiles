@@ -55,9 +55,9 @@ if ! shopt -oq posix; then
   done
 fi
 
-have fasd && eval "$(fasd --init auto)"
+command -v fasd >/dev/null && eval "$(fasd --init auto)"
 
-have grunt && eval "$(grunt --completion=bash)"
+command -v grunt >/dev/null && eval "$(grunt --completion=bash)"
 
 # When connecting to SSH, start or reattach screen session
 # http://dotfiles.org/~thayer/.bashrc

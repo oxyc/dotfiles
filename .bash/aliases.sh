@@ -18,22 +18,22 @@ alias vi="vim"
 alias open="xdg-open" # Install https://github.com/Cloudef/PKGBUILDS/tree/master/linopen
 
 # Shortcuts
-have git && alias g="git"
-have todo.sh && alias t="todo.sh -d ~/.todo.cfg"
-have ls++ && alias l="ls++"
+command -v git >/dev/null && alias g="git"
+command -v todo.sh >/dev/null && alias t="todo.sh -d ~/.todo.cfg"
+command -v ls>/dev/null ++ && alias l="ls++"
 
 # Download mutt attachments into downloads folder
-have mutt && alias mutt="cd ~/downloads/mutt && mutt && cd -"
+command -v mutt >/dev/null && alias mutt="cd ~/downloads/mutt && mutt && cd -"
 
 # Place scrot files in specified directory
-have scrot && alias scrot="scrot ~/pictures/screenshots/%Y-%m-%d_%H%M%S.png"
+command -v scrot >/dev/null && alias scrot="scrot ~/pictures/screenshots/%Y-%m-%d_%H%M%S.png"
 
 # Enable mouse over mosh
 # https://github.com/keithw/mosh/issues/101#issuecomment-12317162
-have mosh && alias mosh="perl -E ' print \"\e[?1005h\e[?1002h\" '; mosh"
+command -v mosh >/dev/null && alias mosh="perl -E ' print \"\e[?1005h\e[?1002h\" '; mosh"
 
 # Git shortcuts
-have git && {
+command -v git >/dev/null && {
   alias ga="git add"
   alias gp="git push"
   alias gpa="gp --all"
@@ -52,7 +52,7 @@ have git && {
 }
 
 # Fasd shortcuts
-have fasd && {
+command -v fasd >/dev/null && {
   alias o="fasd -f -e xdg-open"
   alias oo="fasd -fi -e xdg-open"
   alias z="fasd_cd -d"
