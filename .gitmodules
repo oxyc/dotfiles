@@ -13,3 +13,6 @@
 [submodule ".local/lib/tmuxifier"]
 	path = .local/lib/tmuxifier
 	url = https://github.com/jimeh/tmuxifier.git
+[submodule ".local/lib/wifi.sh"]
+	path = .local/lib/wifi.sh
+	url = git@github.com:dominictarr/wifi.sh.git
