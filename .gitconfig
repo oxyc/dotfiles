@@ -20,3 +20,8 @@
 
 [push]
 	default = simple
+[user]
+	name = Oskar Schöldström
+	email = public@oxy.fi
+[github]
+	user = oxyc
