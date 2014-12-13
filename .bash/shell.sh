@@ -43,11 +43,9 @@ set -o noclobber
 # Vi-like behavior for bash
 set -o vi
 
-# nvm
 [[ -s ~/.nvm/nvm.sh ]] && source ~/.nvm/nvm.sh
-
-# rvm
 [[ -s ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm
+[[ -s ~/.travis/travis.sh ]] && source ~/.travis/travis.sh
 
 if ! shopt -oq posix; then
   for file in ~/.bash_completion.d/* /etc/bash_completion; do

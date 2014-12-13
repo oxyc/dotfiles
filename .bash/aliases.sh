@@ -10,7 +10,7 @@ alias ll="ls -lah"
 alias lsd="ls -la | grep '^d'"
 alias clean="find . -regex '.*\(.AppleDouble\|.DS_Store\)$' -ls -exec rm -r {} \;"
 
-# Rewres
+# Rewrites
 alias df="df -h"
 alias du="du -hc"
 alias ping="ping -c 5"
@@ -20,7 +20,8 @@ alias open="xdg-open" # Install https://github.com/Cloudef/PKGBUILDS/tree/master
 # Shortcuts
 command -v git >/dev/null && alias g="git"
 command -v todo.sh >/dev/null && alias t="todo.sh -d ~/.todo.cfg"
-command -v ls>/dev/null ++ && alias l="ls++"
+command -v ls++ >/dev/null && alias l="ls++"
+command -v toggl-desktop >/dev/null && alias toggl="toggl-desktop"
 
 # Download mutt attachments into downloads folder
 command -v mutt >/dev/null && alias mutt="cd ~/downloads/mutt && mutt && cd -"
