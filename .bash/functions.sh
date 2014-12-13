@@ -270,3 +270,9 @@ targz() {
 tre() {
   tree -aC -I '.git|node_modules|bower_components|.sass-cache' --dirsfirst "$@" | less -FRNX
 }
+
+gtunnel() {
+  { sleep 3; $BROWSER "https://localhost:4545"; } &
+  ssh -L4545:localhost:80 local.$1 -N
+}
+complete -o "default" -o "nospace" -W "$(grep "^\s*HostName" ~/.ssh/config | grep -v "[?*]" | tr -s ' ' | cut -d ' ' -f3 | grep -v "^[[:digit:]]")" gtunnel

@@ -45,7 +45,13 @@ command -v yaourt >/dev/null && export YAOURT_COLORS="\
 export EDITOR="vim"
 export VISUAL="vim"
 export PAGER="less"
-command -v google-chrome >/dev/null && export BROWSER=$(which google-chrome)
+
+for browser in "google-chrome" "google-chrome-stable" "google-chrome-beta"; do
+  if command -v $browser >/dev/null; then
+    export BROWSER="$(which $browser)";
+    break
+  fi
+done
 
 # PATH additions
 for dir in bin .local/bin node_modules/.bin drush .rvm/bin; do

@@ -132,7 +132,7 @@ myKeyBindings = [
     -- Take a screenshot
     , ((0, xK_Print),                  spawn "scrot -e 'mv $f ~/pictures/screenshots/'")
     -- Take screenshot and upload to imgur
-    , ((myModKey, xK_Print),           spawn "google-chrome $(scrot -e 'imgurbash $f 2>/dev/null')")
+    , ((myModKey, xK_Print),           spawn "google-chrome-stable $(scrot -e 'imgurbash $f 2>/dev/null')")
     -- Use history aware dmenu wrapper.
     , ((myModKey, xK_p),               spawn yeganesh)
     -- launch file browser
