@@ -13,4 +13,6 @@ xbindkeys
 # Map caps lock to esc
 xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 
+pulseaudio --start
+
 exec dbus-launch xmonad

@@ -3,21 +3,21 @@
 volume() {
   local step=3
 
-
   case $1 in
     "up")
-      amixer set Master playback $step+ >/dev/null;;
+      pamixer --increase $step >/dev/null;;
     "down")
-      amixer set Master playback $step- >/dev/null;;
+      pamixer --decrease $step >/dev/null;;
     "toggle")
-      amixer set Master toggle >/dev/null;;
+      pamixer --toggle-mute >/dev/null;;
     *)
       echo "Usage: volume [up|down|toggle]"
   esac
 
-  local muted=$(amixer get Master | tail -n1 | sed -E 's/.*\[([a-z]+)\]/\1/')
-  local volume=$(amixer get Master | tail -n1 | sed -E 's/.*\[([0-9]+)\%\].*/\1/')
-  [[ $muted == "off" ]] && local msg="Muted" || local msg="Volume $volume%"
+  local muted=$(pamixer --get-mute)
+  local volume=$(pamixer --get-volume)
+
+  [[ $muted == "true" ]] && local msg="Muted" || local msg="Volume $volume%"
   notify-send "$msg" -t 500
 }
 volume "$@"
