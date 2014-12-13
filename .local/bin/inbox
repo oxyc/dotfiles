@@ -1,6 +1,6 @@
 #!/bin/bash
 
-page="http://www.grooveshark.com"
+page="https://inbox.google.com"
 
 for browser in "google-chrome" "google-chrome-stable" "google-chrome-beta"; do
   # Open grooveshark as a chrome app
