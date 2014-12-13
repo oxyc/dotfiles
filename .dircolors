@@ -85,10 +85,11 @@ TERM xterm-debian
 NORMAL 00;38;0;244 # no color code at all
 #FILE 00 # regular file: use no color at all
 RESET 0 # reset to "normal" color
-DIR 00;38;0;96 # directory (brown)
-LINK 01;38;0;34 # symbolic link. (If you set this to 'target' instead of a
- # numerical value, the color is as for the file pointed to.)
+DIR 00;38;0;34 # directory (blue)
+LINK 01;38;0;35 # symbolic link. (blue) (If you set this to 'target' instead of
+ # a numerical value, the color is as for the file pointed to.)
 MULTIHARDLINK 00 # regular file with more than one link
+# @TODO
 FIFO 48;00;230;38;00;136;01 # pipe
 SOCK 48;00;230;38;00;136;01 # socket
 DOOR 48;00;230;38;00;136;01 # door
@@ -102,43 +103,43 @@ STICKY_OTHER_WRITABLE 48;00;64;38;00;230 # dir that is sticky and other-writable
 OTHER_WRITABLE 48;00;235;38;00;33 # dir that is other-writable (o+w) and not sticky
 STICKY 48;00;33;38;00;230 # dir with the sticky bit set (+t) and not other-writable
 # This is for files with execute permission:
-EXEC 01;38;00;91 # (orange)
+EXEC 01;38;00;31 # (red)
 
 ## Archives or compressed (purple)
-.tar    00;38;00;35
-.tgz    01;38;00;35
-.arj    01;38;00;35
-.taz    01;38;00;35
-.lzh    01;38;00;35
-.lzma   01;38;00;35
-.tlz    01;38;00;35
-.txz    01;38;00;35
-.zip    01;38;00;35
-.z      01;38;00;35
-.Z      01;38;00;35
-.dz     01;38;00;35
-.gz     01;38;00;35
-.lz     01;38;00;35
-.xz     01;38;00;35
-.bz2    01;38;00;35
-.bz     01;38;00;35
-.tbz    01;38;00;35
-.tbz2   01;38;00;35
-.tz     01;38;00;35
-.deb    01;38;00;35
-.rpm    01;38;00;35
-.jar    01;38;00;35
-.rar    01;38;00;35
-.ace    01;38;00;35
-.zoo    01;38;00;35
-.cpio   01;38;00;35
-.7z     01;38;00;35
-.rz     01;38;00;35
-.apk    01;38;00;35
+.tar    00;38;00;32
+.tgz    01;38;00;32
+.arj    01;38;00;32
+.taz    01;38;00;32
+.lzh    01;38;00;32
+.lzma   01;38;00;32
+.tlz    01;38;00;32
+.txz    01;38;00;32
+.zip    01;38;00;32
+.z      01;38;00;32
+.Z      01;38;00;32
+.dz     01;38;00;32
+.gz     01;38;00;32
+.lz     01;38;00;32
+.xz     01;38;00;32
+.bz2    01;38;00;32
+.bz     01;38;00;32
+.tbz    01;38;00;32
+.tbz2   01;38;00;32
+.tz     01;38;00;32
+.deb    01;38;00;32
+.rpm    01;38;00;32
+.jar    01;38;00;32
+.rar    01;38;00;32
+.ace    01;38;00;32
+.zoo    01;38;00;32
+.cpio   01;38;00;32
+.7z     01;38;00;32
+.rz     01;38;00;32
+.apk    01;38;00;32
 
 # Image formats (yellow)
 .jpg    00;38;00;33
-.JPG    00;38;00;33 #stupid but needed
+.JPG    00;38;00;33
 .jpeg   00;38;00;33
 .gif    00;38;00;33
 .bmp    00;38;00;33
@@ -165,32 +166,36 @@ EXEC 01;38;00;91 # (orange)
 .CR2    00;38;00;33
 .ico    00;38;00;33
 
-# Files of special interest (green)
-.tex             01;38;00;31
-.rdf             01;38;00;31
-.owl             01;38;00;31
-.n3              01;38;00;31
-.ttl             01;38;00;31
-.nt              01;38;00;31
-.torrent         01;38;00;31
-*Makefile        01;38;00;31
-*Rakefile        01;38;00;31
-*Gruntfile.js    01;38;00;31
-*build.xml       01;38;00;31
-*rc              01;38;00;31
-*1               01;38;00;31
-.nfo             01;38;00;31
-*README          01;38;00;31
-*README.txt      01;38;00;31
-*readme.txt      01;38;00;31
-*README.md       01;38;00;31
-*README.markdown 01;38;00;31
-*ini             01;38;00;31
-*yml             01;38;00;31
-*cfg             01;38;00;31
-*conf            01;38;00;31
-*.md             01;38;00;31
-*.sql            01;38;00;31
+# Files of special interest (orange)
+.tex             01;38;00;91
+.rdf             01;38;00;91
+.owl             01;38;00;91
+.n3              01;38;00;91
+.ttl             01;38;00;91
+.nt              01;38;00;91
+.torrent         01;38;00;91
+*Makefile        01;38;00;91
+*Rakefile        01;38;00;91
+*Gruntfile.js    01;38;00;91
+*build.xml       01;38;00;91
+*rc              01;38;00;91
+*1               01;38;00;91
+.nfo             01;38;00;91
+*README          01;38;00;91
+*README.txt      01;38;00;91
+*readme.txt      01;38;00;91
+*README.md       01;38;00;91
+*README.markdown 01;38;00;91
+*ini             01;38;00;91
+*yml             01;38;00;91
+*cfg             01;38;00;91
+*conf            01;38;00;91
+*.md             01;38;00;91
+*.sql            01;38;00;91
+*.pdf            01;38;00;91
+*.txt            01;38;00;91
+*.rtf            01;38;00;91
+*.csv            01;38;00;91
 
 # "unimportant" files as logs and backups (base01)
 .log        00;38;00;90
@@ -256,7 +261,7 @@ EXEC 01;38;00;91 # (orange)
 .ogv    01;38;00;96
 .ogx    01;38;00;96
 
-*.php   01;38;00;32
-*.sh    01;38;00;32
-*.js    01;38;00;32
-*.drush 01;38;00;32
+*.php   01;38;00;36
+*.sh    01;38;00;36
+*.js    01;38;00;36
+*.drush 01;38;00;36

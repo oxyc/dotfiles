@@ -13,8 +13,8 @@ dzen2.foreground:         #aaaaaa
 
 ! URxvt
 
-URxvt.termName:           rxvt-256color
-*customization:           -color
+! URxvt.termName:           rxvt-256color
+! *customization:           -color
 URxvt.title:              Terminal
 Urxvt.loginShell:         true
 
@@ -67,58 +67,39 @@ URxvt*modifier:           super
 
 ! base16-default
 
-#define base00 #151515
-#define base01 #202020
-#define base02 #303030
-#define base03 #505050
-#define base04 #b0b0b0
-#define base05 #d0d0d0
-#define base06 #e0e0e0
-#define base07 #f5f5f5
-#define base08 #ac4142
-#define base09 #d28445
-#define base0A #f4bf75
-#define base0B #90a959
-#define base0C #75b5aa
-#define base0D #6a9fb5
-#define base0E #aa759f
-#define base0F #8f5536
+#define darkestgray   #151515
+#define darkergray    #202020
+#define darkgray      #303030
+#define gray          #505050
+#define lightgray     #b0b0b0
+#define lightergray   #d0d0d0
+#define lightestgray  #e0e0e0
+#define white         #f5f5f5
+#define red           #ac4142
+#define orange        #d28445
+#define yellow        #f4bf75
+#define green         #90a959
+#define cyan          #75b5aa
+#define blue          #6a9fb5
+#define magenta       #aa759f
+#define brown         #8f5536
 
-! base16-eighties
-
-! #define base00 #2d2d2d
-! #define base01 #393939
-! #define base02 #515151
-! #define base03 #747369
-! #define base04 #a09f93
-! #define base05 #d3d0c8
-! #define base06 #e8e6df
-! #define base07 #f2f0ec
-! #define base08 #f2777a
-! #define base09 #f99157
-! #define base0A #ffcc66
-! #define base0B #99cc99
-! #define base0C #66cccc
-! #define base0D #6699cc
-! #define base0E #cc99cc
-! #define base0F #d27b53
-
-*.foreground:   base05
-*.background:   base00
-*.cursorColor:  base05
-*.color0:       base00
-*.color1:       base08
-*.color2:       base0B
-*.color3:       base0A
-*.color4:       base0D
-*.color5:       base0E
-*.color6:       base0C
-*.color7:       base05
-*.color8:       base03
-*.color9:       base09
-*.color10:      base01
-*.color11:      base02
-*.color12:      base04
-*.color13:      base06
-*.color14:      base0F
-*.color15:      base07
+*.foreground:   lightergray
+*.background:   darkestgray
+*.cursorColor:  lightergray
+*.color0:       darkestgray
+*.color1:       red
+*.color2:       green
+*.color3:       yellow
+*.color4:       blue
+*.color5:       magenta
+*.color6:       cyan
+*.color7:       lightergray
+*.color8:       gray
+*.color9:       orange
+*.color10:      darkergray
+*.color11:      darkgray
+*.color12:      lightgray
+*.color13:      lightestgray
+*.color14:      brown
+*.color15:      white
