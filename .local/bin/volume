@@ -5,9 +5,9 @@ volume() {
 
   case $1 in
     "up")
-      pamixer --increase $step >/dev/null;;
+      pamixer --allow-boost --increase $step >/dev/null;;
     "down")
-      pamixer --decrease $step >/dev/null;;
+      pamixer --allow-boost --decrease $step >/dev/null;;
     "toggle")
       pamixer --toggle-mute >/dev/null;;
     *)
