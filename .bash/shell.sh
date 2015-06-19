@@ -57,6 +57,10 @@ command -v fasd >/dev/null && eval "$(fasd --init auto)"
 
 command -v grunt >/dev/null && eval "$(grunt --completion=bash)"
 
+# Use a local lib/ for perl modules.
+# @see http://search.cpan.org/~haarg/local-lib-2.000015/lib/local/lib.pm
+[ $SHLVL -eq 1 ] && eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
+
 # When connecting to SSH, start or reattach screen session
 # http://dotfiles.org/~thayer/.bashrc
 #if [ -n "$SSH_CONNECTION" ] && [ -z "$SCREEN_EXIST" ]; then

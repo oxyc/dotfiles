@@ -46,7 +46,7 @@ install-mac: clean tmux shell osx init
 
 init:
 	@if ! perl -MTerm::ExtendedColor -e 1 2>/dev/null; then \
-		cpan Term::ExtendedColor; \
+		sudo cpan Term::ExtendedColor; \
 	fi
 	@echo "Remember to source ~/.bash_profile"
 
