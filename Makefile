@@ -1,4 +1,4 @@
-SHELL_FILES ?= .agignore .bash_profile .bashrc .dircolors .gitconfig .inputrc .jshintrc .lftprc .ls++.conf .linopenrc .apvlvrc \
+SHELL_FILES ?= .agignore .bash_profile .bashrc .dircolors .gitconfig .inputrc .jshintrc .lftprc .ls++.conf \
 	.bash/aliases.sh .bash/colors.sh .bash/exports.sh .bash/functions.sh .bash/prompt.sh .bash/shell.sh \
 	.bash_completion.d/misc $(wildcard .local/bin/*)
 
@@ -13,7 +13,10 @@ TODO_FILES ?= .todo.cfg
 GTK_FILES ?= .gtkrc-2.0
 WEECHAT_FILES ?= $(wildcard .weechat/*)
 
-TARGETS_CLEAN ?= XORG XMONAD DRUPAL MUTT TMUX TODO IRSSI SHELL
+LINUX_FILES ?= .linopenrc .apvlvrc
+OSX_FILES ?=
+
+TARGETS_CLEAN ?= XORG XMONAD DRUPAL MUTT TMUX TODO IRSSI SHELL OSX
 
 MUTT_DIRS ?= .mutt/cache/bodies .mutt/cache/headers .mutt/temp .goobookrc
 SHELL_DIRS ?= .backup
@@ -34,13 +37,24 @@ fetch-github:
 	@git pull origin master
 	@git submodule foreach git pull origin master
 
-install: clean xorg drupal mutt tmux todo weechat shell gtk
+install:
+	@echo "Use either install-linux install-mac depending on your system"
+
+install-linux: clean linux xorg drupal mutt tmux todo weechat shell gtk init
+
+install-mac: clean tmux shell osx init
+
+init:
 	@if ! perl -MTerm::ExtendedColor -e 1 2>/dev/null; then \
 		cpan Term::ExtendedColor; \
 	fi
 	@echo "Remember to source ~/.bash_profile"
 
 # Main targets ----------------------------------------------------------------
+
+linux: $(addprefix $(DEST)/,$(LINUX_FILES))
+
+osx: $(addprefix $(DEST)/,$(OSX_FILES))
 
 xorg: $(addprefix $(DEST)/,$(XORG_FILES))
 
