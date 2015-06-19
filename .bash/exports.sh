@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# PATH additions
+for dir in bin .local/bin node_modules/.bin drush .rvm/bin; do
+  [[ -d "$HOME/$dir" ]] && PATH="$PATH:$HOME/$dir"
+done
+
 # Always enable colored `grep` output
 export GREP_OPTIONS="--color=auto"
 
@@ -52,11 +57,3 @@ for browser in "google-chrome" "google-chrome-stable" "google-chrome-beta"; do
     break
   fi
 done
-
-# PATH additions
-for dir in bin .local/bin node_modules/.bin drush .rvm/bin; do
-  [[ -d "$HOME/$dir" ]] && PATH="$PATH:$HOME/$dir"
-done
-
-# Remove path duplicates
-PATH=$(echo "$PATH" | awk -v RS=':' -v ORS=":" '!a[$1]++')
