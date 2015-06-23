@@ -47,3 +47,15 @@ export BLACK="$(tput setaf 16)"
 
 export FOREGROUND="$LIGHTERGRAY"
 export BACKGROUND="$DARKESTGRAY"
+
+# Get this scripts directory name regardless of aliases, source, bash -c, symlinks, etc.
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+BASE16_SHELL="$DIR/../.local/lib/base16-shell/base16-default.dark.sh"
+[[ -s $BASE16_SHELL  ]] && source $BASE16_SHELL

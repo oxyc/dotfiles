@@ -16,3 +16,6 @@
 [submodule ".local/lib/wifi.sh"]
 	path = .local/lib/wifi.sh
 	url = git@github.com:dominictarr/wifi.sh.git
+[submodule ".local/lib/base16-shell"]
+	path = .local/lib/base16-shell
+	url = https://github.com/chriskempson/base16-shell
