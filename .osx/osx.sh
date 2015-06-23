@@ -128,7 +128,7 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
 # Map Caps Lock to Esc
 /Applications/Seil.app/Contents/Library/bin/seil set enable_capslock 1
-/Applications/Seil.app/Contents/Library/bin/seil set keycode_capslock 80
+/Applications/Seil.app/Contents/Library/bin/seil set keycode_capslock 53
 
 # Set a custom wallpaper image. `DefaultDesktop.jpg` is already a symlink, and
 # all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
