@@ -95,6 +95,14 @@ brew cask install seil
 # Install additional QuickLook plugins.
 brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook 
 
+# Install neovim
+brew tap neovim/neovim
+brew install --HEAD neovim
+
+# Install custom casks
+brew tap oxyc/custom
+brew cask install popcorn-time
+
 # Install MenuAndDockless
 # brew cask install easysimbl
 # wget http://myownapp.com/downloads/MenuAndDockless.zip
