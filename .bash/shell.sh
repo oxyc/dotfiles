@@ -57,6 +57,17 @@ command -v fasd >/dev/null && eval "$(fasd --init auto)"
 
 command -v grunt >/dev/null && eval "$(grunt --completion=bash)"
 
+command -v fzf >/dev/null && {
+  fzf_path="$(dirname $(realpath $(which fzf)))/.."
+  source "$fzf_path/shell/completion.bash"
+  source "$fzf_path/shell/key-bindings.bash"
+  # Ctrl-A: cd into the selected directory, use this instead of fzf's own Alt-C
+  # We use vi mode
+  bind '"\C-a": "\eddi$(__fzf_cd__)\C-x\C-e\C-x\C-r\C-m"'
+  bind -m vi-command '"\C-a": "i\C-a"'
+  unset fzf_path
+}
+
 # Use a local lib/ for perl modules.
 # @see http://search.cpan.org/~haarg/local-lib-2.000015/lib/local/lib.pm
 [ $SHLVL -eq 1 ] && eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"

@@ -68,6 +68,7 @@ brew install rename
 brew install speedtest_cli
 brew install ssh-copy-id
 brew install the_silver_searcher
+brew install fzf
 brew install tree
 brew install webkit2png
 brew install zopfli
