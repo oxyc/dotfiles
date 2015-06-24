@@ -94,7 +94,7 @@ brew cask install font-inconsolata-dz-for-powerline
 brew cask install seil
 
 # Install additional QuickLook plugins.
-brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook 
+brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook
 
 # Install neovim
 brew tap neovim/neovim
@@ -113,6 +113,6 @@ brew cleanup
 
 # Enable and switch to Bash 4
 if ! grep -Fxq "/usr/local/bin/bash" /etc/shells; then
-	sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
-	chsh -s /usr/local/bin/bash
+  sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+  chsh -s /usr/local/bin/bash
 fi

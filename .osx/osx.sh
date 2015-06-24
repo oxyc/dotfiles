@@ -29,16 +29,16 @@ defaults write com.apple.universalaccess reduceTransparency -bool true
 
 # Menu bar: hide the Time Machine, Volume, and User icons
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
-	defaults write "${domain}" dontAutoLoad -array \
-		"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
-		"/System/Library/CoreServices/Menu Extras/Volume.menu" \
-		"/System/Library/CoreServices/Menu Extras/User.menu"
+  defaults write "${domain}" dontAutoLoad -array \
+    "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
+    "/System/Library/CoreServices/Menu Extras/Volume.menu" \
+    "/System/Library/CoreServices/Menu Extras/User.menu"
 done
 defaults write com.apple.systemuiserver menuExtras -array \
-	"/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
-	"/System/Library/CoreServices/Menu Extras/AirPort.menu" \
-	"/System/Library/CoreServices/Menu Extras/Battery.menu" \
-	"/System/Library/CoreServices/Menu Extras/Clock.menu"
+  "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
+  "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
+  "/System/Library/CoreServices/Menu Extras/Battery.menu" \
+  "/System/Library/CoreServices/Menu Extras/Clock.menu"
 
 # Set highlight color to green
 # defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
@@ -120,7 +120,7 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 # Disable smart dashes as they’re annoying when typing code
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
-# Disable Caps Lock
+# Disable Caps Lock (computer specific)
 /usr/libexec/PlistBuddy -c "Add com.apple.keyboard.modifiermapping.1452-626-0 array" ~/Library/Preferences/ByHost/.GlobalPreferences.*.plist
 /usr/libexec/PlistBuddy -c "Add :com.apple.keyboard.modifiermapping.1452-626-0: dict" ~/Library/Preferences/ByHost/.GlobalPreferences.*.plist
 /usr/libexec/PlistBuddy -c "Add com.apple.keyboard.modifiermapping.1452-626-0:0:HIDKeyboardModifierMappingDst integer -1" ~/Library/Preferences/ByHost/.GlobalPreferences.*.plist
@@ -346,9 +346,9 @@ chflags nohidden ~/Library
 # Expand the following File Info panes:
 # “General”, “Open with”, and “Sharing & Permissions”
 defaults write com.apple.finder FXInfoPanesExpanded -dict \
-	General -bool true \
-	OpenWith -bool true \
-	Privileges -bool true
+  General -bool true \
+  OpenWith -bool true \
+  Privileges -bool true
 
 ###############################################################################
 # Dock, Dashboard, and hot corners                                            #
@@ -530,35 +530,35 @@ defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnab
 sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 # Change indexing order and disable some search results
 # Yosemite-specific search results (remove them if your are using OS X 10.9 or older):
-# 	MENU_DEFINITION
-# 	MENU_CONVERSION
-# 	MENU_EXPRESSION
-# 	MENU_SPOTLIGHT_SUGGESTIONS (send search queries to Apple)
-# 	MENU_WEBSEARCH             (send search queries to Apple)
-# 	MENU_OTHER
+#   MENU_DEFINITION
+#   MENU_CONVERSION
+#   MENU_EXPRESSION
+#   MENU_SPOTLIGHT_SUGGESTIONS (send search queries to Apple)
+#   MENU_WEBSEARCH             (send search queries to Apple)
+#   MENU_OTHER
 defaults write com.apple.spotlight orderedItems -array \
-	'{"enabled" = 1;"name" = "APPLICATIONS";}' \
-	'{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
-	'{"enabled" = 1;"name" = "DIRECTORIES";}' \
-	'{"enabled" = 1;"name" = "PDF";}' \
-	'{"enabled" = 1;"name" = "FONTS";}' \
-	'{"enabled" = 0;"name" = "DOCUMENTS";}' \
-	'{"enabled" = 0;"name" = "MESSAGES";}' \
-	'{"enabled" = 0;"name" = "CONTACT";}' \
-	'{"enabled" = 0;"name" = "EVENT_TODO";}' \
-	'{"enabled" = 0;"name" = "IMAGES";}' \
-	'{"enabled" = 0;"name" = "BOOKMARKS";}' \
-	'{"enabled" = 0;"name" = "MUSIC";}' \
-	'{"enabled" = 0;"name" = "MOVIES";}' \
-	'{"enabled" = 0;"name" = "PRESENTATIONS";}' \
-	'{"enabled" = 0;"name" = "SPREADSHEETS";}' \
-	'{"enabled" = 0;"name" = "SOURCE";}' \
-	'{"enabled" = 0;"name" = "MENU_DEFINITION";}' \
-	'{"enabled" = 0;"name" = "MENU_OTHER";}' \
-	'{"enabled" = 0;"name" = "MENU_CONVERSION";}' \
-	'{"enabled" = 0;"name" = "MENU_EXPRESSION";}' \
-	'{"enabled" = 0;"name" = "MENU_WEBSEARCH";}' \
-	'{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
+  '{"enabled" = 1;"name" = "APPLICATIONS";}' \
+  '{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
+  '{"enabled" = 1;"name" = "DIRECTORIES";}' \
+  '{"enabled" = 1;"name" = "PDF";}' \
+  '{"enabled" = 1;"name" = "FONTS";}' \
+  '{"enabled" = 0;"name" = "DOCUMENTS";}' \
+  '{"enabled" = 0;"name" = "MESSAGES";}' \
+  '{"enabled" = 0;"name" = "CONTACT";}' \
+  '{"enabled" = 0;"name" = "EVENT_TODO";}' \
+  '{"enabled" = 0;"name" = "IMAGES";}' \
+  '{"enabled" = 0;"name" = "BOOKMARKS";}' \
+  '{"enabled" = 0;"name" = "MUSIC";}' \
+  '{"enabled" = 0;"name" = "MOVIES";}' \
+  '{"enabled" = 0;"name" = "PRESENTATIONS";}' \
+  '{"enabled" = 0;"name" = "SPREADSHEETS";}' \
+  '{"enabled" = 0;"name" = "SOURCE";}' \
+  '{"enabled" = 0;"name" = "MENU_DEFINITION";}' \
+  '{"enabled" = 0;"name" = "MENU_OTHER";}' \
+  '{"enabled" = 0;"name" = "MENU_CONVERSION";}' \
+  '{"enabled" = 0;"name" = "MENU_EXPRESSION";}' \
+  '{"enabled" = 0;"name" = "MENU_WEBSEARCH";}' \
+  '{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
 # Load new settings before rebuilding the index
 killall mds > /dev/null 2>&1
 # Make sure indexing is enabled for the main volume
@@ -580,43 +580,6 @@ defaults write org.x.X11 wm_ffm -bool true
 
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
-
-# Use the Base16 Default Dark theme by default in Terminal.app
-osascript <<EOD
-tell application "Terminal"
-	local allOpenedWindows
-	local initialOpenedWindows
-	local windowID
-	set themeName to "base16-default.dark.256"
-	(* Store the IDs of all the open terminal windows. *)
-	set initialOpenedWindows to id of every window
-	(* Open the custom theme so that it gets added to the list
-	   of available terminal themes (note: this will open two
-	   additional terminal windows). *)
-	do shell script "open '$DIR/" & themeName & ".terminal'"
-	(* Wait a little bit to ensure that the custom theme is added. *)
-	delay 1
-	(* Set the custom theme as the default terminal theme. *)
-	set default settings to settings set themeName
-	(* Get the IDs of all the currently opened terminal windows. *)
-	set allOpenedWindows to id of every window
-	repeat with windowID in allOpenedWindows
-		(* Close the additional windows that were opened in order
-		   to add the custom theme to the list of terminal themes. *)
-		if initialOpenedWindows does not contain windowID then
-			close (every window whose id is windowID)
-		(* Change the theme for the initial opened terminal windows
-		   to remove the need to close them in order for the custom
-		   theme to be applied. *)
-		else
-			set current settings of tabs of (every window whose id is windowID) to settings set themeName
-		end if
-	end repeat
-end tell
-EOD
-
-# Set the startup theme to Base16.
-defaults write com.apple.terminal "Startup Window Settings" -string "base16-default.dark.256"
 
 ###############################################################################
 # Time Machine                                                                #
@@ -746,9 +709,9 @@ defaults write org.m0k.transmission WarningLegal -bool false
 ###############################################################################
 
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
-	"Dock" "Finder" "Google Chrome" "Google Chrome Canary" "Mail" "Messages" \
-	"Opera" "Safari" "SystemUIServer" "Terminal" \
-	"Transmission" "iCal"; do
-	killall "${app}" > /dev/null 2>&1
+  "Dock" "Finder" "Google Chrome" "Google Chrome Canary" "Mail" "Messages" \
+  "Opera" "Safari" "SystemUIServer" "Terminal" \
+  "Transmission" "iCal"; do
+  killall "${app}" > /dev/null 2>&1
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
