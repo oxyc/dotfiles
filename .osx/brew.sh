@@ -81,6 +81,7 @@ brew cask install lastpass
 brew install lastpass-cli --with-pinentry
 brew cask install transmission
 brew cask install amethyst
+brew cask install hyperswitch
 brew cask install iterm2
 brew cask install caskroom/homebrew-cask/dash
 brew cask install caskroom/homebrew-cask/rescuetime
