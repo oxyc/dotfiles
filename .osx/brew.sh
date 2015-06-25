@@ -78,6 +78,7 @@ brew install caskroom/cask/brew-cask
 brew cask install firefox
 brew cask install google-chrome
 brew cask install lastpass
+brew install lastpass-cli --with-pinentry
 brew cask install transmission
 brew cask install amethyst
 brew cask install iterm2
