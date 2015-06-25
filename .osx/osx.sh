@@ -120,11 +120,14 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 # Disable smart dashes as they’re annoying when typing code
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
-# Disable Caps Lock (computer specific)
-/usr/libexec/PlistBuddy -c "Add com.apple.keyboard.modifiermapping.1452-626-0 array" ~/Library/Preferences/ByHost/.GlobalPreferences.*.plist
-/usr/libexec/PlistBuddy -c "Add :com.apple.keyboard.modifiermapping.1452-626-0: dict" ~/Library/Preferences/ByHost/.GlobalPreferences.*.plist
-/usr/libexec/PlistBuddy -c "Add com.apple.keyboard.modifiermapping.1452-626-0:0:HIDKeyboardModifierMappingDst integer -1" ~/Library/Preferences/ByHost/.GlobalPreferences.*.plist
-/usr/libexec/PlistBuddy -c "Add com.apple.keyboard.modifiermapping.1452-626-0:0:HIDKeyboardModifierMappingSrc integer 0" ~/Library/Preferences/ByHost/.GlobalPreferences.*.plist
+# Disable Caps Lock
+VENDORID="$(ioreg -n IOHIDKeyboard -r | awk '$2 == "\"VendorID\"" { print $4 }')"
+PRODUCTID="$(ioreg -n IOHIDKeyboard -r | awk '$2 == "\"ProductID\"" { print $4 }')"
+
+/usr/libexec/PlistBuddy -c "Add com.apple.keyboard.modifiermapping.${VENDORID}-${PRODUCTID}-0 array" ~/Library/Preferences/ByHost/.GlobalPreferences.*.plist
+/usr/libexec/PlistBuddy -c "Add :com.apple.keyboard.modifiermapping.${VENDORID}-${PRODUCTID}-0: dict" ~/Library/Preferences/ByHost/.GlobalPreferences.*.plist
+/usr/libexec/PlistBuddy -c "Add com.apple.keyboard.modifiermapping.${VENDORID}-${PRODUCTID}-0:0:HIDKeyboardModifierMappingDst integer -1" ~/Library/Preferences/ByHost/.GlobalPreferences.*.plist
+/usr/libexec/PlistBuddy -c "Add com.apple.keyboard.modifiermapping.${VENDORID}-${PRODUCTID}-0:0:HIDKeyboardModifierMappingSrc integer 0" ~/Library/Preferences/ByHost/.GlobalPreferences.*.plist
 
 # Map Caps Lock to Esc
 /Applications/Seil.app/Contents/Library/bin/seil set enable_capslock 1
