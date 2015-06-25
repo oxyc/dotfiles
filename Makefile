@@ -14,7 +14,7 @@ GTK_FILES ?= .gtkrc-2.0
 WEECHAT_FILES ?= $(wildcard .weechat/*)
 
 LINUX_FILES ?= .linopenrc .apvlvrc
-OSX_FILES ?=
+OSX_FILES ?= .amethyst
 
 TARGETS_CLEAN ?= XORG XMONAD DRUPAL MUTT TMUX TODO IRSSI SHELL OSX
 
