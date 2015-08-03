@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # PATH additions
-for dir in bin .local/bin node_modules/.bin drush .rvm/bin; do
-  [[ -d "$HOME/$dir" ]] && PATH="$PATH:$HOME/$dir"
+for dir in bin .local/bin node_modules/.bin drush .rvm/bin .composer/vendor/bin; do
+  [[ -d "$HOME/$dir" ]] && export PATH="$PATH:$HOME/$dir"
 done
 
 # Always enable colored `grep` output
