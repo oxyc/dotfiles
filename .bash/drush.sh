@@ -9,6 +9,19 @@
 # file in your home directory and it will be enabled at your next
 # login. See http://nuvole.org/node/26 for more details and options.
 
+# Use a local drush version if installed.
+drush() {
+  local root="$(git rev-parse --show-cdup 2>/dev/null || echo 0)"
+  local drush="$(which drush)"
+  if [[ "$root" != "0" ]] && [[ -a "${root:-.}/composer.json" ]]; then
+    [[ ! -z "$root" ]] && pushd $root >/dev/null
+    local bin=$(composer config bin-dir)
+    [[ -x "$bin/drush" ]] && drush="$(realpath $bin/drush)"
+    [[ ! -z "$root" ]] && popd >/dev/null
+  fi
+  $drush $@
+}
+
 # Drupal and Drush aliases.
 # To be added at the end of .bashrc.
 alias drsp='cp sites/default/default.settings.php sites/default/settings.php'
@@ -28,7 +41,7 @@ _drupal_root() {
   # Go up until we find index.php
   current_dir=`pwd`;
   while [ ${current_dir} != "/" -a -d "${current_dir}" -a \
-          ! -f "${current_dir}/index.php" ] ; 
+          ! -f "${current_dir}/index.php" ] ;
   do
     current_dir=$(dirname "${current_dir}") ;
   done
@@ -36,7 +49,7 @@ _drupal_root() {
     exit 1 ;
   else
     echo "$current_dir" ;
-  fi 
+  fi
 }
 
 _drupal_modules_in_dir() {
