@@ -5,9 +5,6 @@ for dir in bin .local/bin node_modules/.bin drush .rvm/bin .composer/vendor/bin;
   [[ -d "$HOME/$dir" ]] && export PATH="$PATH:$HOME/$dir"
 done
 
-# Always enable colored `grep` output
-export GREP_OPTIONS="--color=auto"
-
 export LANG="en_US.UTF-8"
 
 # For setting history length see HISTSIZE and HISTFILESIZE in bash(1)

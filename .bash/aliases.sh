@@ -16,6 +16,7 @@ alias du="du -hc"
 alias ping="ping -c 5"
 alias vi="vim"
 alias open="xdg-open" # Install https://github.com/Cloudef/PKGBUILDS/tree/master/linopen
+alias grep='grep --color=auto'
 
 # Shortcuts
 command -v git >/dev/null && alias g="git"
