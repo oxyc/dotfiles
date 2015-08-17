@@ -1,6 +1,6 @@
 SHELL_FILES ?= .agignore .bash_profile .bashrc .dircolors .gitconfig .inputrc .jshintrc .lftprc .ls++.conf \
 	.bash/aliases.sh .bash/colors.sh .bash/exports.sh .bash/functions.sh .bash/prompt.sh .bash/shell.sh \
-	.bash_completion.d/misc $(wildcard .local/bin/*)
+	.bash/ssh-agent.sh .bash_completion.d/misc $(wildcard .local/bin/*)
 
 CRON_FILES ?= $(wildcard .cron/*)
 XORG_FILES ?= .Xresources .xbindkeysrc .xinitrc $(wildcard .urxvt/*)
