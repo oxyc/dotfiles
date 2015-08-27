@@ -5,6 +5,7 @@
       "google",
       "Drupal"
   ],
+  "esnext": true,
   "node" : true,
   "browser" : true,
   "curly": false,
