@@ -86,7 +86,17 @@ brew cask install iterm2
 brew cask install caskroom/homebrew-cask/dash
 brew cask install caskroom/homebrew-cask/rescuetime
 brew cask install caskroom/homebrew-cask/flash
-brew cask install caskroom/homebrew-cask/vagrant
+
+# Install development tools
+brew cask install virtualbox
+brew cask install vagrant
+brew install homebrew/completions/vagrant-completion
+brew cask install vagrant-manager
+vagrant plugin install vagrant-sshfs
+vagrant plugin install hostsupdater
+brew install libyaml
+brew install ansible
+brew install composer
 
 # Install fonts.
 brew tap caskroom/fonts
