@@ -20,27 +20,40 @@ sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 
 # Install some other useful utilities like `sponge`.
 brew install moreutils
-# Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
-brew install findutils
-# Install GNU `sed`, overwriting the built-in `sed`.
+# Install some unix tools.
+brew tap homebrew/dupes
+brew install binutils
+brew install diffutils
+brew install ed --default-names
+brew install findutils --with-default-names
+brew install gawk
+brew install gnu-indent --with-default-names
 brew install gnu-sed --with-default-names
+brew install gnu-tar --with-default-names
+brew install gnu-which --with-default-names
+brew install gnutls
+brew install grep --with-default-names
+brew install gzip
+brew install openssh
+brew install screen
+brew install ssh-copy-id
+brew install rsync
+brew install tree
+brew install watch
+brew install wdiff --with-gettext
+brew install wget --with-iri
 # Install Bash 4.
 brew install bash
 brew tap homebrew/versions
 brew install bash-completion2
-
-# Install `wget` with IRI support.
-brew install wget --with-iri
 
 # Install VIM
 brew install luajit
 brew install vim --with-luajit --without-ruby --override-system-vi
 
 # Install more recent versions of some OS X tools.
-brew install homebrew/dupes/grep
-brew install homebrew/dupes/openssh
-brew install homebrew/dupes/screen
-brew install homebrew/php/php55 --with-gmp
+brew install homebrew/php/php56 --with-gmp
+brew install python
 
 # Install font tools.
 brew tap bramstein/webfonttools
@@ -52,6 +65,9 @@ brew install woff2
 brew install nmap
 brew install pngcheck
 brew install binutils
+brew install mozjpeg
+brew install optipng
+brew install unzip
 
 # Install other useful binaries.
 brew install exiv2
@@ -66,10 +82,8 @@ brew install pigz
 brew install pv
 brew install rename
 brew install speedtest_cli
-brew install ssh-copy-id
 brew install the_silver_searcher
 brew install fzf
-brew install tree
 brew install webkit2png
 brew install zopfli
 
@@ -112,9 +126,9 @@ brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch 
 brew tap neovim/neovim
 brew install --HEAD neovim
 
-# Install custom casks
-brew tap oxyc/custom
-brew cask install popcorn-time
+# Install massren
+brew tap laurent22/massren
+brew install massren
 
 # Install MenuAndDockless
 # brew cask install easysimbl
