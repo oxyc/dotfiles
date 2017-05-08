@@ -1,46 +1,48 @@
-# Disable CTRL-s (stop output)
+#!/usr/bin/env bash
+
+# Disable CTRL-s (stop output).
 stty stop ''
 
-# append to the history file, don't overwrite it
-shopt -s histappend
+# Enter directories by default, i.e. no `cd`. Bash 4.
+shopt -s autocd 2> /dev/null
+
+# Correct minor spelling errors in 'cd' commands.
+shopt -s cdspell
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# Correct minor spelling errors in 'cd' commands.
-shopt -s cdspell
-
-# Enter directories by default, i.e. no `cd`
-shopt -s autocd
-
 # Attempt to save all lines of a multiple-line command in the same history entry.
 shopt -s cmdhist
-
-# Expand aliases for non-interactive shells.
-shopt -s expand_aliases
-
-# Don't try to find all the command possibilities when hitting TAB on an empty line.
-shopt -s no_empty_cmd_completion
 
 # Include dotfiles in globbing.
 shopt -s dotglob
 
-# Recursive globbing
-shopt -s globstar
-
-# Case-insensitive globbing.
-shopt -s nocaseglob
+# Expand aliases for non-interactive shells.
+shopt -s expand_aliases
 
 # Extended globbing patterns.
 # http://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html#Pattern-Matching
 shopt -s extglob
 
+# Recursive globbing. Bash 4.
+shopt -s globstar 2> /dev/null
+
+# append to the history file, don't overwrite it.
+shopt -s histappend
+
+# Don't try to find all the command possibilities when hitting TAB on an empty line.
+shopt -s no_empty_cmd_completion
+
+# Case-insensitive globbing.
+shopt -s nocaseglob
+
 # Do not overwrite files when redirecting using ">".
 # Note that you can still override this with ">|".
 set -o noclobber
 
-# Vi-like behavior for bash
+# Vi-like behavior for bash.
 set -o vi
 
 [[ -s ~/.nvm/nvm.sh ]] && source ~/.nvm/nvm.sh
@@ -56,8 +58,6 @@ fi
 
 command -v fasd >/dev/null && eval "$(fasd --init auto)"
 
-command -v grunt >/dev/null && eval "$(grunt --completion=bash)"
-
 command -v fzf >/dev/null && {
   fzf_path="$(dirname $(realpath $(which fzf)))/.."
   source "$fzf_path/shell/completion.bash"
@@ -68,6 +68,8 @@ command -v fzf >/dev/null && {
   bind -m vi-command '"\C-a": "i\C-a"'
   unset fzf_path
 }
+
+command -v grunt >/dev/null && eval "$(grunt --completion=bash)"
 
 # When connecting to SSH, start or reattach screen session
 # http://dotfiles.org/~thayer/.bashrc

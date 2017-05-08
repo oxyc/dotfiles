@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 # https://github.com/sindresorhus/pure/blob/master/prompt.zsh
 [[ -z $DEFAULT_USERNAME ]] && DEFAULT_USERNAME="oxy"
 [[ -z $DEFAULT_HOSTNAME ]] && DEFAULT_HOSTNAME="cindy"
@@ -8,7 +9,7 @@ __prompt() {
   if [[ $USER != $DEFAULT_USERNAME ]] || [[ $HOSTNAME != $DEFAULT_HOSTNAME ]]; then
     local user="$USER@$HOSTNAME"
   fi
-  local branch=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d;s/* \(.*\)/\1/')
+  local branch="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || git rev-parse --short HEAD 2> /dev/null)"
   local dirty=$(git diff --quiet --ignore-submodules HEAD 2>/dev/null; [ $? -eq 1 ] && echo '*')
 
   [[ -n $ssh ]] && [[ -n $user ]] && ssh="$ssh:"

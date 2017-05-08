@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Place scrot files in specified directory
 command -v scrot >/dev/null && alias scrot="scrot ~/pictures/screenshots/%Y-%m-%d_%H%M%S.png"
