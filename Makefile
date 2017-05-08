@@ -11,7 +11,7 @@ TMUX_FILES ?= .tmux.conf .bash_completion.d/tmux $(wildcard .tmux/sessions/*)
 GTK_FILES ?= .gtkrc-2.0
 WEECHAT_FILES ?= $(wildcard .weechat/*)
 
-LINUX_FILES ?= .linopenrc .apvlvrc
+LINUX_FILES ?= .linopenrc .apvlvrc .bash/linux.sh
 OSX_FILES ?= .amethyst
 
 TARGETS_CLEAN ?= XORG XMONAD DRUPAL MUTT TMUX IRSSI SHELL OSX

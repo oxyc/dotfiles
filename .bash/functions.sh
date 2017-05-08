@@ -95,29 +95,11 @@ gf() {
   [[ "$remote" ]] || return
   local user_repo="$(echo "$remote" | perl -pe 's/.*://;s/\.git$//')"
   git log $* --name-status --color | awk "$(cat <<AWK
-    /^.*commit [0-9a-f]+/ {sha=substr(\$2,1,7); printf "%s\thttps://github.com/$user_repo/commit/%s\033[0m\n", \$1, sha; next}
-    /^[MA]\t/ {printf "%s\thttps://github.com/$user_repo/blob/%s/%s\n", \$1, sha, \$2; next}
+    /^.*commit [0-9a-f]+/ {sha=substr(\$2,1,7); printf "%s\thttps:$user_repo/commit/%s\033[0m\n", \$1, sha; next}
+    /^[MA]\t/ {printf "%s\thttps:$user_repo/blob/%s/%s\n", \$1, sha, \$2; next}
     /.*/ {print \$0}
 AWK
   )" | less -R
-}
-
-# Usage: dimscreen 0-100
-dimscreen() {
-  local max=$(cat /sys/class/backlight/acpi_video0/max_brightness)
-  local amount="${1:-$max}"
-  local dim=$(printf "%.0f" $(awk -v m=$max -v a=$amount 'BEGIN { print m * a / 100}'))
-
-  sudo bash -c "for i in /sys/class/backlight/acpi_video*/brightness; do echo $dim > \$i; done"
-}
-
-toggletouch() {
-  local touchpad=$(xinput list | grep 'TouchPad' | sed -e 's/.*id=\([0-9]\+\).*/\1/')
-  local trackpad=$(xinput list | grep 'TrackPoint' | sed -e 's/.*id=\([0-9]\+\).*/\1/')
-  local enabled=$(xinput list-props $touchpad | grep 'Device Enabled' | sed 's/.*:.\+\([01]\).*/\1/')
-  ((enabled)) && local status=0 || local status=1
-  xinput --set-prop $touchpad "Device Enabled" $status
-  xinput --set-prop $trackpad "Device Enabled" $status
 }
 
 imageshadow() {
@@ -125,21 +107,6 @@ imageshadow() {
   local output="${2:-${input%.*}-shadow.${input#*.}}"
   convert "$input" \( +clone -background black -shadow 100x10+0+10 \) \
     +swap -background transparent -layers merge +repage "$output"
-}
-
-screenshot() {
-  [[ $1 ]] && echo "Grabbing screenshot in $1 sec" && sleep $1
-  local activeWindow=$(xprop -root | grep "_NET_ACTIVE_WINDOW(WINDOW)")
-  local id=${activeWindow:40}
-  local filename="$(date +%F_%H%M%S).png"
-  import -window "$id" -frame $filename
-  imageshadow $filename $filename
-}
-
-windowsize() {
-  local width=${1:-640}
-  local height=${2:-400}
-  wmctrl -r :ACTIVE: -e 0,-1,-1,$width,$height
 }
 
 # Show all the names (CNs and SANs) listed in the SSL certificate

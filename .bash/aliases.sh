@@ -6,7 +6,7 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias -- -="cd -"
-alias ll="ls -lah"
+alias ll="ls -lah" # exa overrides if available
 alias lsd="ls -la | grep '^d'"
 alias clean="find . -regex '.*\(.AppleDouble\|.DS_Store\)$' -ls -exec rm -r {} \;"
 
@@ -27,9 +27,6 @@ command -v exa >/dev/null && {
 
 # Download mutt attachments into downloads folder
 command -v mutt >/dev/null && alias mutt="cd ~/downloads/mutt && mutt && cd -"
-
-# Place scrot files in specified directory
-command -v scrot >/dev/null && alias scrot="scrot ~/pictures/screenshots/%Y-%m-%d_%H%M%S.png"
 
 # Enable mouse over mosh
 # https://github.com/keithw/mosh/issues/101#issuecomment-12317162
@@ -64,9 +61,6 @@ alias bf="du -x | sort -nr | head -10"
 # URL-encode strings
 # https://github.com/mathiasbynens/dotfiles/blob/master/.aliases
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
-
-# http://dotfiles.org/~ghost1227/.bashrc
-alias meminfo="echo -e '/proc/meminfo:\n';grep --color=auto '^[Mem|Swap]*[Free|Total]*:' /proc/meminfo && echo -e '\nfree -m:'; free -m"
 
 alias chromekill="ps aux | grep '[c]hrome --type=renderer' |  grep -v 'extension-process' | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 
