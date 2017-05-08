@@ -5,6 +5,10 @@ for dir in bin .local/bin node_modules/.bin drush .rvm/bin .composer/vendor/bin;
   [[ -d "$HOME/$dir" ]] && export PATH="$PATH:$HOME/$dir"
 done
 
+if command -v ruby >/dev/null && command -v gem >/dev/null; then
+  PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+fi
+
 export LANG="en_US.UTF-8"
 
 # For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
