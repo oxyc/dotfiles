@@ -24,3 +24,8 @@ fi
 
 # Fasd
 [ hash fasd 2>/dev/null ] && _fasd_bash_hook_cmd_complete v m j o
+
+# Enable tab completion for `g` by marking it as an alias for `git`
+if type _git &> /dev/null; then
+  complete -o default -o nospace -F _git g;
+fi;

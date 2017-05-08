@@ -37,26 +37,6 @@ command -v scrot >/dev/null && alias scrot="scrot ~/pictures/screenshots/%Y-%m-%
 # https://github.com/keithw/mosh/issues/101#issuecomment-12317162
 command -v mosh >/dev/null && alias mosh="perl -E ' print \"\e[?1005h\e[?1002h\" '; mosh"
 
-# Git shortcuts
-command -v git >/dev/null && {
-  alias ga="git add"
-  alias gp="git push"
-  alias gpa="gp --all"
-  alias gu="git pull"
-  alias gl="git log"
-  alias gg="gl --decorate --oneline --graph --date-order --all"
-  alias gs="git status"
-  alias gd="git diff"
-  alias gdc="gd --cached"
-  alias gm="git commit -m"
-  alias gma="git commit -am"
-  alias gmn="git commit -nm"
-  alias gb="git branch"
-  alias gba="git branch -a"
-  function gc() { git checkout "${@:-master}"; } # Checkout master by default
-  alias gcb="gc -b"
-}
-
 # Fasd shortcuts
 command -v fasd >/dev/null && {
   alias o="fasd -f -e xdg-open"

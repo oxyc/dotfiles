@@ -1,14 +1,39 @@
 [alias]
-    # View the SHA, description, and history graph of the latest 20 commits
-    l = log --pretty=oneline -n 20 --graph
-    # View the current working tree status using the short format
+    a = add
+    ap = add -p
+    b = branch
+    ba = branch -a
+    p = push
     s = status -s
-    # Commit all changes
-    ca = commit -a
+    # d = diff
+    dc = diff --cached
+    m = commit -m
+    ma = commit -am
+    mn = commit -nm
+
+    tags = tag -l
+    branches = branch -a
+    remotes = remote -v
+
+    # View abbreviated SHA, description, and history graph of the latest 20 commits
+    l = log --pretty=oneline -n 20 --graph --abbrev-commit
+
+    # Interactive rebase with the given number of latest commits
+    r = "!r() { git rebase -i HEAD~$1; }; r"
+
+    # Show the diff between the latest commit and the current state
+    d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
+
     # Switch to a branch, creating it if necessary
-    go = checkout -B
+    c = checkout -B
+
     # Undo a `git push`
     undopush = push -f origin HEAD^:master
+
+    # Remove branches that have already been merged with master
+    # a.k.a. ‘delete merged’
+    dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
 [apply]
     whitespace = fix
 [core]
@@ -19,9 +44,9 @@
     ui = auto
 
 [push]
-	default = simple
+    default = simple
 [user]
-	name = Oskar Schöldström
-	email = public@oxy.fi
+    name = Oskar Schöldström
+    email = public@oxy.fi
 [github]
-	user = oxyc
+    user = oxyc

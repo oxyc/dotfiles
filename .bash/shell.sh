@@ -48,7 +48,7 @@ set -o vi
 [[ -s ~/.travis/travis.sh ]] && source ~/.travis/travis.sh
 
 if ! shopt -oq posix; then
-  for file in ~/.bash_completion.d/* /etc/bash_completion; do
+  for file in ~/.bash_completion.d/* /etc/bash_completion /usr/local/etc/bash_completion.d/*; do
     [ -r "$file" ] && source "$file"
   done
 fi
