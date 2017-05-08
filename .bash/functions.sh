@@ -44,12 +44,6 @@ bu() {
   fi
 }
 
-# http://dotfiles.org/~kparnell/.bashrc
-mkcdir() {
-  mkdir -p $1
-  cd $1
-}
-
 # Tmux session wrapper
 # You can configure skeletons per hostname by adding them to ~/.tmux/sessions/$(hostname)
 play() {
@@ -148,12 +142,6 @@ windowsize() {
   wmctrl -r :ACTIVE: -e 0,-1,-1,$width,$height
 }
 
-yslow() {
-  [ ! -f ~/.local/lib/yslow.js ] && echo "Couldn't find yslow in ~/.local/lib/yslow.js" && return
-  [[ $# -eq 1 ]] && local flags='--info grade --format tap'
-  phantomjs ~/.local/lib/yslow.js $flags "$@"
-}
-
 # Show all the names (CNs and SANs) listed in the SSL certificate
 # for a given domain
 getcertnames() {
@@ -225,18 +213,6 @@ codepoint() {
   echo
 }
 
-# Browserstack tunnel
-bst() {
-  [[ $# -eq 0 ]] && local args="$PWD" || local args="$@"
-  if [[ -d "$args" ]]; then
-    args="$(readlink -f $args)"
-    local flags="-f"
-  fi
-
-  $BROWSER "http://www.browserstack.com"
-  java -jar ~/.local/lib/BrowserStackTunnel.jar $flags "$BROWSERSTACK_KEY" $args
-}
-
 # Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
 # https://github.com/mathiasbynens/dotfiles
 targz() {
@@ -270,9 +246,3 @@ targz() {
 tre() {
   tree -aC -I '.git|node_modules|bower_components|.sass-cache' --dirsfirst "$@" | less -FRNX
 }
-
-gtunnel() {
-  { sleep 3; $BROWSER "https://localhost:4545"; } &
-  ssh -L4545:localhost:80 local.$1 -N
-}
-complete -o "default" -o "nospace" -W "$(grep "^\s*HostName" ~/.ssh/config | grep -v "[?*]" | tr -s ' ' | cut -d ' ' -f3 | grep -v "^[[:digit:]]")" gtunnel

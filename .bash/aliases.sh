@@ -20,12 +20,10 @@ alias grep='grep --color=auto'
 
 # Shortcuts
 command -v git >/dev/null && alias g="git"
-command -v todo.sh >/dev/null && alias t="todo.sh -d ~/.todo.cfg"
 command -v exa >/dev/null && {
   alias l="exa"
   alias ll="exa -la"
 }
-command -v toggl-desktop >/dev/null && alias toggl="toggl-desktop"
 
 # Download mutt attachments into downloads folder
 command -v mutt >/dev/null && alias mutt="cd ~/downloads/mutt && mutt && cd -"

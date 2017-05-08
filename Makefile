@@ -1,27 +1,24 @@
-SHELL_FILES ?= .agignore .bash_profile .bashrc .dircolors .gitconfig .inputrc .jshintrc .lftprc .ls++.conf \
+SHELL_FILES ?= .agignore .bash_profile .bashrc .dircolors .gitconfig .inputrc .lftprc \
 	.bash/aliases.sh .bash/colors.sh .bash/exports.sh .bash/functions.sh .bash/prompt.sh .bash/shell.sh \
 	.bash/ssh-agent.sh .bash_completion.d/misc $(wildcard .local/bin/*)
 
 CRON_FILES ?= $(wildcard .cron/*)
 XORG_FILES ?= .Xresources .xbindkeysrc .xinitrc $(wildcard .urxvt/*)
 XMONAD_FILES ?= .xmonad/xmonad.hs .config/dunst/dunstrc .xmonad/conky .xmonad/icons .xmonad/scripts
-DRUPAL_FILES ?= .bash/drush.sh .ctags
 MUTT_FILES ?= .mutt/colors.muttrc .mutt/muttrc .mutt/sig .mutt/mailcap .msmtprc .offlineimaprc \
 							.local/bin/mutt-notmuch .notmuch-config
 TMUX_FILES ?= .tmux.conf .bash_completion.d/tmux $(wildcard .tmux/sessions/*)
-TODO_FILES ?= .todo.cfg
 GTK_FILES ?= .gtkrc-2.0
 WEECHAT_FILES ?= $(wildcard .weechat/*)
 
 LINUX_FILES ?= .linopenrc .apvlvrc
 OSX_FILES ?= .amethyst
 
-TARGETS_CLEAN ?= XORG XMONAD DRUPAL MUTT TMUX TODO IRSSI SHELL OSX
+TARGETS_CLEAN ?= XORG XMONAD DRUPAL MUTT TMUX IRSSI SHELL OSX
 
-MUTT_DIRS ?= .mutt/cache/bodies .mutt/cache/headers .mutt/temp .goobookrc
+MUTT_DIRS ?= .mutt/cache/bodies .mutt/cache/headers .mutt/temp
 SHELL_DIRS ?= .backup
 TMUX_DIRS ?= .tmux/sessions .tmux/sockets
-TODO_DIRS ?= .todo
 
 LIB_DIR ?= ~/.local/lib
 
@@ -40,7 +37,7 @@ fetch-github:
 install:
 	@echo "Use either install-linux install-mac depending on your system"
 
-install-linux: clean linux xorg drupal mutt tmux todo weechat shell gtk init
+install-linux: clean linux xorg mutt tmux weechat shell gtk init
 
 install-mac: clean tmux shell osx init
 
@@ -62,9 +59,7 @@ cron: $(addprefix $(DEST)/,$(CRON_FILES))
 
 gtk: $(addprefix $(DEST)/,$(GTK_FILES))
 
-xmonad: $(addprefix $(DEST)/, $(XMONAD_FILES))
-
-drupal: $(addprefix $(DEST)/,$(DRUPAL_FILES))
+xmonad: $(addprefix $(DEST)/,$(XMONAD_FILES))
 
 mutt: $(addprefix $(DEST)/,$(MUTT_FILES))
 	@mkdir -p $(addprefix $(DEST)/,$(MUTT_DIRS))
@@ -72,28 +67,12 @@ mutt: $(addprefix $(DEST)/,$(MUTT_FILES))
 tmux: $(addprefix $(DEST)/,$(TMUX_FILES))
 	@mkdir -p $(addprefix $(DEST)/,$(TMUX_DIRS))
 
-todo: $(addprefix $(DEST)/,$(TODO_FILES))
-	@mkdir -p $(addprefix $(DEST)/$(TODO_DIRS))
-
 weechat: $(addprefix $(DEST)/,$(WEECHAT_FILES))
 
 shell: $(addprefix $(DEST)/,$(SHELL_FILES))
 	@mkdir -p $(addprefix $(DEST)/,$(SHELL_DIRS))
 	@git submodule init
 	@git submodule update
-
-yslow:
-	@git clone git://github.com/marcelduran/yslow.git /tmp/yslow \
-		&& pushd /tmp/yslow \
-		&& make -s phantomjs \
-		&& mv build/phantomjs/yslow.js $(LIB_DIR)/ \
-		&& popd \
-		&& rm -rf /tmp/yslow
-
-node: yslow
-
-browserstack:
-	@wget -O $(LIB_DIR)/BrowserStackTunnel.jar http://www.browserstack.com/BrowserStackTunnel.jar
 
 # Helpers ---------------------------------------------------------------------
 
@@ -121,4 +100,4 @@ clean-target: $(addprefix $(BACKUP)/,$($(CLEAN)_FILES))
 clean:
 	@$(foreach target,$(TARGETS_CLEAN), make -s CLEAN=$(target) clean-target;)
 
-.PHONY: xorg xmonad drupal mutt tmux todo weechat shell clean-target clean install gtk
+.PHONY: xorg xmonad mutt tmux weechat shell clean-target clean install gtk
