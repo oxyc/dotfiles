@@ -47,6 +47,7 @@ command -v git >/dev/null && {
   alias gdc="gd --cached"
   alias gm="git commit -m"
   alias gma="git commit -am"
+  alias gmn="git commit -nm"
   alias gb="git branch"
   alias gba="git branch -a"
   function gc() { git checkout "${@:-master}"; } # Checkout master by default
