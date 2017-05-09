@@ -11,6 +11,7 @@ alias lsd="ls -la | grep '^d'"
 alias clean="find . -regex '.*\(.AppleDouble\|.DS_Store\)$' -ls -exec rm -r {} \;"
 
 # Rewrites
+command -v cap >/dev/null && alias cap="bundle exec cap"
 alias df="df -h"
 alias diff="git diff --no-index --color-words"
 alias du="du -hc"
