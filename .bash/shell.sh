@@ -51,7 +51,7 @@ set -o vi
 
 # Shell completions.
 if ! shopt -oq posix; then
-  for file in ~/.bash_completion.d/* /etc/bash_completion /usr/local/etc/bash_completion.d/*; do
+  for file in /etc/bash_completion /usr/local/etc/bash_completion.d/* ~/.bash_completion.d/*; do
     [ -r "$file" ] && source "$file"
   done
 fi
