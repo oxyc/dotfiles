@@ -208,7 +208,7 @@ targz() {
 
 # https://github.com/mathiasbynens/dotfiles/pull/249
 tre() {
-  tree -aC -I '.git|node_modules|bower_components|.sass-cache' --dirsfirst "$@" | less -FRNX
+  tree -aC -I '.git|node_modules|bower_components|vendor|.sass-cache' --dirsfirst "$@" | less -FRNX
 }
 
 # Decode \x{ABCD}-style Unicode escape sequences
