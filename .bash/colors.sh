@@ -50,5 +50,5 @@ export BLACK="$(tput setaf 16)"
 export FOREGROUND="$LIGHTERGRAY"
 export BACKGROUND="$DARKESTGRAY"
 
-BASE16_SHELL="${HOME}/.local/lib/base16-shell/scripts/base16-default-dark.sh"
-[[ -s $BASE16_SHELL  ]] && source $BASE16_SHELL || echo foo
+BASE16_SHELL=/usr/local/share/base16-shell/
+[[ -d $BASE16_SHELL ]] && source "$BASE16_SHELL/scripts/base16-default-dark.sh"
