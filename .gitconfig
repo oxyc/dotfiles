@@ -3,10 +3,12 @@
     ap = add -p
     b = branch
     ba = branch -a
+    f = fetch --all
     p = push
     s = status -s
     # d = diff
     dc = diff --cached
+    amend = commit --amend
     m = commit -m
     ma = commit -am
     mn = commit -nm
