@@ -1,109 +1,26 @@
+These dotfiles have been used on Ubuntu, Archlinux and most recently macOS. Until I can get Archlinux running on the Macbook 12", this will only be tested on macOS even if there's a bunch of linux-specific files committed.
+
 ## Installation
 
-*__This README is outdated__, and the repo has changed drastically, read the Makefile if you know what you're doing*
+There's an outdated Makefile that I've abandoned in favor of my [`mac-playbook`](https://github.com/oxyc/mac-playbook) ansible playbook. That's where future work on installation will take place.
 
-```bash
-make install
-```
+_This is a highly opinionated set of dotfiles, that cater to my user experience. Do **NOT** install anything you haven't looked through. For others than me, this is mostly a reference point for your own dotfiles repo._
 
-Add a .bash/extras.sh file with your additional settings, such as:
-
-```bash
-git config --global user.name FULLNAME
-git config --global user.email EMAIL
-git config --global github.user USERNAME
-git config --global github.token TOKEN
-```
-
-## Features
-
-### Bundled scripts
-
-#### [ack](http://betterthangrep.com/)
-
-Ack, better than grep
-
-#### [markdown](http://daringfireball.net/projects/markdown/)
-
-Markdown to HTML script
-
-#### SSH Expect
-
-Make ssh connection with password and identity file scriptable. Without
-identity file one can use sshpass, but for both password and file, this is
-needed.
-
-```
-sshexp user password path_to_identity_file hostname command
-```
-
-#### Track
-```
-Usage: track [action]
-
-Dead simple time tracking / logging script.
-
-Options:
-  -s, --show    Show log entries, takes a couple of different arguments.
-                  -s: show the default[20] amount of entries
-                  -s 10: show the 10 latest entries
-                  -s today: show all entries made today
-                  -s time: try to calculate time tracked today
-
-  -f, --find    Filters through log entries with grep.
-                  -f Added\ function
-
-  -u, --undo    Undo the last entry addition. Note, you cant undo undoes.
-
-  -h, --help    Displays this output
-
-  *             Everything else passed will be logged, some keywords exist:
-                  - if you timestamp a message with HH:MM it will be respected.
-                  - if your message is END, it will be used to track time
-                    beginning at the previous message.
-```
-
-### Useful aliases/functions
-- `ip` Output your external IP.
-- `server` Start a HTTP server in current path.
-- `license` Output a MIT license file.
-- `extract` Extract content from a compressed file.
-- `bu` Backup current directory to ~/.backup.
-- `record_desktop` Begin screenrecording and share the video over HTTP (needs polishing).
-- `psgrep` Grep trough running processes.
-- `mkcdir` Create a directory and move into it.
-- `calc` A proper calculator
-- `bf` List the 10 biggest files in the current path.
+*See also*:
+ - [`oxyc/mac-playbook`](https://github.com/oxyc/mac-playbook) (the playbook used to provision my computer)
+ - [`oxyc/vimrc`](https://github.com/oxyc/vimrc) (my vimrc repository)
 
 ## Screenshots
 
-All screenshots are taken on a black background, actually there is a 10% alpha
-transparency on them, configured for urxvt
+### macOS
 
-#### Full screen
+![vimrc](http://i.imgur.com/MFYk8fT.jpg)
 
-![Full screen](http://i.imgur.com/6kP2O.png)
+[iTerm2](https://www.iterm2.com/) running [neovim](https://neovim.io/) using my [vimrc repository](https://github.com/oxyc/vimrc).
 
-#### Mutt
+![Screenshot](http://i.imgur.com/XJjQx0C.jpg)
 
-![Mutt](http://i.imgur.com/EkUx6.png)
-
-#### Irssi
-
-![Irssi](http://i.imgur.com/PRrEH.png)
-
-#### ls++ & vim
-
-![ls++ & vim](http://i.imgur.com/XWNXB.png)
-
-## Additional suggestions
-
-As this is often used with shell-only accessed computers I'm not including a
-font but my personal preference is [Inconsolata](http://levien.com/type/myfonts/inconsolata.html) by Raph Levien.
-
-```bash
-mkdir -p ~/.fonts && cd ~/.fonts && wget http://levien.com/type/myfonts/Inconsolata.otf && fc-cache -f -v
-```
+[chunkwm](https://github.com/koekeishiya/chunkwm) as my tiling window manager and [khd](https://github.com/koekeishiya/khd) as my hotkey dameon. This will be added to the playbook once chunkwm hits alpha.
 
 ## Inspired/Stolen by
 
