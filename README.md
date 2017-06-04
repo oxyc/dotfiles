@@ -20,7 +20,7 @@ _This is a highly opinionated set of dotfiles, that cater to my user experience.
 
 ![Screenshot](http://i.imgur.com/XJjQx0C.jpg)
 
-[chunkwm](https://github.com/koekeishiya/chunkwm) as my tiling window manager and [khd](https://github.com/koekeishiya/khd) as my hotkey dameon. This will be added to the playbook once chunkwm hits alpha.
+[chunkwm](https://github.com/koekeishiya/chunkwm) as my tiling window manager and [khd](https://github.com/koekeishiya/khd) as my hotkey dameon.
 
 ## Inspired/Stolen by
 
