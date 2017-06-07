@@ -7,6 +7,7 @@ There's an outdated Makefile that I've abandoned in favor of my [`mac-playbook`]
 _This is a highly opinionated set of dotfiles, that cater to my user experience. Do **NOT** install anything you haven't looked through. For others than me, this is mostly a reference point for your own dotfiles repo._
 
 *See also*:
+
  - [`oxyc/mac-playbook`](https://github.com/oxyc/mac-playbook) (the playbook used to provision my computer)
  - [`oxyc/vimrc`](https://github.com/oxyc/vimrc) (my vimrc repository)
 

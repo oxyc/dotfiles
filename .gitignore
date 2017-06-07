@@ -6,3 +6,7 @@ Desktop.ini
 *~
 *.bak
 *.old
+
+# Vim
+.phpcomplete_extended
+.sass-cache
