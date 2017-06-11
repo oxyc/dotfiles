@@ -90,9 +90,6 @@
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
 
-[user]
-	name = Oskar Schöldström
-	email = m@oxy.fi
-
-[github]
-	user = oxyc
+[include]
+	# user.email, user.name, user.signingkey go in this file
+	path = .local.gitconfig
