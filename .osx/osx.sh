@@ -613,9 +613,10 @@ defaults write com.apple.terminal StringEncodings -array 4
 #defaults write com.apple.terminal FocusFollowsMouse -bool true
 #defaults write org.x.X11 wm_ffm -bool true
 
-# Enable Secure Keyboard Entry in Terminal.app
+# Disable Secure Keyboard Entry
 # See: https://security.stackexchange.com/a/47786/8918
-defaults write com.apple.terminal SecureKeyboardEntry -bool true
+defaults write com.apple.terminal SecureKeyboardEntry -bool false
+defaults write com.googlecode.iterm2 "Secure Input" -bool false
 
 # Disable the annoying line marks
 defaults write com.apple.Terminal ShowLineMarks -int 0
