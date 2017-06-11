@@ -1,0 +1,89 @@
+# remap caps-lock to escape
+- capslock : khd -p "- escape"
+
+# re-map/disable quit shortcut
+cmd - q [ Firefox, iTerm2, Google Chrome ] : khd -p "cmd - w"
+
+# open new terminal
+cmd - return : open -na /Applications/iTerm.app
+
+# when Finder is focused, ⌘N opens a new Finder window so re-use command even
+# when finder isn't opened. This disables new windows for all other Apps.
+cmd - n [ Finder ] !:  open -n ~/
+
+# equalize size of windows
+cmd - 0 : chunkc desktop --equalize
+
+# rotate tree
+cmd - r : chunkc desktop --rotate 90
+
+# toggle desktop offset
+cmd - e : chunkc desktop --toggle offset
+
+# toggle window split type
+cmd - space : chunkc window --toggle split
+
+# toggle window parent zoom
+cmd - d : chunkc window --toggle parent
+
+# reload config
+shift + cmd - r : khd -e "reload"
+
+# toggle window fullscreen
+shift + cmd - f : chunkc window --toggle fullscreen
+
+# toggle window native fullscreen
+shift + cmd - return : chunkc window --toggle native-fullscreen
+
+# float / unfloat window
+shift + cmd - t : chunkc window --toggle float
+
+# move window
+cmd - h : chunkc window --warp west
+cmd - j : chunkc window --warp south
+cmd - k : chunkc window --warp north
+cmd - l : chunkc window --warp east
+
+# swap window
+alt - h : chunkc window --swap west
+alt - j : chunkc window --swap south
+alt - k : chunkc window --swap north
+alt - l : chunkc window --swap east
+
+# move floating windows / windows on a floating space
+alt - up     : chunkc window --warp-floating fullscreen
+alt - left   : chunkc window --warp-floating left
+alt - right  : chunkc window --warp-floating right
+cmd - left   : chunkc window --warp-floating top-left
+cmd - right  : chunkc window --warp-floating top-right
+ctrl - left  : chunkc window --warp-floating bottom-left
+ctrl - right : chunkc window --warp-floating bottom-right
+
+# send window to desktop
+shift + alt - 1 : chunkc window --send-to-desktop 1
+shift + alt - 2 : chunkc window --send-to-desktop 2
+shift + alt - 3 : chunkc window --send-to-desktop 3
+shift + alt - 4 : chunkc window --send-to-desktop 4
+shift + alt - 5 : chunkc window --send-to-desktop 5
+shift + alt - 6 : chunkc window --send-to-desktop 6
+
+# send window to desktop and switch desktop
+# @todo requires mission control shortcuts for desktop moves.
+shift + cmd - 1 : chunkc window -d 1; khd -p "ctrl - 1"
+shift + cmd - 2 : chunkc window -d 2; khd -p "ctrl - 2"
+shift + cmd - 3 : chunkc window -d 3; khd -p "ctrl - 3"
+shift + cmd - 4 : chunkc window -d 4; khd -p "ctrl - 4"
+shift + cmd - 5 : chunkc window -d 5; khd -p "ctrl - 5"
+shift + cmd - 6 : chunkc window -d 6; khd -p "ctrl - 6"
+
+# increase region size
+ctrl + cmd - h : chunkc window --use-temporary-ratio 0.1 --adjust-window-edge west
+ctrl + cmd - j : chunkc window --use-temporary-ratio 0.1 --adjust-window-edge south
+ctrl + cmd - k : chunkc window --use-temporary-ratio 0.1 --adjust-window-edge north
+ctrl + cmd - l : chunkc window --use-temporary-ratio 0.1 --adjust-window-edge east
+
+# decrease region size
+shift + cmd - l : chunkc window --use-temporary-ratio -0.1 --adjust-window-edge west
+shift + cmd - k : chunkc window --use-temporary-ratio -0.1 --adjust-window-edge south
+shift + cmd - j : chunkc window --use-temporary-ratio -0.1 --adjust-window-edge north
+shift + cmd - h : chunkc window --use-temporary-ratio -0.1 --adjust-window-edge east
