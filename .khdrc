@@ -12,31 +12,31 @@ cmd - return : open -na /Applications/iTerm.app
 cmd - n [ Finder ] !:  open -n ~/
 
 # equalize size of windows
-cmd - 0 : chunkc desktop --equalize
+alt - 0 : chunkc desktop --equalize
 
 # rotate tree
-cmd - r : chunkc desktop --rotate 90
+alt - r : chunkc desktop --rotate 90
 
 # toggle desktop offset
-cmd - e : chunkc desktop --toggle offset
+alt - a : chunkc desktop --toggle offset
 
 # toggle window split type
-cmd - space : chunkc window --toggle split
+alt - space : chunkc window --toggle split
 
 # toggle window parent zoom
-cmd - d : chunkc window --toggle parent
+alt - d : chunkc window --toggle parent
 
 # reload config
-shift + cmd - r : khd -e "reload"
-
-# toggle window fullscreen
-shift + cmd - f : chunkc window --toggle fullscreen
-
-# toggle window native fullscreen
-shift + cmd - return : chunkc window --toggle native-fullscreen
+shift + alt - r : khd -e "reload"
 
 # float / unfloat window
-shift + cmd - t : chunkc window --toggle float
+alt - t : chunkc window --toggle float
+
+# toggle window fullscreen
+alt - f : chunkc window --toggle fullscreen
+
+# toggle window native fullscreen
+shift + alt - return : chunkc window --toggle native-fullscreen
 
 # move window
 cmd - h : chunkc window --warp west
