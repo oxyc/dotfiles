@@ -23,6 +23,10 @@ export LANG="en_US.UTF-8"
 # Don’t clear the screen after quitting a manual page.
 export MANPAGER='less -X';
 
+# Avoid issues with `gpg` as installed via Homebrew.
+# https://stackoverflow.com/a/42265848/96656
+export GPG_TTY=$(tty);
+
 # After each command, save and reload history
 # http://unix.stackexchange.com/questions/1288/preserve-bash-history-in-multiple-terminal-windows
 # @TODO the following code places ; in front which breaks the command, track it down!

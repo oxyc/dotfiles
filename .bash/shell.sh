@@ -71,6 +71,11 @@ command -v fzf >/dev/null && {
 
 command -v grunt >/dev/null && eval "$(grunt --completion=bash)"
 
+# Start GPG agent.
+if [ ! -n "$(pgrep gpg-agent)" ]; then
+  gpg-agent --daemon
+fi
+
 # When connecting to SSH, start or reattach screen session
 # http://dotfiles.org/~thayer/.bashrc
 #if [ -n "$SSH_CONNECTION" ] && [ -z "$SCREEN_EXIST" ]; then
