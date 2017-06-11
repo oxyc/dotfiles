@@ -92,4 +92,4 @@
 
 [include]
 	# user.email, user.name, user.signingkey go in this file
-	path = .local.gitconfig
+	path = .gitconfig.local
