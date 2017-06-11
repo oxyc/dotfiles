@@ -1,54 +1,98 @@
 [alias]
-    a = add
-    ap = add -p
-    b = branch
-    ba = branch -a
-    f = fetch --all
-    p = push
-    s = status -s
-    # d = diff
-    dc = diff --cached
-    amend = commit --amend
-    m = commit -m
-    ma = commit -am
-    mn = commit -nm
+	a = add
+	ap = add -p
+	b = branch
+	ba = branch -a
+	f = fetch --all
+	p = push
+	s = status -s
+	# d = diff
+	dc = diff --cached
+	amend = commit --amend
+	m = commit -m
+	ma = commit -am
+	mn = commit -nm
 
-    tags = tag -l
-    branches = branch -a
-    remotes = remote -v
+	tags = tag -l
+	branches = branch -a
+	remotes = remote -v
 
-    # View abbreviated SHA, description, and history graph of the latest 20 commits
-    l = log --pretty=oneline -n 20 --graph --abbrev-commit
+	# View abbreviated SHA, description, and history graph of the latest 20 commits
+	l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
-    # Interactive rebase with the given number of latest commits
-    r = "!r() { git rebase -i HEAD~$1; }; r"
+	# Interactive rebase with the given number of latest commits
+	r = "!r() { git rebase -i HEAD~$1; }; r"
 
-    # Show the diff between the latest commit and the current state
-    d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
+	# Show the diff between the latest commit and the current state
+	d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
 
-    # Switch to a branch, creating it if necessary
-    c = checkout -B
+	# Switch to a branch, creating it if necessary
+	c = checkout -B
 
-    # Undo a `git push`
-    undopush = push -f origin HEAD^:master
+	# Undo a `git push`
+	undopush = push -f origin HEAD^:master
 
-    # Remove branches that have already been merged with master
-    # a.k.a. ‘delete merged’
-    dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+	# Remove branches that have already been merged with master
+	# a.k.a. ‘delete merged’
+	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 
 [apply]
-    whitespace = fix
+	# Detect whitespace errors when applying a patch
+	whitespace = fix
+
 [core]
-    excludesfile = ~/.gitignore
-    editor = vim
+	# Use custom `.gitignore` and `.gitattributes`
+	excludesfile = ~/.gitignore
+
+	# Treat spaces before tabs and all kinds of trailing whitespace as an error
+	# [default] trailing-space: looks for spaces at the end of a line
+	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+
+	# Make `git rebase` safer on macOS
+	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+	trustctime = false
+
+	# Prevent showing files whose names contain non-ASCII symbols as unversioned.
+	# http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+	precomposeunicode = false
+
 [color]
-    # Use colors in Git commands that are capable of colored output when outputting to the terminal
-    ui = auto
+	# Use colors in Git commands that are capable of colored output when
+	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+	ui = auto
+
+[commit]
+	# https://help.github.com/articles/signing-commits-using-gpg/
+	gpgsign = true
+
+[diff]
+	# Detect copies as well as renames
+	renames = copies
+	# Enable an experimental heuristic that shifts the hunk boundary in an
+	# attempt to make the resulting patch easier to read.
+	indentHeuristic = true
+
+[diff "bin"]
+	# Use `hexdump` to diff binary files
+	textconv = hexdump -v -C
+
+[help]
+	# Automatically correct and execute mistyped commands
+	autocorrect = 1
+
+[merge]
+	# Include summaries of merged commits in newly created merge commit messages
+	log = true
 
 [push]
-    default = simple
+	default = simple
+	# Make `git push` push relevant annotated tags when pushing branches out.
+	followTags = true
+
 [user]
-    name = Oskar Schöldström
-    email = public@oxy.fi
+	name = Oskar Schöldström
+	email = m@oxy.fi
+
 [github]
-    user = oxyc
+	user = oxyc
