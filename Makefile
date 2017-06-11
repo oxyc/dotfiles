@@ -5,8 +5,6 @@ SHELL_FILES ?= .agignore .bash_profile .bashrc .dircolors .gitconfig .inputrc .l
 CRON_FILES ?= $(wildcard .cron/*)
 XORG_FILES ?= .Xresources .xbindkeysrc .xinitrc $(wildcard .urxvt/*)
 XMONAD_FILES ?= .xmonad/xmonad.hs .config/dunst/dunstrc .xmonad/conky .xmonad/icons .xmonad/scripts
-MUTT_FILES ?= .mutt/colors.muttrc .mutt/muttrc .mutt/sig .mutt/mailcap .msmtprc .offlineimaprc \
-							.local/bin/mutt-notmuch .notmuch-config
 TMUX_FILES ?= .tmux.conf .bash_completion.d/tmux $(wildcard .tmux/sessions/*)
 GTK_FILES ?= .gtkrc-2.0
 WEECHAT_FILES ?= $(wildcard .weechat/*)
@@ -14,9 +12,8 @@ WEECHAT_FILES ?= $(wildcard .weechat/*)
 LINUX_FILES ?= .linopenrc .apvlvrc .bash/linux.sh
 OSX_FILES ?= .khdrc
 
-TARGETS_CLEAN ?= XORG XMONAD DRUPAL MUTT TMUX IRSSI SHELL OSX
+TARGETS_CLEAN ?= XORG XMONAD TMUX SHELL OSX
 
-MUTT_DIRS ?= .mutt/cache/bodies .mutt/cache/headers .mutt/temp
 SHELL_DIRS ?= .backup
 TMUX_DIRS ?= .tmux/sessions .tmux/sockets
 
@@ -60,9 +57,6 @@ cron: $(addprefix $(DEST)/,$(CRON_FILES))
 gtk: $(addprefix $(DEST)/,$(GTK_FILES))
 
 xmonad: $(addprefix $(DEST)/,$(XMONAD_FILES))
-
-mutt: $(addprefix $(DEST)/,$(MUTT_FILES))
-	@mkdir -p $(addprefix $(DEST)/,$(MUTT_DIRS))
 
 tmux: $(addprefix $(DEST)/,$(TMUX_FILES))
 	@mkdir -p $(addprefix $(DEST)/,$(TMUX_DIRS))
