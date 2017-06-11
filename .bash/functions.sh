@@ -146,6 +146,17 @@ have() {
   type "$1" &> /dev/null
 }
 
+notify() {
+  local input="$@"
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    osascript -e "display notification \"$input\" with title \"${TITLE:-Notification}\""
+  else
+    DISPLAY=${DISPLAY:-:0.0} notify-send --urgency=${2:-normal} "$1"
+    [[ -n $BELL ]] && echo -en '\a' >> /dev/$BELL
+  fi
+}
+
 # Tmux session wrapper
 # You can configure skeletons per hostname by adding them to ~/.tmux/sessions/$(hostname)
 play() {
@@ -226,7 +237,6 @@ vag() {
   done < <(bash -c "ag -l $@")
   "${EDITOR:-vim}" "${files[@]}"
 }
-
 
 # Simple calculator
 # = 1 + 3

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 PATH="$PATH:$HOME/.local/bin:/usr/sbin"
+source ~/.bash/functions.sh
 
 CAPACITY=$(battery capacity)
 AC=$(battery ac)
