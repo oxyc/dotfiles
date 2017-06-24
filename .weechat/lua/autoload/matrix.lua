@@ -1,0 +1,1 @@
+../../plugins/weechat-matrix-protocol-script/matrix.lua
