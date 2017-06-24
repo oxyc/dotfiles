@@ -1,0 +1,1 @@
+../../plugins/wee-slack/wee_slack.py

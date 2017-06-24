@@ -7,3 +7,9 @@
 [submodule ".weechat/plugins/weechat-matrix-protocol-script"]
 	path = .weechat/plugins/weechat-matrix-protocol-script
 	url = https://github.com/torhve/weechat-matrix-protocol-script.git
+[submodule ".weechat/plugins/scripts"]
+	path = .weechat/plugins/scripts
+	url = https://github.com/weechat/scripts.git
+[submodule ".weechat/plugins/wee-slack"]
+	path = .weechat/plugins/wee-slack
+	url = https://github.com/wee-slack/wee-slack.git
