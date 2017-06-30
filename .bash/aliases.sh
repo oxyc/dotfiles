@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # New commands
 alias ..="cd .."
 alias ...="cd ../.."

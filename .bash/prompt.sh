@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # https://github.com/sindresorhus/pure/blob/master/prompt.zsh
 [[ -z $DEFAULT_USERNAME ]] && DEFAULT_USERNAME="oxy"
 [[ -z $DEFAULT_HOSTNAME ]] && DEFAULT_HOSTNAME="cindy"

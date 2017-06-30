@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Unescaped codes
 FG_italic="3"
 FG_underline="4"

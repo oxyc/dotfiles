@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Some default packages
 export EDITOR="vim"
 export VISUAL="vim"

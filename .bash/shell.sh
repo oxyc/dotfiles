@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Disable CTRL-s (stop output).
 stty stop ''
 

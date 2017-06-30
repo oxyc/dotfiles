@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # http://dotfiles.org/~krib/.bashrc
 bu() {
   if [ "$(dirname $1)" == "." ]; then

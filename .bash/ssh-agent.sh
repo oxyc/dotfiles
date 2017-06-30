@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Initialise ssh-agent
 # Taken from https://help.github.com/articles/working-with-ssh-key-passphrases
 
