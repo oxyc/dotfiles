@@ -12,78 +12,82 @@ cmd - return : open -na /Applications/iTerm.app
 cmd - n [ Finder ] !:  open -n ~/
 
 # equalize size of windows
-alt - 0 : chunkc desktop --equalize
+alt - 0 : chunkc tiling::desktop --equalize
 
 # rotate tree
-alt - r : chunkc desktop --rotate 90
+alt - r : chunkc tiling::desktop --rotate 90
 
 # toggle desktop offset
-alt - a : chunkc desktop --toggle offset
+alt - a : chunkc tiling::desktop --toggle offset
 
 # toggle window split type
-alt - space : chunkc window --toggle split
+alt - space : chunkc tiling::tiling::window --toggle split
 
 # toggle window parent zoom
-alt - d : chunkc window --toggle parent
+alt - d : chunkc tiling::window --toggle parent
 
 # reload config
 shift + alt - r : khd -e "reload"
 
 # float / unfloat window
-alt - t : chunkc window --toggle float
+alt - t : chunkc tiling::window --toggle float
+
+# toggle sticky, float and resize to picture-in-picture size
+alt - s : chunkc tiling::window --toggle sticky;\
+          chunkc tiling::window --warp-floating pip-right
 
 # toggle window fullscreen
-alt - f : chunkc window --toggle fullscreen
+alt - f : chunkc tiling::window --toggle fullscreen
 
 # toggle window native fullscreen
-shift + alt - return : chunkc window --toggle native-fullscreen
+shift + alt - return : chunkc tiling::window --toggle native-fullscreen
 
 # move window
-cmd - h : chunkc window --warp west
-cmd - j : chunkc window --warp south
-cmd - k : chunkc window --warp north
-cmd - l : chunkc window --warp east
+cmd - h : chunkc tiling::window --warp west
+cmd - j : chunkc tiling::window --warp south
+cmd - k : chunkc tiling::window --warp north
+cmd - l : chunkc tiling::window --warp east
 
 # swap window
-alt - h : chunkc window --swap west
-alt - j : chunkc window --swap south
-alt - k : chunkc window --swap north
-alt - l : chunkc window --swap east
+alt - h : chunkc tiling::window --swap west
+alt - j : chunkc tiling::window --swap south
+alt - k : chunkc tiling::window --swap north
+alt - l : chunkc tiling::window --swap east
 
 # move floating windows / windows on a floating space
-alt - up     : chunkc window --warp-floating fullscreen
-alt - left   : chunkc window --warp-floating left
-alt - right  : chunkc window --warp-floating right
-cmd - left   : chunkc window --warp-floating top-left
-cmd - right  : chunkc window --warp-floating top-right
-ctrl - left  : chunkc window --warp-floating bottom-left
-ctrl - right : chunkc window --warp-floating bottom-right
+alt - up     : chunkc tiling::window --warp-floating fullscreen
+alt - left   : chunkc tiling::window --warp-floating left
+alt - right  : chunkc tiling::window --warp-floating right
+cmd - left   : chunkc tiling::window --warp-floating top-left
+cmd - right  : chunkc tiling::window --warp-floating top-right
+ctrl - left  : chunkc tiling::window --warp-floating bottom-left
+ctrl - right : chunkc tiling::window --warp-floating bottom-right
 
 # send window to desktop
-shift + alt - 1 : chunkc window --send-to-desktop 1
-shift + alt - 2 : chunkc window --send-to-desktop 2
-shift + alt - 3 : chunkc window --send-to-desktop 3
-shift + alt - 4 : chunkc window --send-to-desktop 4
-shift + alt - 5 : chunkc window --send-to-desktop 5
-shift + alt - 6 : chunkc window --send-to-desktop 6
+shift + alt - 1 : chunkc tiling::window --send-to-desktop 1
+shift + alt - 2 : chunkc tiling::window --send-to-desktop 2
+shift + alt - 3 : chunkc tiling::window --send-to-desktop 3
+shift + alt - 4 : chunkc tiling::window --send-to-desktop 4
+shift + alt - 5 : chunkc tiling::window --send-to-desktop 5
+shift + alt - 6 : chunkc tiling::window --send-to-desktop 6
 
 # send window to desktop and switch desktop
 # @todo requires mission control shortcuts for desktop moves.
-shift + cmd - 1 : chunkc window -d 1; khd -p "ctrl - 1"
-shift + cmd - 2 : chunkc window -d 2; khd -p "ctrl - 2"
-shift + cmd - 3 : chunkc window -d 3; khd -p "ctrl - 3"
-shift + cmd - 4 : chunkc window -d 4; khd -p "ctrl - 4"
-shift + cmd - 5 : chunkc window -d 5; khd -p "ctrl - 5"
-shift + cmd - 6 : chunkc window -d 6; khd -p "ctrl - 6"
+shift + cmd - 1 : chunkc tiling::window -d 1; khd -p "ctrl - 1"
+shift + cmd - 2 : chunkc tiling::window -d 2; khd -p "ctrl - 2"
+shift + cmd - 3 : chunkc tiling::window -d 3; khd -p "ctrl - 3"
+shift + cmd - 4 : chunkc tiling::window -d 4; khd -p "ctrl - 4"
+shift + cmd - 5 : chunkc tiling::window -d 5; khd -p "ctrl - 5"
+shift + cmd - 6 : chunkc tiling::window -d 6; khd -p "ctrl - 6"
 
 # increase region size
-ctrl + cmd - h : chunkc window --use-temporary-ratio 0.1 --adjust-window-edge west
-ctrl + cmd - j : chunkc window --use-temporary-ratio 0.1 --adjust-window-edge south
-ctrl + cmd - k : chunkc window --use-temporary-ratio 0.1 --adjust-window-edge north
-ctrl + cmd - l : chunkc window --use-temporary-ratio 0.1 --adjust-window-edge east
+ctrl + cmd - h : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge west
+ctrl + cmd - j : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge south
+ctrl + cmd - k : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge north
+ctrl + cmd - l : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge east
 
 # decrease region size
-shift + cmd - l : chunkc window --use-temporary-ratio -0.1 --adjust-window-edge west
-shift + cmd - k : chunkc window --use-temporary-ratio -0.1 --adjust-window-edge south
-shift + cmd - j : chunkc window --use-temporary-ratio -0.1 --adjust-window-edge north
-shift + cmd - h : chunkc window --use-temporary-ratio -0.1 --adjust-window-edge east
+shift + cmd - l : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge west
+shift + cmd - k : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge south
+shift + cmd - j : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge north
+shift + cmd - h : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge east
