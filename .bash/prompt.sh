@@ -16,7 +16,7 @@ __prompt_user() {
 __prompt_git() {
   local branch="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || git rev-parse --short HEAD 2> /dev/null)"
   local dirty=$(git diff --quiet --ignore-submodules HEAD 2>/dev/null; [ $? -eq 1 ] && echo '*')
-  if [[ -n "$branch" ]] && [[ -n "$dirty" ]]; then
+  if [[ -n "$branch" ]] || [[ -n "$dirty" ]]; then
     echo " ${branch}${dirty}"
   fi
 }
