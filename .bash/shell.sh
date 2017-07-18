@@ -47,13 +47,6 @@ set -o vi
 [[ -s ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm
 [[ -s ~/.travis/travis.sh ]] && source ~/.travis/travis.sh
 
-# Shell completions.
-if ! shopt -oq posix; then
-  for file in /etc/bash_completion /usr/local/etc/bash_completion.d/* ~/.bash_completion.d/*; do
-    [ -r "$file" ] && source "$file"
-  done
-fi
-
 command -v fasd >/dev/null && eval "$(fasd --init auto)"
 
 command -v fzf >/dev/null && {

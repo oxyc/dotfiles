@@ -1,11 +1,11 @@
 SHELL_FILES ?= .agignore .bash_profile .bashrc .dircolors .gitconfig .inputrc .lftprc \
 	.bash/aliases.sh .bash/colors.sh .bash/exports.sh .bash/functions.sh .bash/prompt.sh .bash/shell.sh \
-	.bash/ssh-agent.sh .bash_completion.d/misc $(wildcard .local/bin/*)
+	.bash/ssh-agent.sh $(wildcard .local/bin/*)
 
 CRON_FILES ?= $(wildcard .cron/*)
 XORG_FILES ?= .Xresources .xbindkeysrc .xinitrc $(wildcard .urxvt/*)
 XMONAD_FILES ?= .xmonad/xmonad.hs .config/dunst/dunstrc .xmonad/conky .xmonad/icons .xmonad/scripts
-TMUX_FILES ?= .tmux.conf .bash_completion.d/tmux $(wildcard .tmux/sessions/*)
+TMUX_FILES ?= .tmux.conf $(wildcard .tmux/sessions/*)
 GTK_FILES ?= .gtkrc-2.0
 WEECHAT_FILES ?= $(wildcard .weechat/*)
 
