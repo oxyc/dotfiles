@@ -1,14 +1,3 @@
-# http://dotfiles.org/~krib/.bashrc
-bu() {
-  if [ "$(dirname $1)" == "." ]; then
-    mkdir -p ~/.backup/$(pwd)
-    cp $1 ~/.backup/$(pwd)/$1-$(date +%Y%m%d%H%M).backup
-  else
-    mkdir -p ~/.backup/$(dirname $1)
-    cp $1 ~/.backup/$1-$(date +%Y%m%d%H%M).backup
-  fi
-}
-
 # Get a character’s Unicode code point
 codepoint() {
   perl -e "use utf8; print sprintf('U+%04X', ord(\"$@\"))"

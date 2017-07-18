@@ -14,7 +14,6 @@ OSX_FILES ?= .khdrc
 
 TARGETS_CLEAN ?= XORG XMONAD TMUX SHELL OSX
 
-SHELL_DIRS ?= .backup
 TMUX_DIRS ?= .tmux/sessions .tmux/sockets
 
 LIB_DIR ?= ~/.local/lib
@@ -39,9 +38,6 @@ install-linux: clean linux xorg mutt tmux weechat shell gtk init
 install-mac: clean tmux shell osx init
 
 init:
-	@if ! perl -MTerm::ExtendedColor -e 1 2>/dev/null; then \
-		sudo cpan Term::ExtendedColor; \
-	fi
 	@echo "Remember to source ~/.bash_profile"
 
 # Main targets ----------------------------------------------------------------
@@ -64,7 +60,6 @@ tmux: $(addprefix $(DEST)/,$(TMUX_FILES))
 weechat: $(addprefix $(DEST)/,$(WEECHAT_FILES))
 
 shell: $(addprefix $(DEST)/,$(SHELL_FILES))
-	@mkdir -p $(addprefix $(DEST)/,$(SHELL_DIRS))
 	@git submodule init
 	@git submodule update
 
