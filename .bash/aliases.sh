@@ -31,7 +31,14 @@ command -v fasd >/dev/null && {
   alias v="fasd -f -e vim"
   alias vv="fasd -fi -e vim"
 }
-command -v git >/dev/null && alias g="git"
+command -v git >/dev/null && {
+  alias g="git"
+  alias ga="g a"
+  alias gap="g ap"
+  alias gp="g p"
+  alias gs="g s"
+  alias gm="g m"
+}
 
 # Enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
