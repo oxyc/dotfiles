@@ -132,6 +132,9 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 # sudo rm -rf /System/Library/CoreServices/DefaultDesktop.jpg
 # sudo ln -sf /Library/Desktop\ Pictures/Solid\ Colors/Solid\ Gray\ Pro\ Dark.png /System/Library/CoreServices/DefaultDesktop.jpg
 
+# Change low disk space notification limit
+defaults write com.apple.diskspaced minFreeSpace 3
+
 ###############################################################################
 # SSD-specific tweaks                                                         #
 ###############################################################################
