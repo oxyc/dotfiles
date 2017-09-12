@@ -225,6 +225,24 @@ vag() {
   "${EDITOR:-vim}" "${files[@]}"
 }
 
+# Whitelist a development certificate on macOS.
+whitelist-cert() {
+  local host=$(echo "$1" | sed -E -e 's/https?:\/\///' -e 's/\/.*//')
+
+  if [[ "$host" =~ .*\.dev$ ]]; then
+    echo "Adding certificate for $host"
+    echo -n | openssl s_client -connect $host:443 -servername $host \
+        | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' \
+        | tee "/tmp/$host.cert"
+    sudo security add-trusted-cert -d -r trustRoot -k "/Library/Keychains/System.keychain" "/tmp/$host.cert"
+    rm -v "/tmp/$host.cert"
+    echo "Please restart your browser."
+  else
+    echo "Usage: whitelist-cert site.dev (only .dev allowed)"
+  fi
+}
+
+
 # Simple calculator
 # = 1 + 3
 = () {
