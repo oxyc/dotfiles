@@ -36,4 +36,4 @@ __prompt() {
   PS1="$PS1\[$RESET\] "
 }
 
-PROMPT_COMMAND="__prompt"
+PROMPT_COMMAND="$PROMPT_COMMAND __prompt"
