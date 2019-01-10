@@ -36,7 +36,10 @@ for dir in bin .local/bin node_modules/.bin drush .rvm/bin .composer/vendor/bin;
   [[ -d "$HOME/$dir" ]] && export PATH="$PATH:$HOME/$dir"
 done
 
-# Add gems to PATH.
+# Add Brew binaries to path (before others)
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+# Add local gems to PATH.
 if command -v ruby >/dev/null && command -v gem >/dev/null; then
   gem_bin="$(ruby -e 'puts Gem.user_dir')/bin"
   [[ -d "$gem_bin" ]] && export PATH="$gem_bin:$PATH"
