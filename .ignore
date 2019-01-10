@@ -5,6 +5,7 @@
 /images/
 /tmp/
 /vendor/
+/.git/
 *.sql
 *.tags*
 *.gemtags*

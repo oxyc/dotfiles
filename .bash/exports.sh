@@ -42,3 +42,5 @@ if command -v ruby >/dev/null && command -v gem >/dev/null; then
   [[ -d "$gem_bin" ]] && export PATH="$gem_bin:$PATH"
   unset gem_bin
 fi
+
+# @todo /usr/local/opt/openssl/bin/
