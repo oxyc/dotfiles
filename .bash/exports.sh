@@ -38,7 +38,7 @@ done
 
 # Add gems to PATH.
 if command -v ruby >/dev/null && command -v gem >/dev/null; then
-  gem_bin="$(ruby -rubygems -e 'puts Gem.user_dir')/bin"
+  gem_bin="$(ruby -e 'puts Gem.user_dir')/bin"
   [[ -d "$gem_bin" ]] && export PATH="$gem_bin:$PATH"
   unset gem_bin
 fi
