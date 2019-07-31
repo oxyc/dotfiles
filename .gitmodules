@@ -1,9 +1,6 @@
 [submodule ".local/lib/urxvt-perls"]
 	path = .local/lib/urxvt-perls
 	url = https://github.com/muennich/urxvt-perls.git
-[submodule ".weechat/plugins/weechat-notification-center"]
-	path = .weechat/plugins/weechat-notification-center
-	url = https://github.com/sindresorhus/weechat-notification-center.git
 [submodule ".weechat/plugins/weechat-matrix-protocol-script"]
 	path = .weechat/plugins/weechat-matrix-protocol-script
 	url = https://github.com/torhve/weechat-matrix-protocol-script.git
