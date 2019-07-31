@@ -31,6 +31,9 @@ export GPG_TTY=$(tty);
 # - printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"
 export PROMPT_COMMAND="_fasd_prompt_func; history -a; history -c; history -r;"
 
+# Add local pythong to path
+export PATH="$HOME/Library/Python/2.7/bin"
+
 # PATH additions.
 for dir in bin .local/bin node_modules/.bin drush .rvm/bin .composer/vendor/bin; do
   [[ -d "$HOME/$dir" ]] && export PATH="$PATH:$HOME/$dir"
