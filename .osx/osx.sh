@@ -464,8 +464,8 @@ defaults write org.m0k.transmission RandomPort -bool true
 # Alfred 3.app
 ###############################################################################
 
-/usr/libexec/PlistBuddy -c "Add :hidehat bool" ~/Library/Application\ Support/Alfred\ 3/Alfred.alfredpreferences/preferences/appearance/options/prefs.plist 2>/dev/null
-/usr/libexec/PlistBuddy -c "Set :hidehat true" ~/Library/Application\ Support/Alfred\ 3/Alfred.alfredpreferences/preferences/appearance/options/prefs.plist
-
-/usr/libexec/PlistBuddy -c "Add :hidemenu bool" ~/Library/Application\ Support/Alfred\ 3/Alfred.alfredpreferences/preferences/appearance/options/prefs.plist 2>/dev/null
-/usr/libexec/PlistBuddy -c "Set :hidemenu true" ~/Library/Application\ Support/Alfred\ 3/Alfred.alfredpreferences/preferences/appearance/options/prefs.plist
+# /usr/libexec/PlistBuddy -c "Add :hidehat bool" ~/Library/Application\ Support/Alfred\ 3/Alfred.alfredpreferences/preferences/appearance/options/prefs.plist 2>/dev/null
+# /usr/libexec/PlistBuddy -c "Set :hidehat true" ~/Library/Application\ Support/Alfred\ 3/Alfred.alfredpreferences/preferences/appearance/options/prefs.plist
+# 
+# /usr/libexec/PlistBuddy -c "Add :hidemenu bool" ~/Library/Application\ Support/Alfred\ 3/Alfred.alfredpreferences/preferences/appearance/options/prefs.plist 2>/dev/null
+# /usr/libexec/PlistBuddy -c "Set :hidemenu true" ~/Library/Application\ Support/Alfred\ 3/Alfred.alfredpreferences/preferences/appearance/options/prefs.plist
